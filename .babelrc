@@ -1,0 +1,30 @@
+{
+  "presets": [
+    ["es2015", { "modules": false }],
+    "react",
+    "stage-0",
+  ],
+  "plugins": [
+    "transform-runtime",
+    "transform-decorators-legacy",
+    [
+      "module-resolver",
+      {
+        "root": ["./app/common"],
+        "alias": {
+          "@components": "react-nebo15-components/lib",
+          "tests": "./tests",
+          "withStyles": "nebo15-isomorphic-style-loader/lib/withStyles",
+          "public": "./public"
+        }
+      }
+    ],
+  ],
+  "env": {
+    "development": {
+      "plugins": [
+        "react-hot-loader/babel"
+      ]
+    }
+  }
+}

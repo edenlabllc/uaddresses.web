@@ -1,0 +1,35 @@
+language: node_js
+services:
+- docker
+cache:
+  directories:
+  - "~/.nvm"
+  - node_modules
+env:
+  global:
+  - RELEASE_BRANCH="master"
+  - DOCKER_HUB_ACCOUNT="nebo15"
+  - MAIN_BRANCHES="master develop"
+  - secure: uJA+Mz+ZA/uVazqdpzT6Nm4EdIqky0fhRbw2i2rFOj/t61LpE7j/87MpAbotvnsF/wzVp2H6NTDPQRbwOTZaGW5Wyp3ia7fratjT/0z1SSA1Ln7RMNWXPUdx+VEJ2iLP4N1D/2SEaI34qF6rPynWN+Dg1xGoiUHm/09eiwH4AZqIJdEhixZuJM/J5GjG56dXG1hXgHNttnYSPHdajGQmaPvs93ND2RgmcBJ25rwa2HIxzXqUd0axCZ3Gu6ckjmk/3ubt3zgsNOky6uCNUdDlL4kI8Mppuz0M4r7vkfgWVjFhy0Ql3fWeqbf96AMhBhMb+VB/Abu8cOHRghv8SmyL+ICK9qabggjdKoOUqSApapBodV1u5U7eRt14+L2ZPmFUGy6MuWiCdewsGwnbMn496zhN7R7Z6VFrAr3r7bvktVtllYimrVyHQMQKDnKXydiDneMr/v4NTKE9sVgxHJZaH0MDfhusnSP8VC8O9UTRqQTrjleuZhQy40DCJVbmAkOrWnnYpi0lqt18RW4uf4vChKK8uswcJzL7Sm6BoSbAOAo6gUOdso/R3sUX7wvM4rh/kqF3/E28TDB65vLjrRP32C9/H5gzBXv7GnLJJMQRQr3uJA8jFXRCWoAE8+2L9iTAMb9G3JNZvZ+YtzpSNs9W5eZWkCUJIHtPz2XZBjn7Iew=
+node_js:
+- 7.5.0
+before_install:
+- npm run docker:up
+- chmod -R +x bin
+script:
+- npm run test
+- npm run lint
+- "./bin/version-increment.sh"
+- "./bin/build.sh"
+- "./bin/start.sh"
+- sleep 5
+- docker ps
+- RUNNING_CONTAINERS=`docker ps | wc -l`; if [ "${RUNNING_CONTAINERS//[[:space:]]/}"
+  == "1" ]; then echo "[E] Container is not started\!"; docker logs uaddresses.web --details
+  --since 5h; exit 1; fi;
+- npm run nightwatch -- -e travis
+- sleep 5
+after_failure:
+- docker logs uaddresses.web
+after_success:
+- "./bin/ci/push.sh"

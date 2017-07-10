@@ -1,0 +1,408 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"POT-Creation-Date: 2017-05-31T13:17:08.654Z\n"
+"PO-Revision-Date: 2017-05-31T13:17:08.654Z\n"
+
+msgid "Required field"
+msgstr ""
+
+msgid "Invalid email format"
+msgstr ""
+
+msgid "Invalid surname"
+msgstr ""
+
+msgid "Length must be less than <%= params %>"
+msgstr ""
+
+msgid "Invalid card number"
+msgstr ""
+
+msgid "Card with such names already exist"
+msgstr ""
+
+msgid "Card with such number already exist"
+msgstr ""
+
+msgid "Support only {{types}} cards"
+msgstr ""
+
+msgid "Minimal value is <%= params %>"
+msgstr ""
+
+msgid "Maximum value is <%= params %>"
+msgstr ""
+
+msgid "Confirm"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "No data"
+msgstr ""
+
+msgid "Yes"
+msgstr ""
+
+msgid "No"
+msgstr ""
+
+msgid "ap."
+msgstr ""
+
+msgid "Area"
+msgstr ""
+
+msgid "region"
+msgstr ""
+
+msgid "UAddresses"
+msgstr ""
+
+msgid "You have unsaved changes"
+msgstr ""
+
+msgid "Are you sure want to leave this page?"
+msgstr ""
+
+msgid "Tokens"
+msgstr ""
+
+msgid "Approvals"
+msgstr ""
+
+msgid "Users"
+msgstr ""
+
+msgid "Roles"
+msgstr ""
+
+msgid "Client Types"
+msgstr ""
+
+msgid "Clients"
+msgstr ""
+
+msgid "Documentation"
+msgstr ""
+
+msgid "app:authorize"
+msgstr ""
+
+msgid "User roles"
+msgstr ""
+
+msgid "Client"
+msgstr ""
+
+msgid "Role"
+msgstr ""
+
+msgid "Actions"
+msgstr ""
+
+msgid "Delete user role"
+msgstr ""
+
+msgid "Create new user role"
+msgstr ""
+
+msgid "Are you sure?"
+msgstr ""
+
+msgid "Are you sure want to delete this user role?"
+msgstr ""
+
+msgid "User ID"
+msgstr ""
+
+msgid "Client id"
+msgstr ""
+
+msgid "Enter scopes"
+msgstr ""
+
+msgid "Saving..."
+msgstr ""
+
+msgid "Update Role"
+msgstr ""
+
+msgid "Saved"
+msgstr ""
+
+msgid "Deleting..."
+msgstr ""
+
+msgid "Delete Role"
+msgstr ""
+
+msgid "Save New Role"
+msgstr ""
+
+msgid "Are you sure want to delete this role?"
+msgstr ""
+
+msgid "Approval ID"
+msgstr ""
+
+msgid "Update approval"
+msgstr ""
+
+msgid "Delete Approval"
+msgstr ""
+
+msgid "Are you sure want to delete this approval?"
+msgstr ""
+
+msgid "Client name"
+msgstr ""
+
+msgid "eHealth portal"
+msgstr ""
+
+msgid "Redirect uri"
+msgstr ""
+
+msgid "Client type id"
+msgstr ""
+
+msgid "Create New Client"
+msgstr ""
+
+msgid "Update Client"
+msgstr ""
+
+msgid "Delete client"
+msgstr ""
+
+msgid "Are you sure want to delete this client?"
+msgstr ""
+
+msgid "Client Type name"
+msgstr ""
+
+msgid "Update Client Type"
+msgstr ""
+
+msgid "Delete Client Type"
+msgstr ""
+
+msgid "Save New Client Type"
+msgstr ""
+
+msgid "Are you sure want to delete this client type?"
+msgstr ""
+
+msgid "Role name"
+msgstr ""
+
+msgid "ID"
+msgstr ""
+
+msgid "b5e3318e-2192-4676"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Value"
+msgstr ""
+
+msgid "bkZ2b3BsND"
+msgstr ""
+
+msgid "22/01/2018"
+msgstr ""
+
+msgid "Scope"
+msgstr ""
+
+msgid "Client ID"
+msgstr ""
+
+msgid "Grant type"
+msgstr ""
+
+msgid "password"
+msgstr ""
+
+msgid "http://example.com/resource"
+msgstr ""
+
+msgid "8d3c0349-353e-48ef"
+msgstr ""
+
+msgid "Delete token"
+msgstr ""
+
+msgid "Save New Token"
+msgstr ""
+
+msgid "Failed"
+msgstr ""
+
+msgid "Are you sure want to delete this token?"
+msgstr ""
+
+msgid "User email"
+msgstr ""
+
+msgid "example@gmail.com"
+msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "Create New User"
+msgstr ""
+
+msgid "Update User"
+msgstr ""
+
+msgid "Delete user"
+msgstr ""
+
+msgid "Are you sure want to delete this user?"
+msgstr ""
+
+msgid "Role id"
+msgstr ""
+
+msgid "Create User Role"
+msgstr ""
+
+msgid "OAuth2 flow, validation, proxy"
+msgstr ""
+
+msgid ""
+"Authentication, client and role management service. Token verification "
+"service."
+msgstr ""
+
+msgid "Create approval"
+msgstr ""
+
+msgid "Id"
+msgstr ""
+
+msgid "Action"
+msgstr ""
+
+msgid "Edit approval"
+msgstr ""
+
+msgid "Create new approval"
+msgstr ""
+
+msgid "Create client"
+msgstr ""
+
+msgid "Details"
+msgstr ""
+
+msgid "Show client details"
+msgstr ""
+
+msgid "Create new client"
+msgstr ""
+
+msgid "Create client type"
+msgstr ""
+
+msgid "Edit client type"
+msgstr ""
+
+msgid "Create new client type"
+msgstr ""
+
+msgid "Edit client type: {{name}}"
+msgstr ""
+
+msgid "Update client"
+msgstr ""
+
+msgid "Page Not Found"
+msgstr ""
+
+msgid "Requested page not found. Maybe you are looking for"
+msgstr ""
+
+msgid "Go to dashboard"
+msgstr ""
+
+msgid "Create role"
+msgstr ""
+
+msgid "Edit role"
+msgstr ""
+
+msgid "Create new"
+msgstr ""
+
+msgid "Edit role: {{name}}"
+msgstr ""
+
+msgid "Create token"
+msgstr ""
+
+msgid "Token details"
+msgstr ""
+
+msgid "Show token details"
+msgstr ""
+
+msgid "Create new token"
+msgstr ""
+
+msgid "Create user"
+msgstr ""
+
+msgid "Create user role"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "Show user details"
+msgstr ""
+
+msgid "Create new user"
+msgstr ""
+
+msgid "User details"
+msgstr ""
+
+msgctxt "api:read"
+msgid "some"
+msgstr ""
+
+msgctxt "api:write"
+msgid "some"
+msgstr ""
+
+msgctxt "entity:read"
+msgid "legal"
+msgstr ""
+
+msgctxt "entity:write"
+msgid "legal"
+msgstr ""
+
+msgctxt "request:write"
+msgid "employee"
+msgstr ""
+
+msgctxt "token"
+msgid "access"
+msgstr ""
+
+msgctxt "at"
+msgid "Expires"
+msgstr ""
