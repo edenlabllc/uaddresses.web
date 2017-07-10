@@ -10,7 +10,7 @@ env:
   - RELEASE_BRANCH="master"
   - DOCKER_HUB_ACCOUNT="nebo15"
   - MAIN_BRANCHES="master develop"
-  - secure: uJA+Mz+ZA/uVazqdpzT6Nm4EdIqky0fhRbw2i2rFOj/t61LpE7j/87MpAbotvnsF/wzVp2H6NTDPQRbwOTZaGW5Wyp3ia7fratjT/0z1SSA1Ln7RMNWXPUdx+VEJ2iLP4N1D/2SEaI34qF6rPynWN+Dg1xGoiUHm/09eiwH4AZqIJdEhixZuJM/J5GjG56dXG1hXgHNttnYSPHdajGQmaPvs93ND2RgmcBJ25rwa2HIxzXqUd0axCZ3Gu6ckjmk/3ubt3zgsNOky6uCNUdDlL4kI8Mppuz0M4r7vkfgWVjFhy0Ql3fWeqbf96AMhBhMb+VB/Abu8cOHRghv8SmyL+ICK9qabggjdKoOUqSApapBodV1u5U7eRt14+L2ZPmFUGy6MuWiCdewsGwnbMn496zhN7R7Z6VFrAr3r7bvktVtllYimrVyHQMQKDnKXydiDneMr/v4NTKE9sVgxHJZaH0MDfhusnSP8VC8O9UTRqQTrjleuZhQy40DCJVbmAkOrWnnYpi0lqt18RW4uf4vChKK8uswcJzL7Sm6BoSbAOAo6gUOdso/R3sUX7wvM4rh/kqF3/E28TDB65vLjrRP32C9/H5gzBXv7GnLJJMQRQr3uJA8jFXRCWoAE8+2L9iTAMb9G3JNZvZ+YtzpSNs9W5eZWkCUJIHtPz2XZBjn7Iew=
+  - secure: THJUXwPivUSJLPLWfTWM2oySXrfcwdcCTej4wy9PIEVUYDFzTfaLkRIQTkouyQDFN54FbNB1vfmvDmCT/nThjOfG84sgX6BfTh5ZKYU6GigUfQ84aUoxmKBzOhATn71IZ6xsne/KC2tkSiq+rq2Txm7ncPPoNcvHvESyCVAS278cMmrQK7pwv/MTw3Kha/nup62/IvTQC0/yd9YPNQxwbPuevC2XM4Y0SXDAxjb5n2Np7l22b6KpyqAkMMAE+TIEfgppoqfj6cElvYTg2m29sIcpLffXLJxeVkwBkWn0Wqv82phjGRpTlFFHCSq7meq7jiNhmPYODWb8oUHxRaScZ9VbI6oPo7bQET1mezYs3pkWTiTt0x0UES5oo4rRVjpsrhmsNzC8ThwEN3/EU5w3whyBA8JmUxQxXce2kbeTIhBRA1Jqlr3gbnQIJKOmwt8s31hPC9iEULIrlm2iF5bFWHMb4yE1mxYm1BxyQdTQJcBN592IFj83L7GxnVikd96+208FgVbDBbPsl/qFQ1QAKh20mIhrJOPgiHzpEXEaoprnXG1a7tsegRvlsxH0dM9OXv099T4Gbk5uZaivV3aO1OvixF25hkh1Zy0naWMFBhMRnE1zipFj8uL8HUWadbBank0oQcWBcPCaMLeCtXGDklEeD4GdeWNKu+daUh5IBQA=
 node_js:
 - 7.5.0
 before_install:
@@ -25,8 +25,8 @@ script:
 - sleep 5
 - docker ps
 - RUNNING_CONTAINERS=`docker ps | wc -l`; if [ "${RUNNING_CONTAINERS//[[:space:]]/}"
-  == "1" ]; then echo "[E] Container is not started\!"; docker logs uaddresses.web --details
-  --since 5h; exit 1; fi;
+  == "1" ]; then echo "[E] Container is not started\!"; docker logs uaddresses.web
+  --details --since 5h; exit 1; fi;
 - npm run nightwatch -- -e travis
 - sleep 5
 after_failure:
