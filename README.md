@@ -21,7 +21,7 @@ Try it here: http://uaddresses-web.herokuapp.com/
 
 ### Docker
 
-Dashboard can be deployed as a single container from [nebo15/man.web](https://hub.docker.com/r/nebo15/uaddresses.web/) Docker Hub.
+Dashboard can be deployed as a single container from [nebo15/uaddresses.web](https://hub.docker.com/r/nebo15/uaddresses.web/) Docker Hub.
 
 ## Configurations
 
