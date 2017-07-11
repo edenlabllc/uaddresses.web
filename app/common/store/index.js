@@ -5,6 +5,7 @@ import promiseMiddleware from 'redux-promise';
 import thunkMiddleware from 'redux-thunk';
 import multiMiddleware from 'redux-multi';
 import { apiMiddleware } from 'redux-api-middleware';
+import { loadTokenFromStorage } from 'redux/session';
 
 import rootReducer from '../reducers';
 
@@ -26,6 +27,7 @@ export function configureStore ({ history, cookies, i18n }, initialState) { // e
   )(createStore);
 
   const store = createStoreWithMiddleware(rootReducer, initialState);
+  store.dispatch(loadTokenFromStorage());
 
   return store;
 }
