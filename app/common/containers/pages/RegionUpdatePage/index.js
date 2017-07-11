@@ -8,32 +8,37 @@ import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
 import FormPageWrapper from 'containers/blocks/FormPageWrapper';
 import RegionForm from 'containers/forms/RegionForm';
 
-import { getRole } from 'reducers';
-import { fetchRoleByID, updateRole } from 'redux/regions';
-import { deleteRole } from './redux';
+import { getRegion } from 'reducers';
+import { fetchRegionByID, updateRegion } from 'redux/regions';
+
+import { deleteRegion, fetchDistricts } from './redux';
 
 import styles from './styles.scss';
 
 @provideHooks({
-  fetch: ({ dispatch, params: { id } }) => dispatch(fetchRoleByID(id)),
+  fetch: ({ dispatch, params: { id }, query }) => Promise.all([
+    dispatch(fetchRegionByID(id)),
+    dispatch(fetchDistricts(id, query)),
+  ]),
 })
 @connect((state, { params: { id } }) => ({
-  role: getRole(state, id),
-}), { updateRole, deleteRole })
+  ...state.pages.RegionUpdatePage,
+  region: getRegion(state, id),
+}), { updateRegion, deleteRegion })
 @withStyles(styles)
 @translate()
-export default class RoleUpdatePage extends React.Component {
+export default class RegionUpdatePage extends React.Component {
   render() {
-    const { t, role, updateRole, deleteRole } = this.props;
+    const { t, region, updateRegion, deleteRegion } = this.props;
 
     return (
-      <FormPageWrapper id="update-regions-page" title={t('Edit role: {{name}}', { name: role.name })} back="/regions">
-        <Helmet title={t('Edit role: {{name}}', { name: role.name })} />
+      <FormPageWrapper id="update-regions-page" title={t('Edit region: {{name}}', { name: region.name })} back="/regions">
+        <Helmet title={t('Edit region: {{name}}', { name: region.name })} />
         <div className={styles.block}>
           <RegionForm
-            initialValues={role}
-            onSubmit={values => updateRole(role.id, values)}
-            onDelete={deleteRole}
+            initialValues={region}
+            onSubmit={values => updateRegion(region.id, values)}
+            onDelete={deleteRegion}
             edit
           />
         </div>

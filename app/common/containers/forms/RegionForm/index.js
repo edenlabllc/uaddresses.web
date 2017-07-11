@@ -23,6 +23,9 @@ const getValues = getFormValues('region-form');
     name: {
       required: true,
     },
+    koatuu: {
+      required: true,
+    },
   }),
   initialValues: {
     scope: '',
@@ -67,18 +70,18 @@ export default class RegionForm extends React.Component {
               <Field
                 name="name"
                 component={FieldInput}
-                labelText={t('Role name')}
-                placeholder={t('Role name')}
+                labelText={t('Name')}
+                placeholder={t('Zaopizhzhya region')}
               />
             </FormColumn>
           </FormRow>
           <FormRow>
             <FormColumn>
               <Field
-                name="scope"
+                name="koatuu"
                 component={FieldInput}
-                labelText={t('Enter scopes')}
-                placeholder="some_api:write some_api:read"
+                labelText={t('Koatuu')}
+                placeholder={t('1234567890')}
               />
             </FormColumn>
           </FormRow>
@@ -87,16 +90,16 @@ export default class RegionForm extends React.Component {
           {
             edit && (<ButtonsGroup>
               <Button type="submit" disabled={!this.isChanged}>{
-                submitting ? t('Saving...') : (this.isChanged ? t('Update Role') : t('Saved'))
+                submitting ? t('Saving...') : (this.isChanged ? t('Update Region') : t('Saved'))
               }</Button>
-              <Button color="red" onClick={() => this.setState({ onDelete: true })}>{submitting ? t('Deleting...') : t('Delete Role')
+              <Button color="red" onClick={() => this.setState({ onDelete: true })}>{submitting ? t('Deleting...') : t('Delete Region')
               }</Button>
             </ButtonsGroup>)
           }
           {
             !edit && (<ButtonsGroup>
               <Button type="submit" disabled={!this.isChanged}>{
-                submitting ? t('Saving...') : (this.isChanged ? t('Save New Role') : t('Saved'))
+                submitting ? t('Saving...') : (this.isChanged ? t('Save New Region') : t('Saved'))
               }</Button>
             </ButtonsGroup>)
           }
@@ -110,7 +113,7 @@ export default class RegionForm extends React.Component {
           id="confirm-delete"
           onCancel={() => this.setState({ onDelete: false })}
           onConfirm={() => onDelete(this.state.savedValues.id)}
-        >{ t('Are you sure want to delete this role?') }</Confirm>
+        >{ t('Are you sure want to delete this region?') }</Confirm>
       </Form>
     );
   }

@@ -7,7 +7,7 @@ import Main from 'containers/layouts/Main';
 
 import RegionsPage from 'containers/pages/RegionsPage';
 // import RegionCreatePage from 'containers/pages/RegionCreatePage';
-// import RegionUpdatePage from 'containers/pages/RegionUpdatePage';
+import RegionUpdatePage from 'containers/pages/RegionUpdatePage';
 import SignInPage from 'containers/pages/SignInPage';
 import NotFoundPage from 'containers/pages/NotFoundPage';
 
@@ -46,8 +46,8 @@ export const configureRoutes = ({ store }) => { // eslint-disable-line
 
           <Route path="regions">
             <IndexRoute component={RegionsPage} />
-            {/* <Route path="create" component={RegionCreatePage} />
-            <Route path=":id" component={RegionUpdatePage} /> */}
+            {/* <Route path="create" component={RegionCreatePage} /> */}
+            <Route path=":id" component={RegionUpdatePage} />
           </Route>
         </Route>
       </Route>

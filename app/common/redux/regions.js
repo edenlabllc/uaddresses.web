@@ -24,7 +24,7 @@ export const fetchRegions = ({ ...options, limit = 10 } = {}, { useCache = false
 });
 
 export const fetchRegionByID = id => invoke({
-  endpoint: `${API_URL}/admin/regions/${id}`,
+  endpoint: `${API_URL}/regions/${id}`,
   method: 'GET',
   headers: {
     'content-type': 'application/json',
@@ -38,7 +38,7 @@ export const fetchRegionByID = id => invoke({
 });
 
 export const createRegion = body => invoke({
-  endpoint: `${API_URL}/admin/regions`,
+  endpoint: `${API_URL}/regions`,
   method: 'POST',
   headers: {
     'content-type': 'application/json',
@@ -57,7 +57,7 @@ export const createRegion = body => invoke({
 });
 
 export const updateRegion = (id, body) => invoke({
-  endpoint: `${API_URL}/admin/regions/${id}`,
+  endpoint: `${API_URL}/regions/${id}`,
   method: 'PATCH',
   headers: {
     'content-type': 'application/json',
@@ -76,7 +76,7 @@ export const updateRegion = (id, body) => invoke({
 });
 
 export const deleteRegion = id => invoke({
-  endpoint: `${API_URL}/admin/regions/${id}`,
+  endpoint: `${API_URL}/regions/${id}`,
   method: 'DELETE',
   headers: {
     'content-type': 'application/json',
