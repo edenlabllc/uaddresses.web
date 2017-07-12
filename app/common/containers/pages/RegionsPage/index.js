@@ -63,15 +63,22 @@ export default class RegionsPage extends React.Component {
             ]}
             data={regions.map(item => ({
               ...item,
-              name: <div className={styles.name}>
-                {item.name}
-              </div>,
+              name: (<div className={styles.name}>
+                <Button
+                  id={`edit-region-button-${item.id}`}
+                  theme="link"
+                  color="red"
+                  to={`/districts?region=${item.name}`}
+                >
+                  {item.name}
+                </Button>
+              </div>),
               edit: (<Button
                 id={`edit-region-button-${item.id}`}
                 theme="link"
-                to={`/districts?region=${item.name}`}
+                to={`/regions/${item.id}`}
               >
-                { t('See districts') }
+                { t('Edit') }
               </Button>),
             }))}
           />

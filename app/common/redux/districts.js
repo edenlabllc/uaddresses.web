@@ -6,7 +6,7 @@ import { district } from 'schemas';
 
 import { invoke } from './api';
 
-export const fetchDistricts = ({ ...options, limit = 5 } = {}, { useCache = false } = {}) =>
+export const fetchDistricts = ({ ...options, limit = 10 } = {}, { useCache = false } = {}) =>
 invoke({
   endpoint: createUrl(`${API_URL}/search/districts`, { ...options, limit }),
   method: 'GET',

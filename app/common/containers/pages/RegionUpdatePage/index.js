@@ -7,24 +7,19 @@ import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
 
 import FormPageWrapper from 'containers/blocks/FormPageWrapper';
 import RegionForm from 'containers/forms/RegionForm';
-// import DistrictsByRegion from 'containers/blocks/DistrictsByRegion';
 import { getRegion } from 'reducers';
 import { fetchRegionByID, updateRegion } from 'redux/regions';
-
-import { fetchDistricts } from './redux';
 
 import styles from './styles.scss';
 
 @provideHooks({
-  fetch: ({ dispatch, params: { id }, query }) => Promise.all([
+  fetch: ({ dispatch, params: { id } }) => Promise.all([
     dispatch(fetchRegionByID(id)),
-    dispatch(fetchDistricts(id, query)),
   ]),
 })
 @connect((state, { params: { id } }) => ({
   ...state.pages.RegionUpdatePage,
   region: getRegion(state, id),
-  // districts: getRegion(state, id),
 }), { updateRegion })
 @withStyles(styles)
 @translate()
@@ -41,9 +36,6 @@ export default class RegionUpdatePage extends React.Component {
             onSubmit={values => updateRegion(region.id, values)}
             edit
           />
-          {
-            // <DistrictsByRegion districts={districts} />
-          }
         </div>
       </FormPageWrapper>
     );
