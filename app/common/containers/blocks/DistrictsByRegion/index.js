@@ -1,8 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
+// import { connect } from 'react-redux';
+// import { withRouter } from 'react-router';
 import { translate } from 'react-i18next';
-import { provideHooks } from 'redial';
+// import { provideHooks } from 'redial';
 import Helmet from 'react-helmet';
 import { filterParams } from 'helpers/url';
 import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
@@ -15,22 +15,12 @@ import { FormRow, FormColumn } from '@components/Form';
 import FieldFilterForm from 'containers/forms/FieldFilterForm';
 // import Pagination from 'components/CursorPagination';
 
-import { getAllDistricts } from 'reducers';
-import { fetchDistrictByRegionID } from './redux';
+// import { getAllDistricts } from 'reducers';
 
 import styles from './styles.scss';
 
-@withRouter
 @withStyles(styles)
 @translate()
-@provideHooks({
-  fetch: ({ dispatch, params: { id }, location: { query } }) =>
-    dispatch(fetchDistrictByRegionID(id, query)),
-})
-@connect(state => ({
-  ...state.pages.DistrictsPage,
-  districts: getAllDistricts(state, state.pages.DistrictsPage.districts),
-}))
 export default class DistrictsByRegionPage extends React.Component {
   render() {
     const { districts = [], t, location } = this.props;

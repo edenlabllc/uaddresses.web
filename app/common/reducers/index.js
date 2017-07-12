@@ -10,13 +10,15 @@ import session from 'redux/session';
 import regions from 'redux/regions';
 import districts from 'redux/districts';
 
+import settlements from 'redux/settlements';
+import streets from 'redux/streets';
+
 import Aside from 'containers/blocks/Aside/redux';
 
 import RegionsPage from 'containers/pages/RegionsPage/redux';
 import RegionUpdatePage from 'containers/pages/RegionUpdatePage/redux';
 
 import DistrictsPage from 'containers/pages/DistrictsPage/redux';
-import DistrictsByRegionPage from 'containers/pages/DistrictsByRegionPage/redux';
 
 
 const blocks = combineReducers({
@@ -27,12 +29,13 @@ const pages = combineReducers({
   RegionsPage,
   RegionUpdatePage,
   DistrictsPage,
-  DistrictsByRegionPage,
 });
 
 const data = combineReducers({
   regions,
   districts,
+  settlements,
+  streets,
 });
 
 export default combineReducers({
@@ -59,3 +62,12 @@ export const getRegion = (state, id) => denormalize(id, schemas.region, state.da
 export const getDistricts = (state, ids) => denormalize(ids, [schemas.district], state.data);
 export const getAllDistricts = state => getDistricts(state, Object.keys(state.data.districts));
 export const getDistrict = (state, id) => denormalize(id, schemas.district, state.data);
+
+export const getSettlements = (state, ids) => denormalize(ids, [schemas.settlement], state.data);
+export const getAllSettlements = state =>
+getSettlements(state, Object.keys(state.data.settlements));
+export const getSettlement = (state, id) => denormalize(id, schemas.settlement, state.data);
+
+export const getStreets = (state, ids) => denormalize(ids, [schemas.street], state.data);
+export const getAllStreets = state => getStreets(state, Object.keys(state.data.streets));
+export const getStreet = (state, id) => denormalize(id, schemas.street, state.data);

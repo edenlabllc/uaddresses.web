@@ -7,7 +7,7 @@ export const setDistricts = createAction('regionUpdate/SET_DISTRICTS');
 export const setDistrictsPaging = createAction('regionUpdate/SET_DISTRICTS_PAGING');
 
 export const fetchDistricts = (regionId, options) => dispatch =>
-  dispatch(fromDistricts.fetchDistricts({
+  dispatch(fromDistricts.fetchDistricts(regionId, {
     ...options,
     region: 'К',
     region_id: regionId,
