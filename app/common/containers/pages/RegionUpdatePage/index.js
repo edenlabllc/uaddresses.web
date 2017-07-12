@@ -11,7 +11,7 @@ import RegionForm from 'containers/forms/RegionForm';
 import { getRegion } from 'reducers';
 import { fetchRegionByID, updateRegion } from 'redux/regions';
 
-import { deleteRegion, fetchDistricts } from './redux';
+import { fetchDistricts } from './redux';
 
 import styles from './styles.scss';
 
@@ -24,12 +24,12 @@ import styles from './styles.scss';
 @connect((state, { params: { id } }) => ({
   ...state.pages.RegionUpdatePage,
   region: getRegion(state, id),
-}), { updateRegion, deleteRegion })
+}), { updateRegion })
 @withStyles(styles)
 @translate()
 export default class RegionUpdatePage extends React.Component {
   render() {
-    const { t, region, updateRegion, deleteRegion } = this.props;
+    const { t, region, updateRegion } = this.props;
 
     return (
       <FormPageWrapper id="update-regions-page" title={t('Edit region: {{name}}', { name: region.name })} back="/regions">
@@ -38,7 +38,6 @@ export default class RegionUpdatePage extends React.Component {
           <RegionForm
             initialValues={region}
             onSubmit={values => updateRegion(region.id, values)}
-            onDelete={deleteRegion}
             edit
           />
         </div>

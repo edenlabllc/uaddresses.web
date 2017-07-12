@@ -10,11 +10,14 @@ import session from 'redux/session';
 import regions from 'redux/regions';
 import districts from 'redux/districts';
 
-
 import Aside from 'containers/blocks/Aside/redux';
 
 import RegionsPage from 'containers/pages/RegionsPage/redux';
 import RegionUpdatePage from 'containers/pages/RegionUpdatePage/redux';
+
+import DistrictsPage from 'containers/pages/DistrictsPage/redux';
+import DistrictsByRegionPage from 'containers/pages/DistrictsByRegionPage/redux';
+
 
 const blocks = combineReducers({
   Aside,
@@ -23,6 +26,8 @@ const blocks = combineReducers({
 const pages = combineReducers({
   RegionsPage,
   RegionUpdatePage,
+  DistrictsPage,
+  DistrictsByRegionPage,
 });
 
 const data = combineReducers({

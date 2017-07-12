@@ -6,7 +6,7 @@ import { district } from 'schemas';
 
 import { invoke } from './api';
 
-export const fetchDistricts = ({ ...options, limit = 10 } = {}, { useCache = false } = {}) =>
+export const fetchDistrictsList = ({ ...options, limit = 10 } = {}, { useCache = false } = {}) =>
 invoke({
   endpoint: createUrl(`${API_URL}/search/districts`, { ...options, limit }),
   method: 'GET',
@@ -24,60 +24,60 @@ invoke({
   }, 'districts/FETCH_DISTRICTS_FAILURE'],
 });
 
-export const fetchDistrictByID = id => invoke({
-  endpoint: `${API_URL}/admin/districts/${id}`,
+export const fetchDistrictByRegionID = (id, options) => invoke({
+  endpoint: createUrl(`${API_URL}/region/${id}/regions`, options),
   method: 'GET',
   headers: {
     'content-type': 'application/json',
   },
-  types: ['districts/FETCH_DISTRICT_BY_ID_REQUEST', {
-    type: 'districts/FETCH_DISTRICT_BY_ID_SUCCESS',
+  types: ['districts/FETCH_DISTRICT_BY_REGION_ID_REQUEST', {
+    type: 'districts/FETCH_DISTRICT_BY_REGION_ID_SUCCESS',
     payload: (action, state, res) => res.json().then(
       json => normalize(json.data, district)
     ),
-  }, 'districts/FETCH_DISTRICT_BY_ID_FAILURE'],
+  }, 'districts/FETCH_DISTRICT_BY_REGION_ID_FAILURE'],
 });
 
-export const createDistrict = body => invoke({
-  endpoint: `${API_URL}/admin/districts`,
-  method: 'POST',
-  headers: {
-    'content-type': 'application/json',
-  },
-  types: ['districts/CREATE_DISTRICT_REQUEST', {
-    type: 'districts/CREATE_DISTRICT_SUCCESS',
-    payload: (action, state, res) => res.json().then(
-      json => normalize(json.data, district)
-    ),
-  }, 'districts/CREATE_DISTRICT_FAILURE'],
-  body: {
-    district: {
-      ...body,
-    },
-  },
-});
+// export const createDistrict = body => invoke({
+//   endpoint: `${API_URL}/districts`,
+//   method: 'POST',
+//   headers: {
+//     'content-type': 'application/json',
+//   },
+//   types: ['districts/CREATE_DISTRICT_REQUEST', {
+//     type: 'districts/CREATE_DISTRICT_SUCCESS',
+//     payload: (action, state, res) => res.json().then(
+//       json => normalize(json.data, district)
+//     ),
+//   }, 'districts/CREATE_DISTRICT_FAILURE'],
+//   body: {
+//     district: {
+//       ...body,
+//     },
+//   },
+// });
 
-export const updateDistrict = (id, body) => invoke({
-  endpoint: `${API_URL}/admin/districts/${id}`,
-  method: 'PATCH',
-  headers: {
-    'content-type': 'application/json',
-  },
-  types: ['districts/UPDATE_DISTRICT_REQUEST', {
-    type: 'districts/UPDATE_DISTRICT_SUCCESS',
-    payload: (action, state, res) => res.json().then(
-      json => normalize(json.data, district)
-    ),
-  }, 'districts/UPDATE_DISTRICT_FAILURE'],
-  body: {
-    district: {
-      ...body,
-    },
-  },
-});
+// export const updateDistrict = (id, body) => invoke({
+//   endpoint: `${API_URL}/districts/${id}`,
+//   method: 'PATCH',
+//   headers: {
+//     'content-type': 'application/json',
+//   },
+//   types: ['districts/UPDATE_DISTRICT_REQUEST', {
+//     type: 'districts/UPDATE_DISTRICT_SUCCESS',
+//     payload: (action, state, res) => res.json().then(
+//       json => normalize(json.data, district)
+//     ),
+//   }, 'districts/UPDATE_DISTRICT_FAILURE'],
+//   body: {
+//     district: {
+//       ...body,
+//     },
+//   },
+// });
 
 export const deleteDistrict = id => invoke({
-  endpoint: `${API_URL}/admin/districts/${id}`,
+  endpoint: `${API_URL}/districts/${id}`,
   method: 'DELETE',
   headers: {
     'content-type': 'application/json',
@@ -90,9 +90,9 @@ export const deleteDistrict = id => invoke({
 export default handleAction(
   combineActions(
     'districts/FETCH_DISTRICTS_SUCCESS',
-    'districts/FETCH_DISTRICT_BY_ID_SUCCESS',
-    'districts/CREATE_DISTRICT_SUCCESS',
-    'districts/UPDATE_DISTRICT_SUCCESS'
+    'districts/FETCH_DISTRICT_BY_REGION_ID_SUCCESS',
+    // 'districts/CREATE_DISTRICT_SUCCESS',
+    // 'districts/UPDATE_DISTRICT_SUCCESS'
   ),
   (state, action) => ({
     ...state,

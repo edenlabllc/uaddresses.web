@@ -1,20 +1,10 @@
 import { handleAction, createAction } from 'redux-actions';
-import { push } from 'react-router-redux';
 import { combineReducers } from 'redux';
 
-import * as fromRoles from 'redux/regions';
 import * as fromDistricts from 'redux/districts';
 
 export const setDistricts = createAction('regionUpdate/SET_DISTRICTS');
 export const setDistrictsPaging = createAction('regionUpdate/SET_DISTRICTS_PAGING');
-
-export const deleteRole = id => dispatch =>
-  dispatch(fromRoles.deleteRole(id))
-    .then((action) => {
-      if (action.error) throw action;
-      dispatch(push('/roles'));
-      return action;
-    });
 
 export const fetchDistricts = (regionId, options) => dispatch =>
   dispatch(fromDistricts.fetchDistricts({
