@@ -14,9 +14,9 @@ import { FormRow, FormColumn } from '@components/Form';
 
 import DistrictFieldFilterForm from 'containers/forms/DistrictFieldFilterForm';
 
-// import Pagination from 'components/CursorPagination';
+import Pagination from 'components/CursorPagination';
 
-import { getAllDistricts } from 'reducers';
+import { getDistricts } from 'reducers';
 import { fetchDistricts } from './redux';
 
 import styles from './styles.scss';
@@ -60,12 +60,12 @@ const regions = [
 
 @connect(state => ({
   ...state.pages.DistrictsPage,
-  districts: getAllDistricts(state, state.pages.DistrictsPage.districts),
+  districts: getDistricts(state, state.pages.DistrictsPage.districts),
   // regions: getRegions(state, state.pages.RegionsPage.regions),
 }))
 export default class DistrictsPage extends React.Component {
   render() {
-    const { districts = [], t, location } = this.props;
+    const { districts = [], t, location, paging } = this.props;
 
     return (
       <div id="districts-page">
@@ -78,7 +78,6 @@ export default class DistrictsPage extends React.Component {
               onChange={region => filterParams({ region: region.region.title }, this.props)}
               regions={regions}
             />
-
           </FormColumn>
           <FormColumn />
         </FormRow>
@@ -110,19 +109,14 @@ export default class DistrictsPage extends React.Component {
             }))}
           />
         </div>
-        {/* <div className={styles.block}>
-            <Button to="/regions/create">{t('Create new region')}</Button>
-          </div>*/
-        }
-
-        {/* <div className={styles.pagination}>
+        <div className={styles.pagination}>
           <Pagination
             location={location}
             more={paging.has_more}
             after={paging.cursors.starting_after}
             before={paging.cursors.ending_before}
           />
-        </div> */}
+        </div>
       </div>
     );
   }

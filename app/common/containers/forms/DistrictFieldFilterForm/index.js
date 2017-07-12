@@ -26,7 +26,6 @@ export default class DistrictFieldFilterForm extends React.Component {
             searchable
             type="text"
             name="region"
-            labelText={t('List of districts')}
             component={Select}
             emptyText={t('Not found')}
             placeholder={t('Choose region')}
