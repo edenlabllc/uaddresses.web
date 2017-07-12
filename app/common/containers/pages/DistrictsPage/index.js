@@ -70,7 +70,7 @@ export default class DistrictsPage extends React.Component {
     return (
       <div id="districts-page">
         <Helmet title={t('Districts')} />
-        <H1>{t('District')}</H1>
+        <H1>{t(`Область ${location.query && location.query.region}`)}</H1>
         <FormRow>
           <FormColumn>
             <DistrictFieldFilterForm

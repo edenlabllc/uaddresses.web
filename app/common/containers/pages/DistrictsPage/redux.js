@@ -5,12 +5,11 @@ import * as fromDistricts from 'redux/districts';
 export const getDistricts = createAction('regionsPage/GET_REGIONS');
 export const pagingDistricts = createAction('regionsPage/ADD_PAGING');
 
-export const fetchDistricts = options => (dispatch) => {
-  console.log('fetchDistricts', options);
-  return dispatch(fromDistricts.fetchDistricts({
+export const fetchDistricts = options => dispatch =>
+  dispatch(fromDistricts.fetchDistricts({
     region: 'ВОЛИНСЬКА',
     ...options,
-  }, { useCache: false }))
+  }))
     .then((action) => {
       if (action.error) throw action;
       return [
@@ -18,7 +17,6 @@ export const fetchDistricts = options => (dispatch) => {
         dispatch(pagingDistricts(action.meta)),
       ];
     });
-};
 
 const districts = handleAction(getDistricts, (state, action) => action.payload, []);
 const paging = handleAction(pagingDistricts, (state, action) => action.payload, {});

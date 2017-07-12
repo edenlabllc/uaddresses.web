@@ -44,7 +44,9 @@ export default class RegionsPage extends React.Component {
             <FieldFilterForm
               name="region"
               form="regions_name_form"
-              initialValues={location.query}
+              defaultValue={{
+                region: location.query.region,
+              }}
               submitBtn
               onSubmit={name => filterParams(name, this.props)}
             />
@@ -67,9 +69,9 @@ export default class RegionsPage extends React.Component {
               edit: (<Button
                 id={`edit-region-button-${item.id}`}
                 theme="link"
-                to={`/regions/${item.id}`}
+                to={`/districts?region=${item.name}`}
               >
-                { t('Edit region') }
+                { t('See districts') }
               </Button>),
             }))}
           />
