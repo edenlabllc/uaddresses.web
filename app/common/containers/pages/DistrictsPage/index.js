@@ -70,7 +70,7 @@ export default class DistrictsPage extends React.Component {
     return (
       <div id="districts-page">
         <Helmet title={t('Districts')} />
-        <H1>{t(`Область ${location.query && location.query.region}`)}</H1>
+        <H1>{t(`Область ${location.query.region ? location.query.region : ''}`)}</H1>
         <FormRow>
           <FormColumn>
             <DistrictFieldFilterForm
@@ -84,15 +84,26 @@ export default class DistrictsPage extends React.Component {
         <div id="district-table" className={styles.table}>
           <Table
             columns={[
+              { key: 'id', title: t('id') },
               { key: 'district', title: t('district') },
               { key: 'koatuu', title: t('koatuu') },
               { key: 'region', title: t('region') },
               { key: 'edit', title: t('Action') },
             ]}
             data={districts.map(item => ({
-              district: <div className={styles.name}>
-                {item.district}
+              id: <div className={styles.name}>
+                {item.id}
               </div>,
+              district: (<div className={styles.name}>
+                <Button
+                  id={`edit-district-button-${item.id}`}
+                  theme="link"
+                  color="red"
+                  to={`/settlements?district=${item.name}`}
+                >
+                  {item.district}
+                </Button>
+              </div>),
               koatuu: <div className={styles.name}>
                 {item.koatuu}
               </div>,
