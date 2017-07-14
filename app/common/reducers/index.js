@@ -14,7 +14,6 @@ import settlements from 'redux/settlements';
 import streets from 'redux/streets';
 
 import Aside from 'containers/blocks/Aside/redux';
-
 import RegionsPage from 'containers/pages/RegionsPage/redux';
 // import RegionUpdatePage from 'containers/pages/RegionUpdatePage/redux';
 

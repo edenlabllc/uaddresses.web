@@ -108,7 +108,7 @@
     "react-helmet": "4.0.0",
     "react-hot-loader": "3.0.0-beta.6",
     "react-i18next": "2.2.0",
-    "react-nebo15-components": "^0.0.11",
+    "react-nebo15-components": "^0.0.17",
     "react-nebo15-mask": "~1.0.7",
     "react-nebo15-validate": "0.1.12",
     "react-nl2br": "0.2.0",

@@ -11,11 +11,11 @@ import { H1 } from '@components/Title';
 import Table from '@components/Table';
 import Button from '@components/Button';
 import { FormRow, FormColumn } from '@components/Form';
+import DistrictFieldFilterForm from 'containers/forms/DistrictFieldFilterForm';
 
-import FieldFilterForm from 'containers/forms/FieldFilterForm';
 // import Pagination from 'components/CursorPagination';
 
-import { getRegions } from 'reducers';
+import { getRegions, getAllRegions } from 'reducers';
 import { fetchRegions } from './redux';
 
 import styles from './styles.scss';
@@ -30,10 +30,11 @@ import styles from './styles.scss';
 @connect(state => ({
   ...state.pages.RegionsPage,
   regions: getRegions(state, state.pages.RegionsPage.regions),
+  regionsList: getAllRegions(state),
 }))
 export default class RegionsPage extends React.Component {
   render() {
-    const { regions = [], t, location } = this.props;
+    const { regions = [], regionsList = [], t, location } = this.props;
 
     return (
       <div id="roles-page">
@@ -41,14 +42,10 @@ export default class RegionsPage extends React.Component {
         <H1>{ t('Regions') }</H1>
         <FormRow>
           <FormColumn>
-            <FieldFilterForm
-              name="region"
-              form="regions_name_form"
-              defaultValue={{
-                region: location.query.region,
-              }}
-              submitBtn
-              onSubmit={name => filterParams(name, this.props)}
+            <DistrictFieldFilterForm
+              initialValues={location.query}
+              onChange={region => filterParams({ region: region.region.title }, this.props)}
+              regions={regionsList}
             />
           </FormColumn>
           <FormColumn />
