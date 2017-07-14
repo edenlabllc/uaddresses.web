@@ -10,6 +10,7 @@ import RegionsPage from 'containers/pages/RegionsPage';
 import RegionUpdatePage from 'containers/pages/RegionUpdatePage';
 
 import DistrictsPage from 'containers/pages/DistrictsPage';
+import DistrictUpdatePage from 'containers/pages/DistrictUpdatePage';
 
 import SignInPage from 'containers/pages/SignInPage';
 import NotFoundPage from 'containers/pages/NotFoundPage';
@@ -54,8 +55,8 @@ export const configureRoutes = ({ store }) => { // eslint-disable-line
           </Route>
           <Route path="districts">
             <IndexRoute component={DistrictsPage} />
+            <Route path=":region/:district" component={DistrictUpdatePage} />
             {/* <Route path="create" component={RegionCreatePage} /> */}
-            {/* <Route path=":id" component={RegionUpdatePage} />*/}
           </Route>
         </Route>
       </Route>

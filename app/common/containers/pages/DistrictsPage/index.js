@@ -57,7 +57,6 @@ const regions = [
   fetch: ({ dispatch, location: { query } }) =>
     dispatch(fetchDistricts(query)),
 })
-
 @connect(state => ({
   ...state.pages.DistrictsPage,
   districts: getDistricts(state, state.pages.DistrictsPage.districts),
@@ -113,12 +112,15 @@ export default class DistrictsPage extends React.Component {
               edit: (<Button
                 id={`edit-district-button-${item.id}`}
                 theme="link"
-                to={`/district/${item.district}`}
+                to={`/districts/${item.region}/${item.district}`}
               >
-                { t('Show district detail') }
+                { t('Edit') }
               </Button>),
             }))}
           />
+        </div>
+        <div className={styles.block}>
+          <Button to="/regions/create">{t('Create new region')}</Button>
         </div>
         <div className={styles.pagination}>
           <Pagination

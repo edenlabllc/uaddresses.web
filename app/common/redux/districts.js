@@ -6,23 +6,26 @@ import { district } from 'schemas';
 
 import { invoke } from './api';
 
-export const fetchDistricts = ({ ...options, limit = 10 } = {}, { useCache = false } = {}) =>
-invoke({
-  endpoint: createUrl(`${API_URL}/search/districts`, { ...options, limit }),
-  method: 'GET',
-  headers: {
-    'content-type': 'application/json',
-  },
-  bailout: state => useCache && state.data.districts,
-  types: ['districts/FETCH_DISTRICTS_REQUEST', {
-    type: 'districts/FETCH_DISTRICTS_SUCCESS',
-    payload: (action, state, res) => res.clone().json().then(
-      json => normalize(json.data, [district])
-    ),
-    meta: (action, state, res) =>
-      res.clone().json().then(json => json.paging),
-  }, 'districts/FETCH_DISTRICTS_FAILURE'],
-});
+export const fetchDistricts = ({ ...options, limit = 10 } = {}, { useCache = false } = {}) => {
+  console.log('dispacth', options);
+  return invoke({
+    endpoint: createUrl(`${API_URL}/search/districts`, { ...options, limit }),
+    method: 'GET',
+    headers: {
+      'content-type': 'application/json',
+    },
+    bailout: state => useCache && state.data.districts,
+    types: ['districts/FETCH_DISTRICTS_REQUEST', {
+      type: 'districts/FETCH_DISTRICTS_SUCCESS',
+      payload: (action, state, res) => res.clone().json().then(
+        json => normalize(json.data, [district])
+      ),
+      meta: (action, state, res) =>
+        res.clone().json().then(json => json.paging),
+    }, 'districts/FETCH_DISTRICTS_FAILURE'],
+  });
+};
+
 
 export const fetchDistrictByID = (id, options) => invoke({
   endpoint: createUrl(`${API_URL}/details/region/${id}/districts`, options),
@@ -57,24 +60,24 @@ export const fetchDistrictByID = (id, options) => invoke({
 //   },
 // });
 
-// export const updateDistrict = (id, body) => invoke({
-//   endpoint: `${API_URL}/districts/${id}`,
-//   method: 'PATCH',
-//   headers: {
-//     'content-type': 'application/json',
-//   },
-//   types: ['districts/UPDATE_DISTRICT_REQUEST', {
-//     type: 'districts/UPDATE_DISTRICT_SUCCESS',
-//     payload: (action, state, res) => res.json().then(
-//       json => normalize(json.data, district)
-//     ),
-//   }, 'districts/UPDATE_DISTRICT_FAILURE'],
-//   body: {
-//     district: {
-//       ...body,
-//     },
-//   },
-// });
+export const updateDistrict = (id, body) => invoke({
+  endpoint: `${API_URL}/districts/${id}`,
+  method: 'PATCH',
+  headers: {
+    'content-type': 'application/json',
+  },
+  types: ['districts/UPDATE_DISTRICT_REQUEST', {
+    type: 'districts/UPDATE_DISTRICT_SUCCESS',
+    payload: (action, state, res) => res.json().then(
+      json => normalize(json.data, district)
+    ),
+  }, 'districts/UPDATE_DISTRICT_FAILURE'],
+  body: {
+    district: {
+      ...body,
+    },
+  },
+});
 
 export const deleteDistrict = id => invoke({
   endpoint: `${API_URL}/districts/${id}`,
