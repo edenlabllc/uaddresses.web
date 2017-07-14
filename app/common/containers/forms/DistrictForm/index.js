@@ -27,9 +27,6 @@ const getValues = getFormValues('district-form');
       required: true,
     },
   }),
-  initialValues: {
-    scope: '',
-  },
 })
 @connect(state => ({
   values: getValues(state),
@@ -68,7 +65,7 @@ export default class DistrictForm extends React.Component {
           <FormRow>
             <FormColumn>
               <Field
-                name="name"
+                name="district"
                 component={FieldInput}
                 labelText={t('Name')}
                 placeholder={t('Zaopizhzhya district')}

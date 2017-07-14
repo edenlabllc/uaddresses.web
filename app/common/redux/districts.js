@@ -6,9 +6,8 @@ import { district } from 'schemas';
 
 import { invoke } from './api';
 
-export const fetchDistricts = ({ ...options, limit = 10 } = {}, { useCache = false } = {}) => {
-  console.log('dispacth', options);
-  return invoke({
+export const fetchDistricts = ({ ...options, limit = 10 } = {}, { useCache = false } = {}) =>
+  invoke({
     endpoint: createUrl(`${API_URL}/search/districts`, { ...options, limit }),
     method: 'GET',
     headers: {
@@ -24,7 +23,6 @@ export const fetchDistricts = ({ ...options, limit = 10 } = {}, { useCache = fal
         res.clone().json().then(json => json.paging),
     }, 'districts/FETCH_DISTRICTS_FAILURE'],
   });
-};
 
 
 export const fetchDistrictByID = (id, options) => invoke({
@@ -95,7 +93,7 @@ export default handleAction(
     'districts/FETCH_DISTRICTS_SUCCESS',
     'districts/FETCH_DISTRICT_BY_REGION_ID_SUCCESS',
     // 'districts/CREATE_DISTRICT_SUCCESS',
-    // 'districts/UPDATE_DISTRICT_SUCCESS'
+    'districts/UPDATE_DISTRICT_SUCCESS'
   ),
   (state, action) => ({
     ...state,
