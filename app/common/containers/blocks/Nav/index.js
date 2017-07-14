@@ -35,6 +35,9 @@ export default class Nav extends React.Component {
           <NavItem to="districts" activeClassName={styles.active}>
             <Link id="districts-nav" to="/districts">{ t('Districts') }</Link>
           </NavItem>
+          <NavItem to="settlements" activeClassName={styles.active}>
+            <Link id="settlements-nav" to="/settlements">{ t('Settlements') }</Link>
+          </NavItem>
         </ul>
         <ul className={styles.down}>
           <li>

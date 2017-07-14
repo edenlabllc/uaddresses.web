@@ -16,8 +16,8 @@ import DistrictFieldFilterForm from 'containers/forms/DistrictFieldFilterForm';
 
 import Pagination from 'components/CursorPagination';
 
-import { getDistricts } from 'reducers';
-import { fetchDistricts } from './redux';
+import { getSettlements } from 'reducers';
+import { fetchSettlements } from './redux';
 
 import styles from './styles.scss';
 
@@ -55,21 +55,23 @@ const regions = [
 @translate()
 @provideHooks({
   fetch: ({ dispatch, location: { query } }) =>
-    dispatch(fetchDistricts(query)),
+    dispatch(fetchSettlements(query)),
 })
 @connect(state => ({
-  ...state.pages.DistrictsPage,
-  districts: getDistricts(state, state.pages.DistrictsPage.districts),
+  ...state.pages.SettlementsPage,
+  settlements: getSettlements(state, state.pages.SettlementsPage.settlements),
   // regions: getRegions(state, state.pages.RegionsPage.regions),
 }))
-export default class DistrictsPage extends React.Component {
+export default class SettlementsPage extends React.Component {
   render() {
-    const { districts = [], t, location, paging } = this.props;
+    const { settlements = [], t, location: { query }, paging } = this.props;
+    const location = query.region && query.district;
+    console.log(settlements);
 
     return (
-      <div id="districts-page">
-        <Helmet title={t('Districts')} />
-        <H1>{t(`Область ${location.query.region ? location.query.region : ''}`)}</H1>
+      <div id="settlements-page">
+        <Helmet title={t('Settlements')} />
+        <H1>{t(`Settlements ${location ? query.region && query.district : ''}`)}</H1>
         <FormRow>
           <FormColumn>
             <DistrictFieldFilterForm
@@ -80,39 +82,43 @@ export default class DistrictsPage extends React.Component {
           </FormColumn>
           <FormColumn />
         </FormRow>
-        <div id="district-table" className={styles.table}>
+        <div id="settlements-table" className={styles.table}>
           <Table
             columns={[
               { key: 'id', title: t('id') },
-              { key: 'district', title: t('district') },
+              { key: 'settlement_name', title: t('settlement_name') },
+              { key: 'mountain_group', title: t('mountain_group') },
+              { key: 'type', title: t('type') },
               { key: 'koatuu', title: t('koatuu') },
-              { key: 'region', title: t('region') },
               { key: 'edit', title: t('Action') },
             ]}
-            data={districts.map(item => ({
+            data={settlements.map(item => ({
               id: <div className={styles.name}>
                 {item.id}
               </div>,
-              district: (<div className={styles.name}>
+              settlement_name: (<div className={styles.name}>
                 <Button
-                  id={`edit-district-button-${item.id}`}
+                  id={`edit-settlements-button-${item.name}`}
                   theme="link"
                   color="red"
-                  to={`/settlements?region=${item.region}&district=${item.district}`}
+                  to={`/addresss?district=${item.name}`}
                 >
-                  {item.district}
+                  {item.settlement_name}
                 </Button>
               </div>),
+              mountain_group: <div className={styles.name}>
+                {item.mountain_group}
+              </div>,
+              type: <div className={styles.name}>
+                {item.type}
+              </div>,
               koatuu: <div className={styles.name}>
                 {item.koatuu}
               </div>,
-              region: <div className={styles.name}>
-                {item.region}
-              </div>,
               edit: (<Button
-                id={`edit-district-button-${item.id}`}
+                id={`edit-settlements-button-${item.id}`}
                 theme="link"
-                to={`/districts/${item.region}/${item.district}`}
+                to={`/settlements/${item.region}/${item.district}`}
               >
                 { t('Edit') }
               </Button>),
