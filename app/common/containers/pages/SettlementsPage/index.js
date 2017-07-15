@@ -42,8 +42,8 @@ export default class SettlementsPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      region: this.props.location.query.region ? this.props.location.query.region : '',
-      district: this.props.location.query.district ? this.props.location.query.district : '',
+      region: props.location.query.region ? props.location.query.region : '',
+      district: props.location.query.district ? props.location.query.district : '',
     };
   }
 
