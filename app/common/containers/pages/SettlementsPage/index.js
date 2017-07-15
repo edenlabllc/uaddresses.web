@@ -52,18 +52,19 @@ export default class SettlementsPage extends React.Component {
       settlements = [],
       regionsAll = [],
       districtsFromRegion = [],
-      location: { query },
+      location,
       onSelectRegion,
       paging,
       t,
     } = this.props;
 
-    const location = query.region && query.district ? `${query.region} Region => ${query.district} District` : '';
+    const getRegionAndDistrict = location.query.region && location.query.district ?
+      `${location.query.region} Region => ${location.query.district} District` : '';
 
     return (
       <div id="settlements-page">
         <Helmet title={t('Settlements')} />
-        <H1>{t(`Settlements ${location && location}`)}</H1>
+        <H1>{t(`Settlements ${getRegionAndDistrict && getRegionAndDistrict}`)}</H1>
         <FormRow>
           <FormColumn>
             <QueryFieldFilterForm
