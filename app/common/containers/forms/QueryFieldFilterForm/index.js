@@ -9,30 +9,29 @@ import styles from './styles.scss';
 
 @withStyles(styles)
 @translate()
-@reduxForm({
-  form: 'district-filter-form',
-})
-export default class DistrictFieldFilterForm extends React.Component {
+@reduxForm()
+export default class QueryFieldFilterForm extends React.Component {
   state = {
     active: '',
   };
 
   render() {
-    const { regions, t } = this.props;
+    const { data, name, disabled, t } = this.props;
     return (
       <form>
         <div>
           <Field
             searchable
+            disabled={disabled}
             type="text"
-            name="region"
+            name={name}
             component={Select}
             emptyText={t('Not found')}
-            placeholder={t('Choose region')}
+            placeholder={t(`Choose ${name}`)}
             allowAddItem
             onChangeSearch={val => this.setState({ active: val })}
             options={
-              regions
+              data
                 .filter(i => new RegExp(this.state.active).test(i.name) === true)
                 .map(i => ({
                   name: i.id,

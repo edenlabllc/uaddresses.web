@@ -11,7 +11,7 @@ import { H1 } from '@components/Title';
 import Table from '@components/Table';
 import Button from '@components/Button';
 import { FormRow, FormColumn } from '@components/Form';
-import DistrictFieldFilterForm from 'containers/forms/DistrictFieldFilterForm';
+import QueryFieldFilterForm from 'containers/forms/QueryFieldFilterForm';
 
 // import Pagination from 'components/CursorPagination';
 
@@ -42,10 +42,12 @@ export default class RegionsPage extends React.Component {
         <H1>{ t('Regions') }</H1>
         <FormRow>
           <FormColumn>
-            <DistrictFieldFilterForm
+            <QueryFieldFilterForm
+              name="region"
+              form="region-filter-form"
               initialValues={location.query}
               onChange={region => filterParams({ region: region.region.title }, this.props)}
-              regions={regionsList}
+              data={regionsList}
             />
           </FormColumn>
           <FormColumn />
@@ -62,7 +64,7 @@ export default class RegionsPage extends React.Component {
               ...item,
               name: (<div className={styles.name}>
                 <Button
-                  id={`edit-region-button-${item.id}`}
+                  id={`edit-districts-button-${item.id}`}
                   theme="link"
                   color="red"
                   to={`/districts?region=${item.name}`}

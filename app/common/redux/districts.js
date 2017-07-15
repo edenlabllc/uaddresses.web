@@ -25,8 +25,8 @@ export const fetchDistricts = ({ ...options, limit = 10 } = {}, { useCache = fal
   });
 
 
-export const fetchDistrictByID = (id, options) => invoke({
-  endpoint: createUrl(`${API_URL}/details/region/${id}/districts`, options),
+export const fetchDistrictByID = (id, { ...options, limit = 10 } = {}) => invoke({
+  endpoint: createUrl(`${API_URL}/details/region/${id}/districts`, { ...options, ...limit }),
   method: 'GET',
   headers: {
     'content-type': 'application/json',
@@ -34,7 +34,7 @@ export const fetchDistrictByID = (id, options) => invoke({
   types: ['districts/FETCH_DISTRICT_BY_REGION_ID_REQUEST', {
     type: 'districts/FETCH_DISTRICT_BY_REGION_ID_SUCCESS',
     payload: (action, state, res) => res.json().then(
-      json => normalize(json.data, district)
+      json => normalize(json.data, [district])
     ),
   }, 'districts/FETCH_DISTRICT_BY_REGION_ID_FAILURE'],
 });

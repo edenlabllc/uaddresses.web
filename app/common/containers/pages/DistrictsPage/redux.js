@@ -6,10 +6,7 @@ export const getDistricts = createAction('regionsPage/GET_REGIONS');
 export const pagingDistricts = createAction('regionsPage/ADD_PAGING');
 
 export const fetchDistricts = options => dispatch =>
-  dispatch(fromDistricts.fetchDistricts({
-    region: 'ВОЛИНСЬКА',
-    ...options,
-  }))
+  Object.keys(options).length && dispatch(fromDistricts.fetchDistricts(options))
     .then((action) => {
       if (action.error) throw action;
       return [

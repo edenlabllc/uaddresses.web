@@ -12,12 +12,11 @@ import Table from '@components/Table';
 import Button from '@components/Button';
 import { FormRow, FormColumn } from '@components/Form';
 
-import DistrictFieldFilterForm from 'containers/forms/DistrictFieldFilterForm';
-
+import QueryFieldFilterForm from 'containers/forms/QueryFieldFilterForm';
 import Pagination from 'components/CursorPagination';
 
-import { getSettlements, getAllRegions } from 'reducers';
-import { fetchSettlements } from './redux';
+import { getSettlements, getAllRegions, getDistricts } from 'reducers';
+import { fetchSettlements, fetchDistrictByRegion } from './redux';
 
 import styles from './styles.scss';
 
@@ -28,84 +27,139 @@ import styles from './styles.scss';
   fetch: ({ dispatch, location: { query } }) =>
     dispatch(fetchSettlements(query)),
 })
-@connect(state => ({
-  ...state.pages.SettlementsPage,
-  settlements: getSettlements(state, state.pages.SettlementsPage.settlements),
-  regions: getAllRegions(state),
-}))
+@connect(
+  state => ({
+    ...state.pages.SettlementsPage,
+    settlements: getSettlements(state, state.pages.SettlementsPage.settlements),
+    regionsAll: getAllRegions(state),
+    districtsFromRegion: getDistricts(state, state.pages.SettlementsPage.regionDistricts),
+  }),
+  dispatch => ({
+    onSelectRegion: id => dispatch(fetchDistrictByRegion(id)),
+  })
+)
 export default class SettlementsPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      region: this.props.location.query.region ? this.props.location.query.region : '',
+      district: this.props.location.query.district ? this.props.location.query.district : '',
+    };
+  }
+
+  filterParamsWithClear(filter, { router, location }) {
+    const newFilter = {
+      ...filter,
+    };
+    const query = Object.keys(newFilter).reduce((target, key) => {
+      if (newFilter[key]) {
+        target[key] = newFilter[key]; // eslint-disable-line
+      }
+      return target;
+    }, { });
+    router.push({
+      ...location,
+      query,
+    });
+  }
+
   render() {
-    const { settlements = [], regions = [], t, location: { query }, paging } = this.props;
-    const location = query.region && query.district;
+    const {
+      settlements = [],
+      regionsAll = [],
+      districtsFromRegion = [],
+      location: { query },
+      onSelectRegion,
+      paging,
+      t,
+    } = this.props;
+
+    const location = query.region && query.district ? `${query.region} Region => ${query.district} District` : '';
 
     return (
       <div id="settlements-page">
         <Helmet title={t('Settlements')} />
-        <H1>{t(`Settlements ${location ? (query.region, query.district) : ''}`)}</H1>
+        <H1>{t(`Settlements ${location && location}`)}</H1>
         <FormRow>
           <FormColumn>
-            <DistrictFieldFilterForm
-              initialValues={location.query}
-              onChange={region => filterParams({ region: region.region.title }, this.props)}
-              regions={regions}
+            <QueryFieldFilterForm
+              name="region"
+              form="region-filter-form"
+              onChange={({ region }) => {
+                onSelectRegion(region.name);
+                return this.filterParamsWithClear({ region: region.title }, this.props);
+              }}
+              data={regionsAll}
             />
           </FormColumn>
-          <FormColumn />
+          <FormColumn>
+            <QueryFieldFilterForm
+              name="district"
+              disabled={districtsFromRegion.length === 0}
+              form="district-filter-form"
+              onChange={({ district }) => filterParams({ district: district.title }, this.props)}
+              data={districtsFromRegion.map(i => ({ id: i.id, name: i.district }))}
+            />
+          </FormColumn>
         </FormRow>
-        <div id="settlements-table" className={styles.table}>
-          <Table
-            columns={[
-              { key: 'id', title: t('id') },
-              { key: 'settlement_name', title: t('settlement_name') },
-              { key: 'mountain_group', title: t('mountain_group') },
-              { key: 'type', title: t('type') },
-              { key: 'koatuu', title: t('koatuu') },
-              { key: 'edit', title: t('Action') },
-            ]}
-            data={settlements.map(item => ({
-              id: <div className={styles.name}>
-                {item.id}
-              </div>,
-              settlement_name: (<div className={styles.name}>
-                <Button
-                  id={`edit-settlements-button-${item.name}`}
-                  theme="link"
-                  color="red"
-                  to={`/addresss?district=${item.name}`}
-                >
-                  {item.settlement_name}
-                </Button>
-              </div>),
-              mountain_group: <div className={styles.name}>
-                {item.mountain_group}
-              </div>,
-              type: <div className={styles.name}>
-                {item.type}
-              </div>,
-              koatuu: <div className={styles.name}>
-                {item.koatuu}
-              </div>,
-              edit: (<Button
-                id={`edit-settlements-button-${item.id}`}
-                theme="link"
-                to={`/settlements/${item.region}/${item.district}`}
-              >
-                { t('Edit') }
-              </Button>),
-            }))}
-          />
-        </div>
-        <div className={styles.block}>
-          <Button to="/regions/create">{t('Create new region')}</Button>
-        </div>
-        <div className={styles.pagination}>
-          <Pagination
-            location={location}
-            more={paging.has_more}
-            after={paging.cursors.starting_after}
-            before={paging.cursors.ending_before}
-          />
-        </div>
+        {
+          this.state.region && (<div>
+            <div id="settlements-table" className={styles.table}>
+              <Table
+                columns={[
+                  { key: 'id', title: t('id') },
+                  { key: 'settlement_name', title: t('settlement_name') },
+                  { key: 'mountain_group', title: t('mountain group') },
+                  { key: 'type', title: t('type') },
+                  { key: 'koatuu', title: t('koatuu') },
+                  { key: 'edit', title: t('Action') },
+                ]}
+                data={settlements.map(item => ({
+                  id: <div className={styles.name}>
+                    {item.id}
+                  </div>,
+                  settlement_name: (<div className={styles.name}>
+                    <Button
+                      id={`edit-settlements-button-${item.name}`}
+                      theme="link"
+                      color="red"
+                      to={`/addresss?district=${item.name}`}
+                    >
+                      {item.settlement_name}
+                    </Button>
+                  </div>),
+                  mountain_group: <div className={styles.name}>
+                    {item.mountain_group}
+                  </div>,
+                  type: <div className={styles.name}>
+                    {item.type}
+                  </div>,
+                  koatuu: <div className={styles.name}>
+                    {item.koatuu}
+                  </div>,
+                  edit: (<Button
+                    id={`edit-settlements-button-${item.id}`}
+                    theme="link"
+                    to={`/settlements/${item.region}/${item.district}`}
+                  >
+                    { t('Edit') }
+                  </Button>),
+                }))}
+              />
+            </div>
+            <div className={styles.block}>
+              <Button to="/regions/create">{t('Create new region')}</Button>
+            </div>
+            <div className={styles.pagination}>
+              <Pagination
+                location={location}
+                more={paging.has_more}
+                after={paging.cursors.starting_after}
+                before={paging.cursors.ending_before}
+              />
+            </div>
+          </div>)
+        }
       </div>
     );
   }

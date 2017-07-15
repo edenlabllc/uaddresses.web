@@ -5,6 +5,8 @@ import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
 import Icon from '@components/Icon';
 import Aside from 'containers/blocks/Aside';
 import { fetchRegions } from 'redux/regions';
+// import { fetchDistricts } from 'redux/districts';
+// import { fetchSettlements } from 'redux/settlements';
 
 import styles from './styles.scss';
 
