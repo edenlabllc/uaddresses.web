@@ -47,22 +47,6 @@ export default class SettlementsPage extends React.Component {
     };
   }
 
-  filterParamsWithClear(filter, { router, location }) {
-    const newFilter = {
-      ...filter,
-    };
-    const query = Object.keys(newFilter).reduce((target, key) => {
-      if (newFilter[key]) {
-        target[key] = newFilter[key]; // eslint-disable-line
-      }
-      return target;
-    }, { });
-    router.push({
-      ...location,
-      query,
-    });
-  }
-
   render() {
     const {
       settlements = [],
@@ -87,7 +71,7 @@ export default class SettlementsPage extends React.Component {
               form="region-filter-form"
               onChange={({ region }) => {
                 onSelectRegion(region.name);
-                return this.filterParamsWithClear({ region: region.title }, this.props);
+                return filterParams({ region: region.title }, this.props, true);
               }}
               data={regionsAll}
             />
