@@ -99,44 +99,43 @@ export default class SettlementsPage extends React.Component {
             <div id="settlements-table" className={styles.table}>
               <Table
                 columns={[
-                  { key: 'id', title: t('id') },
                   { key: 'settlement_name', title: t('settlement_name') },
                   { key: 'mountain_group', title: t('mountain group') },
                   { key: 'type', title: t('type') },
                   { key: 'koatuu', title: t('koatuu') },
                   { key: 'edit', title: t('Action') },
                 ]}
-                data={settlements || [].map(item => ({
-                  id: <div className={styles.name}>
-                    {item.id}
-                  </div>,
-                  settlement_name: (<div className={styles.name}>
-                    <Button
-                      id={`edit-settlements-button-${item.name}`}
+                data={(settlements || [])
+                  .sort((a, b) => a.settlement_name.localeCompare(b.settlement_name))
+                  .map(item => ({
+                    settlement_name: (<div className={styles.name}>
+                      <Button
+                        id={`edit-settlements-button-${item.name}`}
+                        theme="link"
+                        color="red"
+                        to={`/streets?settlement_name=${item.settlement_name}&settlement_id=${item.id}`}
+                      >
+                        {item.settlement_name}
+                      </Button>
+                    </div>),
+                    mountain_group: <div className={styles.name}>
+                      {item.mountain_group}
+                    </div>,
+                    type: <div className={styles.name}>
+                      {item.type}
+                    </div>,
+                    koatuu: <div className={styles.name}>
+                      {item.koatuu}
+                    </div>,
+                    edit: (<Button
+                      id={`edit-settlements-button-${item.id}`}
                       theme="link"
-                      color="red"
                       to={`/streets?settlement_name=${item.settlement_name}&settlement_id=${item.id}`}
                     >
-                      {item.settlement_name}
-                    </Button>
-                  </div>),
-                  mountain_group: <div className={styles.name}>
-                    {item.mountain_group}
-                  </div>,
-                  type: <div className={styles.name}>
-                    {item.type}
-                  </div>,
-                  koatuu: <div className={styles.name}>
-                    {item.koatuu}
-                  </div>,
-                  edit: (<Button
-                    id={`edit-settlements-button-${item.id}`}
-                    theme="link"
-                    to={`/streets?settlement_name=${item.settlement_name}&settlement_id=${item.id}`}
-                  >
-                    { t('Edit') }
-                  </Button>),
-                }))}
+                      { t('Edit') }
+                    </Button>),
+                  })
+                )}
               />
             </div>
             <div className={styles.block}>
