@@ -91,9 +91,9 @@ export default class SettlementsPage extends React.Component {
               <Table
                 columns={[
                   { key: 'settlement_name', title: t('settlement_name') },
-                  { key: 'mountain_group', title: t('mountain group') },
                   { key: 'type', title: t('type') },
                   { key: 'koatuu', title: t('koatuu') },
+                  { key: 'mountain_group', title: t('mountain group') },
                   { key: 'edit', title: t('Action') },
                 ]}
                 data={(settlements || [])
@@ -109,14 +109,14 @@ export default class SettlementsPage extends React.Component {
                         {item.settlement_name}
                       </Button>
                     </div>),
-                    mountain_group: <div className={styles.name}>
-                      {item.mountain_group}
-                    </div>,
                     type: <div className={styles.name}>
                       {item.type}
                     </div>,
                     koatuu: <div className={styles.name}>
                       {item.koatuu}
+                    </div>,
+                    mountain_group: <div className={styles.name}>
+                      {item.mountain_group}
                     </div>,
                     edit: (<Button
                       id={`edit-settlements-button-${item.id}`}
