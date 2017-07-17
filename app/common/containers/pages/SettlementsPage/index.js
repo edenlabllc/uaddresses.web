@@ -41,14 +41,6 @@ import styles from './styles.scss';
   })
 )
 export default class SettlementsPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      region: props.location.query.region ? props.location.query.region : '',
-      district: props.location.query.district ? props.location.query.district : '',
-    };
-  }
-
   render() {
     const {
       settlements = [],
@@ -60,7 +52,6 @@ export default class SettlementsPage extends React.Component {
       paging,
       t,
     } = this.props;
-    console.log('settlements', settlements);
 
     const getRegionAndDistrict = location.query.region && location.query.district ?
       `${location.query.region} Region => ${location.query.district} District` : '';
