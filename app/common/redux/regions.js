@@ -6,7 +6,7 @@ import { region } from 'schemas';
 
 import { invoke } from './api';
 
-export const fetchRegions = ({ ...options, limit = 10 } = {}, { useCache = false } = {}) => invoke({
+export const fetchRegions = ({ ...options, limit = 24 } = {}, { useCache = false } = {}) => invoke({
   endpoint: createUrl(`${API_URL}/search/regions`, { ...options, limit }),
   method: 'GET',
   headers: {
