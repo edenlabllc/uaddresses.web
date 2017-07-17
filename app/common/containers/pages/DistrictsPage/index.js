@@ -62,51 +62,51 @@ export default class DistrictsPage extends React.Component {
           <FormColumn />
         </FormRow>
         {
-          this.state.selected && (
-            <div>
-              <div id="district-table" className={styles.table}>
-                <Table
-                  columns={[
-                    { key: 'id', title: t('id') },
-                    { key: 'district', title: t('district') },
-                    { key: 'koatuu', title: t('koatuu') },
-                    { key: 'region', title: t('region') },
-                    { key: 'edit', title: t('Action') },
-                  ]}
-                  data={districts.map(item => ({
-                    id: <div className={styles.name}>
-                      {item.id}
-                    </div>,
-                    district: (<div className={styles.name}>
-                      <Button
-                        id={`view-settlements-button-${item.district}`}
-                        theme="link"
-                        color="red"
-                        to={`/settlements?region=${item.region}&district=${item.district}`}
-                      >
-                        {item.district}
-                      </Button>
-                    </div>),
-                    koatuu: <div className={styles.name}>
-                      {item.koatuu}
-                    </div>,
-                    region: <div className={styles.name}>
-                      {item.region}
-                    </div>,
-                    edit: (<Button
-                      id={`edit-district-button-${item.district}`}
+          <div>
+            <div id="district-table" className={styles.table}>
+              <Table
+                columns={[
+                  { key: 'id', title: t('id') },
+                  { key: 'district', title: t('district') },
+                  { key: 'koatuu', title: t('koatuu') },
+                  { key: 'region', title: t('region') },
+                  { key: 'edit', title: t('Action') },
+                ]}
+                data={districts.map(item => ({
+                  id: <div className={styles.name}>
+                    {item.id}
+                  </div>,
+                  district: (<div className={styles.name}>
+                    <Button
+                      id={`view-settlements-button-${item.district}`}
                       theme="link"
-                      to={`/districts/${item.region}/${item.district}`}
+                      color="red"
+                      to={`/settlements?region=${item.region}&district=${item.district}`}
                     >
-                      { t('Edit') }
-                    </Button>),
-                  }))}
-                />
-              </div>
-              <div className={styles.block}>
-                <Button to="/regions/create">{t('Create new region')}</Button>
-              </div>
-              <div className={styles.pagination}>
+                      {item.district}
+                    </Button>
+                  </div>),
+                  koatuu: <div className={styles.name}>
+                    {item.koatuu}
+                  </div>,
+                  region: <div className={styles.name}>
+                    {item.region}
+                  </div>,
+                  edit: (<Button
+                    id={`edit-district-button-${item.district}`}
+                    theme="link"
+                    to={`/districts/${item.region}/${item.district}`}
+                  >
+                    { t('Edit') }
+                  </Button>),
+                }))}
+              />
+            </div>
+            <div className={styles.block}>
+              <Button to="/regions/create">{t('Create new region')}</Button>
+            </div>
+            {
+              false && <div className={styles.pagination}>
                 <Pagination
                   location={location}
                   more={paging.has_more}
@@ -114,8 +114,9 @@ export default class DistrictsPage extends React.Component {
                   before={paging.cursors.ending_before}
                 />
               </div>
-            </div>
-          )
+            }
+          </div>
+
         }
       </div>
     );

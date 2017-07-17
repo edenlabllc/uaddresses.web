@@ -105,7 +105,7 @@ export default class StreetsPage extends React.Component {
             <div id="settlements-table" className={styles.table}>
               <Table
                 columns={[
-                  { key: 'id', title: t('id') },
+                  // { key: 'id', title: t('id') },
                   { key: 'settlement_name', title: t('settlement_name') },
                   { key: 'mountain_group', title: t('mountain group') },
                   { key: 'type', title: t('type') },
@@ -113,9 +113,9 @@ export default class StreetsPage extends React.Component {
                   { key: 'edit', title: t('Action') },
                 ]}
                 data={streets.map(item => ({
-                  id: <div className={styles.name}>
-                    {item.id}
-                  </div>,
+                  // id: <div className={styles.name}>
+                  //   {item.id}
+                  // </div>,
                   settlement_name: (<div className={styles.name}>
                     <Button
                       id={`edit-settlements-button-${item.name}`}

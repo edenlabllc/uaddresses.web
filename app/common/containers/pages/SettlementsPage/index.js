@@ -60,6 +60,7 @@ export default class SettlementsPage extends React.Component {
       paging,
       t,
     } = this.props;
+    console.log('settlements', settlements);
 
     const getRegionAndDistrict = location.query.region && location.query.district ?
       `${location.query.region} Region => ${location.query.district} District` : '';
@@ -94,7 +95,7 @@ export default class SettlementsPage extends React.Component {
           </FormColumn>
         </FormRow>
         {
-          this.state.region && (<div>
+          <div>
             <div id="settlements-table" className={styles.table}>
               <Table
                 columns={[
@@ -105,7 +106,7 @@ export default class SettlementsPage extends React.Component {
                   { key: 'koatuu', title: t('koatuu') },
                   { key: 'edit', title: t('Action') },
                 ]}
-                data={settlements.map(item => ({
+                data={settlements || [].map(item => ({
                   id: <div className={styles.name}>
                     {item.id}
                   </div>,
@@ -142,14 +143,16 @@ export default class SettlementsPage extends React.Component {
               <Button to="/regions/create">{t('Create new region')}</Button>
             </div>
             <div className={styles.pagination}>
-              <Pagination
-                location={location}
-                more={paging.has_more}
-                after={paging.cursors.starting_after}
-                before={paging.cursors.ending_before}
-              />
+              {
+                false && <Pagination
+                  location={location}
+                  more={paging.has_more}
+                  after={paging.cursors.starting_after}
+                  before={paging.cursors.ending_before}
+                />
+              }
             </div>
-          </div>)
+          </div>
         }
       </div>
     );
