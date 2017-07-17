@@ -57,7 +57,7 @@ export const configureRoutes = ({ store }) => { // eslint-disable-line
           <Route path="regions">
             <IndexRoute component={RegionsPage} />
             {/* <Route path="create" component={RegionCreatePage} /> */}
-            <Route path=":id" component={RegionUpdatePage} />
+            <Route path=":id/:region" component={RegionUpdatePage} />
           </Route>
           <Route path="districts">
             <IndexRoute component={DistrictsPage} />

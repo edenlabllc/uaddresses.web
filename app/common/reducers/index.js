@@ -15,7 +15,7 @@ import streets from 'redux/streets';
 
 import Aside from 'containers/blocks/Aside/redux';
 import RegionsPage from 'containers/pages/RegionsPage/redux';
-// import RegionUpdatePage from 'containers/pages/RegionUpdatePage/redux';
+import RegionUpdatePage from 'containers/pages/RegionUpdatePage/redux';
 
 import DistrictsPage from 'containers/pages/DistrictsPage/redux';
 import DistrictUpdatePage from 'containers/pages/DistrictUpdatePage/redux';
@@ -32,7 +32,7 @@ const blocks = combineReducers({
 
 const pages = combineReducers({
   RegionsPage,
-  // RegionUpdatePage,
+  RegionUpdatePage,
   DistrictsPage,
   DistrictUpdatePage,
   SettlementsPage,

@@ -76,7 +76,7 @@ export default class RegionsPage extends React.Component {
                 edit: (<Button
                   id={`edit-region-button-${item.id}`}
                   theme="link"
-                  to={`/regions/${item.id}`}
+                  to={`/regions/${item.id}/${item.name}`}
                 >
                   { t('Edit') }
                 </Button>),
