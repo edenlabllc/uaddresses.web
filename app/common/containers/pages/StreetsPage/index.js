@@ -3,12 +3,11 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { translate } from 'react-i18next';
 import { provideHooks } from 'redial';
-import { reset } from 'redux-form';
 import Helmet from 'react-helmet';
 import { filterParams } from 'helpers/url';
 import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
 
-import { H1 } from '@components/Title';
+// import { H1 } from '@components/Title';
 import Table from '@components/Table';
 import Button from '@components/Button';
 import { FormRow, FormColumn } from '@components/Form';
@@ -16,8 +15,13 @@ import { FormRow, FormColumn } from '@components/Form';
 import QueryFieldFilterForm from 'containers/forms/QueryFieldFilterForm';
 import Pagination from 'components/CursorPagination';
 
-import { getSettlements, getAllRegions, getDistricts } from 'reducers';
-import { fetchSettlements, fetchDistrictByRegion } from './redux';
+import {
+  getSettlements,
+  // getAllRegions,
+  // getDistricts,
+} from 'reducers';
+
+import { fetchStreets } from './redux';
 
 import styles from './styles.scss';
 
@@ -26,75 +30,78 @@ import styles from './styles.scss';
 @translate()
 @provideHooks({
   fetch: ({ dispatch, location: { query } }) =>
-    dispatch(fetchSettlements(query)),
+    dispatch(fetchStreets(query)),
 })
 @connect(
   state => ({
-    ...state.pages.SettlementsPage,
-    settlements: getSettlements(state, state.pages.SettlementsPage.settlements),
-    regionsAll: getAllRegions(state),
-    districtsFromRegion: getDistricts(state, state.pages.SettlementsPage.regionDistricts),
+    ...state.pages.StreetsPage,
+    streets: getSettlements(state, state.pages.StreetsPage.streets),
+    // regionsAll: getAllRegions(state),
+    // districtsFromRegion: getDistricts(state, state.pages.StreetsPage.regionDistricts),
   }),
-  dispatch => ({
-    onSelectRegion: id => dispatch(fetchDistrictByRegion(id)),
-    onSelectNewRegion: () => dispatch(reset('district-filter-form')),
-  })
+  // dispatch => ({
+  //   onSelectRegion: id => dispatch(fetchDistrictByRegion(id)),
+  // })
 )
-export default class SettlementsPage extends React.Component {
+export default class StreetsPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      region: props.location.query.region ? props.location.query.region : '',
-      district: props.location.query.district ? props.location.query.district : '',
+      // region: props.location.query.region ? props.location.query.region : '',
+    //   district: props.location.query.district ? props.location.query.district : '',
     };
   }
 
   render() {
     const {
-      settlements = [],
+      streets = [],
       regionsAll = [],
       districtsFromRegion = [],
       location,
       onSelectRegion,
-      onSelectNewRegion,
       paging,
       t,
     } = this.props;
+    console.log('streets', streets);
 
-    const getRegionAndDistrict = location.query.region && location.query.district ?
-      `${location.query.region} Region => ${location.query.district} District` : '';
+    // const getRegionAndDistrict = location.query.region && location.query.district ?
+    //   `${location.query.region} Region => ${location.query.district} District` : '';
 
     return (
       <div id="settlements-page">
         <Helmet title={t('Settlements')} />
-        <H1>{t(`Settlements ${getRegionAndDistrict && getRegionAndDistrict}`)}</H1>
-        <FormRow>
-          <FormColumn>
-            <QueryFieldFilterForm
-              name="region"
-              form="region-filter-form"
-              onChange={({ region }) => {
-                onSelectRegion(region.name);
-                onSelectNewRegion();
-                return filterParams({ region: region.title }, this.props, true);
-              }}
-              data={regionsAll}
-            />
-          </FormColumn>
-          <FormColumn>
-            <QueryFieldFilterForm
-              name="district"
-              disabled={districtsFromRegion.length === 0}
-              form="district-filter-form"
-              onChange={({ district }) =>
-                district && filterParams({ district: district.title }, this.props)
-              }
-              data={districtsFromRegion.map(i => ({ id: i.id, name: i.district }))}
-            />
-          </FormColumn>
-        </FormRow>
         {
-          this.state.region && (<div>
+          // <H1>{t(`Settlements ${getRegionAndDistrict && getRegionAndDistrict}`)}</H1>
+        }
+        {
+          false && (
+            <FormRow>
+              <FormColumn>
+                <QueryFieldFilterForm
+                  name="region"
+                  form="region-filter-form"
+                  onChange={({ region }) => {
+                    onSelectRegion(region.name);
+                    return filterParams({ region: region.title }, this.props, true);
+                  }}
+                  data={regionsAll}
+                />
+              </FormColumn>
+              <FormColumn>
+                <QueryFieldFilterForm
+                  name="district"
+                  disabled={districtsFromRegion.length === 0}
+                  form="district-filter-form"
+                  onChange={({ district }) =>
+                    filterParams({ district: district.title }, this.props)}
+                  data={districtsFromRegion.map(i => ({ id: i.id, name: i.district }))}
+                />
+              </FormColumn>
+            </FormRow>
+          )
+        }
+        {
+          false && (<div>
             <div id="settlements-table" className={styles.table}>
               <Table
                 columns={[
@@ -105,7 +112,7 @@ export default class SettlementsPage extends React.Component {
                   { key: 'koatuu', title: t('koatuu') },
                   { key: 'edit', title: t('Action') },
                 ]}
-                data={settlements.map(item => ({
+                data={streets.map(item => ({
                   id: <div className={styles.name}>
                     {item.id}
                   </div>,
@@ -114,7 +121,7 @@ export default class SettlementsPage extends React.Component {
                       id={`edit-settlements-button-${item.name}`}
                       theme="link"
                       color="red"
-                      to={`/streets?settlement_name=${item.settlement_name}&settlement_id=${item.id}`}
+                      to={`/addresss?district=${item.name}`}
                     >
                       {item.settlement_name}
                     </Button>
@@ -131,7 +138,7 @@ export default class SettlementsPage extends React.Component {
                   edit: (<Button
                     id={`edit-settlements-button-${item.id}`}
                     theme="link"
-                    to={`/streets?settlement_name=${item.settlement_name}&settlement_id=${item.id}`}
+                    to={`/settlements/${item.region}/${item.district}`}
                   >
                     { t('Edit') }
                   </Button>),

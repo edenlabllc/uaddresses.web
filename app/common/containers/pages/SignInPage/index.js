@@ -23,10 +23,9 @@ export default class SignInPage extends React.Component {
             { property: 'og:title', content: t('Sign in') },
           ]}
         />
-
         <div className={styles.main__content}>
           <header className={styles.header}>
-            <img src="/images/nhs-logo.svg" alt="Logo" />
+            UAddress Admin
           </header>
           { query.error && <section className={styles.error}>
             { t('Auth error {{code}}', { code: query.error }) }

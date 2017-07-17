@@ -23,6 +23,7 @@ import DistrictUpdatePage from 'containers/pages/DistrictUpdatePage/redux';
 import SettlementsPage from 'containers/pages/SettlementsPage/redux';
 // import DistrictUpdatePage from 'containers/pages/DistrictUpdatePage/redux';
 
+import StreetsPage from 'containers/pages/StreetsPage/redux';
 
 const blocks = combineReducers({
   Aside,
@@ -34,6 +35,7 @@ const pages = combineReducers({
   DistrictsPage,
   DistrictUpdatePage,
   SettlementsPage,
+  StreetsPage,
 });
 
 const data = combineReducers({
