@@ -66,40 +66,39 @@ export default class DistrictsPage extends React.Component {
             <div id="district-table" className={styles.table}>
               <Table
                 columns={[
-                  { key: 'id', title: t('id') },
                   { key: 'district', title: t('district') },
                   { key: 'koatuu', title: t('koatuu') },
                   { key: 'region', title: t('region') },
                   { key: 'edit', title: t('Action') },
                 ]}
-                data={districts.map(item => ({
-                  id: <div className={styles.name}>
-                    {item.id}
-                  </div>,
-                  district: (<div className={styles.name}>
-                    <Button
-                      id={`view-settlements-button-${item.district}`}
+                data={(districts || [])
+                  .sort((a, b) => a.district.localeCompare(b.district))
+                  .map(item => ({
+                    district: (<div className={styles.name}>
+                      <Button
+                        id={`view-settlements-button-${item.district}`}
+                        theme="link"
+                        color="red"
+                        to={`/settlements?region=${item.region}&district=${item.district}`}
+                      >
+                        {item.district}
+                      </Button>
+                    </div>),
+                    koatuu: <div className={styles.name}>
+                      {item.koatuu}
+                    </div>,
+                    region: <div className={styles.name}>
+                      {item.region}
+                    </div>,
+                    edit: (<Button
+                      id={`edit-district-button-${item.district}`}
                       theme="link"
-                      color="red"
-                      to={`/settlements?region=${item.region}&district=${item.district}`}
+                      to={`/districts/${item.region}/${item.district}`}
                     >
-                      {item.district}
-                    </Button>
-                  </div>),
-                  koatuu: <div className={styles.name}>
-                    {item.koatuu}
-                  </div>,
-                  region: <div className={styles.name}>
-                    {item.region}
-                  </div>,
-                  edit: (<Button
-                    id={`edit-district-button-${item.district}`}
-                    theme="link"
-                    to={`/districts/${item.region}/${item.district}`}
-                  >
-                    { t('Edit') }
-                  </Button>),
-                }))}
+                      { t('Edit') }
+                    </Button>),
+                  }))
+                }
               />
             </div>
             <div className={styles.block}>

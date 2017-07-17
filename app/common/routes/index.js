@@ -13,6 +13,7 @@ import DistrictsPage from 'containers/pages/DistrictsPage';
 import DistrictUpdatePage from 'containers/pages/DistrictUpdatePage';
 
 import SettlementsPage from 'containers/pages/SettlementsPage';
+import SettlementUpdatePage from 'containers/pages/SettlementUpdatePage';
 // import DistrictUpdatePage from 'containers/pages/DistrictUpdatePage';
 
 import StreetsPage from 'containers/pages/StreetsPage';
@@ -66,7 +67,7 @@ export const configureRoutes = ({ store }) => { // eslint-disable-line
           <Route path="settlements">
             <IndexRoute component={SettlementsPage} />
             {/* <Route path="create" component={RegionCreatePage} /> */}
-            {/* <Route path=":id" component={RegionUpdatePage} />*/}
+            <Route path=":region/:id" component={SettlementUpdatePage} />
           </Route>
           <Route path="streets">
             <IndexRoute component={StreetsPage} />

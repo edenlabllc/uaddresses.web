@@ -55,31 +55,33 @@ export default class RegionsPage extends React.Component {
         <div id="regions-table" className={styles.table}>
           <Table
             columns={[
-              { key: 'id', title: t('Id') },
               { key: 'name', title: t('Name') },
               { key: 'koatuu', title: t('Koatuu') },
               { key: 'edit', title: t('Action') },
             ]}
-            data={regions.map(item => ({
-              ...item,
-              name: (<div className={styles.name}>
-                <Button
-                  id={`edit-districts-button-${item.id}`}
+            data={(regions || [])
+              .sort((a, b) => a.name.localeCompare(b.name))
+              .map(item => ({
+                ...item,
+                name: (<div className={styles.name}>
+                  <Button
+                    id={`edit-districts-button-${item.id}`}
+                    theme="link"
+                    color="red"
+                    to={`/districts?region=${item.name}`}
+                  >
+                    {item.name}
+                  </Button>
+                </div>),
+                edit: (<Button
+                  id={`edit-region-button-${item.id}`}
                   theme="link"
-                  color="red"
-                  to={`/districts?region=${item.name}`}
+                  to={`/regions/${item.id}`}
                 >
-                  {item.name}
-                </Button>
-              </div>),
-              edit: (<Button
-                id={`edit-region-button-${item.id}`}
-                theme="link"
-                to={`/regions/${item.id}`}
-              >
-                { t('Edit') }
-              </Button>),
-            }))}
+                  { t('Edit') }
+                </Button>),
+              }))
+            }
           />
         </div>
         <div className={styles.block}>
