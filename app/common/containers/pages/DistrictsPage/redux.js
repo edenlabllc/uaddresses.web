@@ -2,8 +2,8 @@ import { combineReducers } from 'redux';
 import { handleAction, createAction } from 'redux-actions';
 import * as fromDistricts from 'redux/districts';
 
-export const getDistricts = createAction('regionsPage/GET_REGIONS');
-export const pagingDistricts = createAction('regionsPage/ADD_PAGING');
+export const getDistricts = createAction('districtsPage/GET_REGIONS');
+export const pagingDistricts = createAction('districtsPage/ADD_PAGING');
 
 export const fetchDistricts = options => dispatch =>
   Object.keys(options).length && dispatch(fromDistricts.fetchDistricts(options))

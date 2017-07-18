@@ -1,19 +1,19 @@
 import { handleAction, createAction } from 'redux-actions';
 import { combineReducers } from 'redux';
 
-import * as fromDistricts from 'redux/districts';
+import * as fromSettlements from 'redux/settlements';
 
-export const setDistrict = createAction('districtUpdate/SET_DISTRICT');
+export const setSettlemment = createAction('settlementUpdate/SET_SETTLEMENT');
 
-export const fetchDistricts = options => dispatch =>
-  dispatch(fromDistricts.fetchDistricts(options))
+export const fetchSettlement = options => dispatch =>
+  dispatch(fromSettlements.fetchSettlements(options))
     .then((action) => {
       if (action.error) throw action;
-      return dispatch(setDistrict(action.payload.result));
+      return dispatch(setSettlemment(action.payload.result));
     });
 
-const district = handleAction(setDistrict, (state, action) => action.payload, []);
+const settlement = handleAction(setSettlemment, (state, action) => action.payload, []);
 
 export default combineReducers({
-  district,
+  settlement,
 });

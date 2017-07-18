@@ -46,7 +46,7 @@ export default class RegionsPage extends React.Component {
               name="region"
               form="region-filter-form"
               initialValues={location.query}
-              onChange={region => filterParams({ region: region.region.title }, this.props)}
+              onChange={region => filterParams({ name: region.region.title }, this.props)}
               data={regionsList}
             />
           </FormColumn>
