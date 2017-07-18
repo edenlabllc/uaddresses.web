@@ -65,6 +65,12 @@ export default class SettlementsPage extends React.Component {
             <QueryFieldFilterForm
               name="region"
               form="region-filter-form"
+              initialValues={location.query.region && ({
+                region: {
+                  name: regionsAll.filter(i => i.name === location.query.region)[0].id,
+                  title: location.query.region,
+                },
+              })}
               onChange={({ region }) => {
                 onSelectRegion(region.name);
                 onSelectNewRegion();

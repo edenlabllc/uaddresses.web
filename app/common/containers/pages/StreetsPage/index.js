@@ -16,7 +16,7 @@ import QueryFieldFilterForm from 'containers/forms/QueryFieldFilterForm';
 import Pagination from 'components/CursorPagination';
 
 import {
-  getSettlements,
+  getStreets,
   // getAllRegions,
   // getDistricts,
 } from 'reducers';
@@ -35,7 +35,7 @@ import styles from './styles.scss';
 @connect(
   state => ({
     ...state.pages.StreetsPage,
-    streets: getSettlements(state, state.pages.StreetsPage.streets),
+    streets: getStreets(state, state.pages.StreetsPage.streets),
     // regionsAll: getAllRegions(state),
     // districtsFromRegion: getDistricts(state, state.pages.StreetsPage.regionDistricts),
   }),
@@ -44,14 +44,6 @@ import styles from './styles.scss';
   // })
 )
 export default class StreetsPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      // region: props.location.query.region ? props.location.query.region : '',
-    //   district: props.location.query.district ? props.location.query.district : '',
-    };
-  }
-
   render() {
     const {
       streets = [],
@@ -62,7 +54,6 @@ export default class StreetsPage extends React.Component {
       paging,
       t,
     } = this.props;
-    console.log('streets', streets);
 
     // const getRegionAndDistrict = location.query.region && location.query.district ?
     //   `${location.query.region} Region => ${location.query.district} District` : '';
@@ -73,91 +64,65 @@ export default class StreetsPage extends React.Component {
         {
           // <H1>{t(`Settlements ${getRegionAndDistrict && getRegionAndDistrict}`)}</H1>
         }
-        {
-          false && (
-            <FormRow>
-              <FormColumn>
-                <QueryFieldFilterForm
-                  name="region"
-                  form="region-filter-form"
-                  onChange={({ region }) => {
-                    onSelectRegion(region.name);
-                    return filterParams({ region: region.title }, this.props, true);
-                  }}
-                  data={regionsAll}
-                />
-              </FormColumn>
-              <FormColumn>
-                <QueryFieldFilterForm
-                  name="district"
-                  disabled={districtsFromRegion.length === 0}
-                  form="district-filter-form"
-                  onChange={({ district }) =>
-                    filterParams({ district: district.title }, this.props)}
-                  data={districtsFromRegion.map(i => ({ id: i.id, name: i.district }))}
-                />
-              </FormColumn>
-            </FormRow>
-          )
-        }
-        {
-          false && (<div>
-            <div id="settlements-table" className={styles.table}>
-              <Table
-                columns={[
-                  // { key: 'id', title: t('id') },
-                  { key: 'settlement_name', title: t('settlement_name') },
-                  { key: 'mountain_group', title: t('mountain group') },
-                  { key: 'type', title: t('type') },
-                  { key: 'koatuu', title: t('koatuu') },
-                  { key: 'edit', title: t('Action') },
-                ]}
-                data={streets.map(item => ({
-                  // id: <div className={styles.name}>
-                  //   {item.id}
-                  // </div>,
-                  settlement_name: (<div className={styles.name}>
-                    <Button
-                      id={`edit-settlements-button-${item.name}`}
-                      theme="link"
-                      color="red"
-                      to={`/addresss?district=${item.name}`}
-                    >
-                      {item.settlement_name}
-                    </Button>
+        <FormRow>
+          <FormColumn>
+            <QueryFieldFilterForm
+              name="region"
+              form="region-filter-form"
+              onChange={({ region }) => {
+                onSelectRegion(region.name);
+                return filterParams({ region: region.title }, this.props, true);
+              }}
+              data={regionsAll}
+            />
+          </FormColumn>
+          <FormColumn>
+            <QueryFieldFilterForm
+              name="district"
+              disabled={districtsFromRegion.length === 0}
+              form="district-filter-form"
+              onChange={({ district }) =>
+                filterParams({ district: district.title }, this.props)}
+              data={districtsFromRegion.map(i => ({ id: i.id, name: i.district }))}
+            />
+          </FormColumn>
+        </FormRow>
+        <div>
+          <div id="settlements-table" className={styles.table}>
+            <Table
+              columns={[
+                { key: 'name', title: t('name') },
+                { key: 'type', title: t('type') },
+              ]}
+              data={(streets || [])
+                .sort((a, b) => a.name.localeCompare(b.name))
+                .map(item => ({
+                  name: (<div className={styles.name}>
+                    {item.name}
                   </div>),
-                  mountain_group: <div className={styles.name}>
-                    {item.mountain_group}
-                  </div>,
                   type: <div className={styles.name}>
                     {item.type}
                   </div>,
-                  koatuu: <div className={styles.name}>
-                    {item.koatuu}
-                  </div>,
-                  edit: (<Button
-                    id={`edit-settlements-button-${item.id}`}
-                    theme="link"
-                    to={`/settlements/${item.region}/${item.district}`}
-                  >
-                    { t('Edit') }
-                  </Button>),
-                }))}
-              />
-            </div>
-            <div className={styles.block}>
-              <Button to="/regions/create">{t('Create new region')}</Button>
-            </div>
-            <div className={styles.pagination}>
-              <Pagination
-                location={location}
-                more={paging.has_more}
-                after={paging.cursors.starting_after}
-                before={paging.cursors.ending_before}
-              />
-            </div>
-          </div>)
-        }
+                }))
+              }
+            />
+          </div>
+          {
+            false && (
+              <div className={styles.block}>
+                <Button to="/regions/create">{t('Create new region')}</Button>
+              </div>
+            )
+          }
+          <div className={styles.pagination}>
+            <Pagination
+              location={location}
+              more={paging.has_more}
+              after={paging.cursors.starting_after}
+              before={paging.cursors.ending_before}
+            />
+          </div>
+        </div>
       </div>
     );
   }

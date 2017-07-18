@@ -39,7 +39,6 @@ export default class DistrictsPage extends React.Component {
 
   render() {
     const { districts = [], regions = [], t, location, paging } = this.props;
-
     return (
       <div id="districts-page">
         <Helmet title={t('Districts')} />
@@ -49,7 +48,12 @@ export default class DistrictsPage extends React.Component {
             <QueryFieldFilterForm
               name="region"
               form="region-filter-form"
-              initialValues={location.query}
+              initialValues={location.query.region && ({
+                region: {
+                  name: regions.filter(i => i.name === location.query.region)[0].id,
+                  title: location.query.region,
+                },
+              })}
               onChange={(region) => {
                 this.setState({
                   selected: region.region.title,

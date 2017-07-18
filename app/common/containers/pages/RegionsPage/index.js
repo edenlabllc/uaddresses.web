@@ -35,6 +35,7 @@ import styles from './styles.scss';
 export default class RegionsPage extends React.Component {
   render() {
     const { regions = [], regionsList = [], t, location } = this.props;
+    console.log(location.query.region);
 
     return (
       <div id="roles-page">
@@ -45,7 +46,12 @@ export default class RegionsPage extends React.Component {
             <QueryFieldFilterForm
               name="region"
               form="region-filter-form"
-              initialValues={location.query}
+              initialValues={location.query.region && ({
+                region: {
+                  name: regionsList.filter(i => i.name === location.query.region)[0].id,
+                  title: location.query.region,
+                },
+              })}
               onChange={region => filterParams({ name: region.region.title }, this.props)}
               data={regionsList}
             />
