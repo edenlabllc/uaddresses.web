@@ -65,7 +65,7 @@ export default class DistrictForm extends React.Component {
           <FormRow>
             <FormColumn>
               <Field
-                name="district"
+                name="name"
                 component={FieldInput}
                 labelText={t('Name')}
                 placeholder={t('Zaopizhzhya district')}

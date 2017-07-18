@@ -110,7 +110,7 @@ export default class SettlementsPage extends React.Component {
                         id={`edit-settlements-button-${item.name}`}
                         theme="link"
                         color="red"
-                        to={`/streets?settlement_name=${item.settlement_name}&settlement_id=${item.id}`}
+                        to={`/streets?settlement_id=${item.id}`}
                       >
                         {item.settlement_name}
                       </Button>

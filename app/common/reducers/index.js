@@ -23,7 +23,6 @@ import DistrictUpdatePage from 'containers/pages/DistrictUpdatePage/redux';
 import SettlementsPage from 'containers/pages/SettlementsPage/redux';
 import SettlementUpdatePage from 'containers/pages/SettlementUpdatePage/redux';
 
-
 import StreetsPage from 'containers/pages/StreetsPage/redux';
 
 const blocks = combineReducers({

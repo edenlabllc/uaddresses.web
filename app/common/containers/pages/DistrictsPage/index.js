@@ -12,6 +12,7 @@ import Table from '@components/Table';
 import Button from '@components/Button';
 import { FormRow, FormColumn } from '@components/Form';
 import QueryFieldFilterForm from 'containers/forms/QueryFieldFilterForm';
+import FieldFilterForm from 'containers/forms/FieldFilterForm';
 import Pagination from 'components/CursorPagination';
 
 import { getDistricts, getAllRegions } from 'reducers';
@@ -39,6 +40,7 @@ export default class DistrictsPage extends React.Component {
 
   render() {
     const { districts = [], regions = [], t, location, paging } = this.props;
+    console.log(districts);
     return (
       <div id="districts-page">
         <Helmet title={t('Districts')} />
@@ -47,7 +49,7 @@ export default class DistrictsPage extends React.Component {
           <FormColumn>
             <QueryFieldFilterForm
               name="region"
-              form="region-filter-form"
+              form="district-filter-form"
               initialValues={location.query.region && ({
                 region: {
                   name: regions.filter(i => i.name === location.query.region)[0].id,
@@ -65,6 +67,26 @@ export default class DistrictsPage extends React.Component {
           </FormColumn>
           <FormColumn />
         </FormRow>
+        <FormRow>
+          <FormColumn>
+            <FieldFilterForm
+              name="name"
+              form="districts_name_form"
+              initialValues={location.query}
+              onSubmit={({ name }) => filterParams({ name }, this.props)}
+              submitBtn
+            />
+          </FormColumn>
+          <FormColumn>
+            <FieldFilterForm
+              name="koatuu"
+              form="districts_koatuu_form"
+              initialValues={location.query}
+              onSubmit={({ koatuu }) => filterParams({ koatuu }, this.props)}
+              submitBtn
+            />
+          </FormColumn>
+        </FormRow>
         {
           <div>
             <div id="district-table" className={styles.table}>
@@ -76,7 +98,7 @@ export default class DistrictsPage extends React.Component {
                   { key: 'edit', title: t('Action') },
                 ]}
                 data={(districts || [])
-                  .sort((a, b) => a.district.localeCompare(b.district))
+                  .sort((a, b) => a.name.localeCompare(b.name))
                   .map(item => ({
                     district: (<div className={styles.name}>
                       <Button
@@ -85,7 +107,7 @@ export default class DistrictsPage extends React.Component {
                         color="red"
                         to={`/settlements?region=${item.region}&district=${item.district}`}
                       >
-                        {item.district}
+                        {item.name}
                       </Button>
                     </div>),
                     koatuu: <div className={styles.name}>

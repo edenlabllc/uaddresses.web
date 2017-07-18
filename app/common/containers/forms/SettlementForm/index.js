@@ -93,7 +93,7 @@ export default class SettlementForm extends React.Component {
           <FormRow>
             <FormColumn>
               <Field
-                name="Street Type"
+                name="type"
                 labelText={t('type')}
                 component={Select}
                 placeholder="Select street type"

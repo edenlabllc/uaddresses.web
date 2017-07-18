@@ -46,24 +46,24 @@ export default class DistrictUpdatePage extends React.Component {
         <div id="settlements-table" className={styles.table}>
           <Table
             columns={[
-              { key: 'settlement_name', title: t('settlement_name') },
+              { key: 'name', title: t('name') },
               { key: 'type', title: t('type') },
               { key: 'koatuu', title: t('koatuu') },
               { key: 'mountain_group', title: t('mountain group') },
               { key: 'edit', title: t('Action') },
             ]}
             data={(settlements || [])
-              .sort((a, b) => a.settlement_name.localeCompare(b.settlement_name))
+              .sort((a, b) => a.name.localeCompare(b.name))
               .map(item => ({
-                settlement_name: (<div className={styles.name}>
-                  <Button
+                name: (<div className={styles.name}>
+                  <name
                     id={`edit-settlements-button-${item.name}`}
                     theme="link"
                     color="red"
-                    to={`/streets?settlement_name=${item.settlement_name}&settlement_id=${item.id}`}
+                    to={`/streets?settlement_name=${item.name}&settlement_id=${item.id}`}
                   >
-                    {item.settlement_name}
-                  </Button>
+                    {item.name}
+                  </name>
                 </div>),
                 type: <div className={styles.name}>
                   {item.type}

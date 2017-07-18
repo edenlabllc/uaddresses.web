@@ -53,26 +53,20 @@ export const configureRoutes = ({ store }) => { // eslint-disable-line
       <Route component={Main} onEnter={requireAuth}>
         <Route path="/">
           <IndexRedirect to="/regions" />
-
           <Route path="regions">
             <IndexRoute component={RegionsPage} />
-            {/* <Route path="create" component={RegionCreatePage} /> */}
             <Route path=":id/:region" component={RegionUpdatePage} />
           </Route>
           <Route path="districts">
             <IndexRoute component={DistrictsPage} />
             <Route path=":region/:district" component={DistrictUpdatePage} />
-            {/* <Route path="create" component={RegionCreatePage} /> */}
           </Route>
           <Route path="settlements">
             <IndexRoute component={SettlementsPage} />
-            {/* <Route path="create" component={RegionCreatePage} /> */}
             <Route path=":region/:id" component={SettlementUpdatePage} />
           </Route>
           <Route path="streets">
             <IndexRoute component={StreetsPage} />
-            {/* <Route path="create" component={RegionCreatePage} /> */}
-            {/* <Route path=":id" component={RegionUpdatePage} />*/}
           </Route>
         </Route>
       </Route>

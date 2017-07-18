@@ -16,12 +16,13 @@ import QueryFieldFilterForm from 'containers/forms/QueryFieldFilterForm';
 import Pagination from 'components/CursorPagination';
 
 import {
+  getAllRegions,
+  getDistricts,
+  // getSettlements,
   getStreets,
-  // getAllRegions,
-  // getDistricts,
 } from 'reducers';
 
-import { fetchStreets } from './redux';
+import { fetchStreets, fetchDistrictByRegion, fetchSettlements } from './redux';
 
 import styles from './styles.scss';
 
@@ -36,24 +37,31 @@ import styles from './styles.scss';
   state => ({
     ...state.pages.StreetsPage,
     streets: getStreets(state, state.pages.StreetsPage.streets),
-    // regionsAll: getAllRegions(state),
-    // districtsFromRegion: getDistricts(state, state.pages.StreetsPage.regionDistricts),
+    regionsAll: getAllRegions(state),
+    districtsFromRegion: getDistricts(state, state.pages.StreetsPage.regionDistricts),
+    // settlements: getSettlements(state, state.pages.StreetsPage.settlements),
   }),
-  // dispatch => ({
-  //   onSelectRegion: id => dispatch(fetchDistrictByRegion(id)),
-  // })
+  dispatch => ({
+    onSelectRegion: id => dispatch(fetchDistrictByRegion(id)),
+    onSelectDistrict: id => dispatch(fetchSettlements(id)),
+    onSelectSettlements: id => dispatch(fetchStreets(id)),
+  })
 )
 export default class StreetsPage extends React.Component {
   render() {
     const {
-      streets = [],
       regionsAll = [],
       districtsFromRegion = [],
-      location,
+      settlements = [],
+      streets = [],
       onSelectRegion,
+      onSelectDistrict,
+      onSelectSettlements,
+      location,
       paging,
       t,
     } = this.props;
+    console.log(regionsAll, districtsFromRegion, settlements);
 
     // const getRegionAndDistrict = location.query.region && location.query.district ?
     //   `${location.query.region} Region => ${location.query.district} District` : '';
@@ -69,10 +77,7 @@ export default class StreetsPage extends React.Component {
             <QueryFieldFilterForm
               name="region"
               form="region-filter-form"
-              onChange={({ region }) => {
-                onSelectRegion(region.name);
-                return filterParams({ region: region.title }, this.props, true);
-              }}
+              onChange={({ region }) => onSelectRegion(region.name)}
               data={regionsAll}
             />
           </FormColumn>
@@ -81,9 +86,22 @@ export default class StreetsPage extends React.Component {
               name="district"
               disabled={districtsFromRegion.length === 0}
               form="district-filter-form"
-              onChange={({ district }) =>
-                filterParams({ district: district.title }, this.props)}
+              onChange={({ district }) => onSelectDistrict(district.name)}
               data={districtsFromRegion.map(i => ({ id: i.id, name: i.district }))}
+            />
+          </FormColumn>
+        </FormRow>
+        <FormRow>
+          <FormColumn />
+          <FormColumn>
+            <QueryFieldFilterForm
+              name="settlement"
+              form="settlement-filter-form"
+              onChange={({ settlement }) => {
+                onSelectSettlements(settlement.name);
+                return filterParams({ settlement_id: settlement.name }, this.props, true);
+              }}
+              data={settlements}
             />
           </FormColumn>
         </FormRow>

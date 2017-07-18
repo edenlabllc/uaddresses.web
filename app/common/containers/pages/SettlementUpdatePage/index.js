@@ -28,7 +28,11 @@ export default class SettlementUpdatePage extends React.Component {
   render() {
     const { t, settlement, updateSettlement } = this.props;
     return (
-      <FormPageWrapper id="update-settlement-page" title={t('Edit settlement: {{name}}', { name: settlement.settlement_name })} back="/settlements">
+      <FormPageWrapper
+        id="update-settlement-page"
+        title={t('Edit settlement: {{name}}', { name: settlement.settlement_name })}
+        back="/settlements"
+      >
         <Helmet title={t('Edit settlement: {{name}}', { name: settlement.name })} />
         <div className={styles.block}>
           <SettlementForm
