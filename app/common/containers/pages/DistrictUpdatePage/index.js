@@ -34,7 +34,7 @@ export default class DistrictUpdatePage extends React.Component {
   render() {
     const { t, district = [], settlements = [], updateDistrict } = this.props;
     return (
-      <FormPageWrapper id="update-district-page" title={t('Edit district: {{name}}', { name: district.district })} back="/districts">
+      <FormPageWrapper id="update-district-page" title={t('Edit district: {{name}}', { name: district.name })} back="/districts">
         <Helmet title={t('Edit district: {{name}}', { name: district.name })} />
         <div className={styles.block}>
           <DistrictForm

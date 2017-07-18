@@ -11,23 +11,26 @@ import styles from './styles.scss';
 @translate()
 @reduxForm()
 export default class QueryFieldFilterForm extends React.Component {
-  state = {
-    active: '',
-  };
-
+  constructor() {
+    super();
+    this.state = {
+      active: '',
+    };
+  }
   render() {
     const { data, name, disabled, t } = this.props;
     return (
       <form>
         <div>
           <Field
+            // searchable
+            allowAddItem
             disabled={disabled}
             type="text"
             name={name}
             component={Select}
             emptyText={t('Not found')}
             placeholder={t(`Choose ${name}`)}
-            allowAddItem
             onChangeSearch={val => this.setState({ active: val })}
             options={
               data

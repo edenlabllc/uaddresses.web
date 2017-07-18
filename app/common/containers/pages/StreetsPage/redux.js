@@ -27,8 +27,8 @@ export const fetchDistrictByRegion = id => dispatch =>
     return dispatch(getRegionDistricts(action.payload.result));
   });
 
-export const fetchSettlements = id => dispatch =>
-  dispatch(fromSettlements.fetchSettlements({ region_id: id, limit: 100 }))
+export const fetchSettlements = region => dispatch =>
+  dispatch(fromSettlements.fetchSettlements({ region, limit: 100 }))
     .then((action) => {
       if (action.error) throw action;
       return dispatch(getSettlements(action.payload.result));

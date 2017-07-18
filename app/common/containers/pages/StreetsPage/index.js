@@ -86,7 +86,7 @@ export default class StreetsPage extends React.Component {
               name="district"
               disabled={districtsFromRegion.length === 0}
               form="district-filter-form"
-              onChange={({ district }) => onSelectDistrict(district.name)}
+              onChange={({ district }) => onSelectDistrict(district.title)}
               data={districtsFromRegion.map(i => ({ id: i.id, name: i.district }))}
             />
           </FormColumn>

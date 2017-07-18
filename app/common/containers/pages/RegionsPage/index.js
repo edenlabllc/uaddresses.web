@@ -35,7 +35,7 @@ import styles from './styles.scss';
 export default class RegionsPage extends React.Component {
   render() {
     const { regions = [], regionsList = [], t, location } = this.props;
-    console.log(location.query.region);
+
 
     return (
       <div id="roles-page">
