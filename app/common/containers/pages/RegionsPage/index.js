@@ -60,7 +60,7 @@ export default class RegionsPage extends React.Component {
         <div id="regions-table" className={styles.table}>
           <Table
             columns={[
-              { key: 'name', title: t('Name') },
+              { key: 'name', title: t('Regions name') },
               { key: 'koatuu', title: t('Koatuu') },
               { key: 'edit', title: t('Action') },
             ]}

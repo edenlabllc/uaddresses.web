@@ -1,3 +1,4 @@
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
@@ -5,46 +6,13 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2017-05-31T13:17:08.654Z\n"
-"PO-Revision-Date: 2017-05-31T13:17:08.654Z\n"
+"POT-Creation-Date: 2017-07-19 16:05+0300\n"
+"PO-Revision-Date: 2017-07-19T13:05:34.009Z\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.0.2\n"
 
-msgid "Required field"
-msgstr ""
-
-msgid "Invalid email format"
-msgstr ""
-
-msgid "Invalid surname"
-msgstr ""
-
-msgid "Length must be less than <%= params %>"
-msgstr ""
-
-msgid "Invalid card number"
-msgstr ""
-
-msgid "Card with such names already exist"
-msgstr ""
-
-msgid "Card with such number already exist"
-msgstr ""
-
-msgid "Support only {{types}} cards"
-msgstr ""
-
-msgid "Minimal value is <%= params %>"
-msgstr ""
-
-msgid "Maximum value is <%= params %>"
-msgstr ""
-
-msgid "Confirm"
-msgstr ""
-
-msgid "Cancel"
-msgstr ""
-
-msgid "No data"
+msgid "1234567890"
 msgstr ""
 
 msgid "Yes"
@@ -71,22 +39,16 @@ msgstr ""
 msgid "Are you sure want to leave this page?"
 msgstr ""
 
-msgid "Tokens"
+msgid "Regions"
 msgstr ""
 
-msgid "Approvals"
+msgid "Districts"
 msgstr ""
 
-msgid "Users"
+msgid "Settlements"
 msgstr ""
 
-msgid "Roles"
-msgstr ""
-
-msgid "Client Types"
-msgstr ""
-
-msgid "Clients"
+msgid "Streets"
 msgstr ""
 
 msgid "Documentation"
@@ -95,237 +57,106 @@ msgstr ""
 msgid "app:authorize"
 msgstr ""
 
-msgid "User roles"
+msgid "Name"
 msgstr ""
 
-msgid "Client"
+msgid "Zaopizhzhya district"
 msgstr ""
 
-msgid "Role"
-msgstr ""
-
-msgid "Actions"
-msgstr ""
-
-msgid "Delete user role"
-msgstr ""
-
-msgid "Create new user role"
-msgstr ""
-
-msgid "Are you sure?"
-msgstr ""
-
-msgid "Are you sure want to delete this user role?"
-msgstr ""
-
-msgid "User ID"
-msgstr ""
-
-msgid "Client id"
-msgstr ""
-
-msgid "Enter scopes"
+msgid "Koatuu"
 msgstr ""
 
 msgid "Saving..."
 msgstr ""
 
-msgid "Update Role"
+msgid "Update District"
 msgstr ""
 
 msgid "Saved"
 msgstr ""
 
+msgid "Save New District"
+msgstr ""
+
+msgid "Are you sure?"
+msgstr ""
+
+msgid "Are you sure want to delete this district?"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Not found"
+msgstr ""
+
+msgid "Zaopizhzhya region"
+msgstr ""
+
+msgid "Update Region"
+msgstr ""
+
+msgid "Save New Region"
+msgstr ""
+
+msgid "Are you sure want to delete this region?"
+msgstr ""
+
+msgid "Settlement Name"
+msgstr ""
+
+msgid "settlement type"
+msgstr ""
+
+msgid "Update Settlement"
+msgstr ""
+
 msgid "Deleting..."
 msgstr ""
 
-msgid "Delete Role"
+msgid "Delete Settlement"
 msgstr ""
 
-msgid "Save New Role"
+msgid "Save New Settlement"
 msgstr ""
 
-msgid "Are you sure want to delete this role?"
+msgid "Are you sure want to delete this settlement?"
 msgstr ""
 
-msgid "Approval ID"
+msgid "head-keywords"
 msgstr ""
 
-msgid "Update approval"
+msgid "head-description"
 msgstr ""
 
-msgid "Delete Approval"
+msgid "districts name"
 msgstr ""
 
-msgid "Are you sure want to delete this approval?"
-msgstr ""
-
-msgid "Client name"
-msgstr ""
-
-msgid "eHealth portal"
-msgstr ""
-
-msgid "Redirect uri"
-msgstr ""
-
-msgid "Client type id"
-msgstr ""
-
-msgid "Create New Client"
-msgstr ""
-
-msgid "Update Client"
-msgstr ""
-
-msgid "Delete client"
-msgstr ""
-
-msgid "Are you sure want to delete this client?"
-msgstr ""
-
-msgid "Client Type name"
-msgstr ""
-
-msgid "Update Client Type"
-msgstr ""
-
-msgid "Delete Client Type"
-msgstr ""
-
-msgid "Save New Client Type"
-msgstr ""
-
-msgid "Are you sure want to delete this client type?"
-msgstr ""
-
-msgid "Role name"
-msgstr ""
-
-msgid "ID"
-msgstr ""
-
-msgid "b5e3318e-2192-4676"
-msgstr ""
-
-msgid "Name"
-msgstr ""
-
-msgid "Value"
-msgstr ""
-
-msgid "bkZ2b3BsND"
-msgstr ""
-
-msgid "22/01/2018"
-msgstr ""
-
-msgid "Scope"
-msgstr ""
-
-msgid "Client ID"
-msgstr ""
-
-msgid "Grant type"
-msgstr ""
-
-msgid "password"
-msgstr ""
-
-msgid "http://example.com/resource"
-msgstr ""
-
-msgid "8d3c0349-353e-48ef"
-msgstr ""
-
-msgid "Delete token"
-msgstr ""
-
-msgid "Save New Token"
-msgstr ""
-
-msgid "Failed"
-msgstr ""
-
-msgid "Are you sure want to delete this token?"
-msgstr ""
-
-msgid "User email"
-msgstr ""
-
-msgid "example@gmail.com"
-msgstr ""
-
-msgid "Password"
-msgstr ""
-
-msgid "Create New User"
-msgstr ""
-
-msgid "Update User"
-msgstr ""
-
-msgid "Delete user"
-msgstr ""
-
-msgid "Are you sure want to delete this user?"
-msgstr ""
-
-msgid "Role id"
-msgstr ""
-
-msgid "Create User Role"
-msgstr ""
-
-msgid "OAuth2 flow, validation, proxy"
-msgstr ""
-
-msgid ""
-"Authentication, client and role management service. Token verification "
-"service."
-msgstr ""
-
-msgid "Create approval"
-msgstr ""
-
-msgid "Id"
+msgid "koatuu"
 msgstr ""
 
 msgid "Action"
 msgstr ""
 
-msgid "Edit approval"
+msgid "Edit"
 msgstr ""
 
-msgid "Create new approval"
+msgid "Create new disrict"
 msgstr ""
 
-msgid "Create client"
+msgid "Edit district: {{name}}"
 msgstr ""
 
-msgid "Details"
+msgid "settlements"
 msgstr ""
 
-msgid "Show client details"
+msgid "type"
 msgstr ""
 
-msgid "Create new client"
+msgid "mountain group"
 msgstr ""
 
-msgid "Create client type"
-msgstr ""
-
-msgid "Edit client type"
-msgstr ""
-
-msgid "Create new client type"
-msgstr ""
-
-msgid "Edit client type: {{name}}"
-msgstr ""
-
-msgid "Update client"
+msgid "Show all settlements"
 msgstr ""
 
 msgid "Page Not Found"
@@ -337,72 +168,35 @@ msgstr ""
 msgid "Go to dashboard"
 msgstr ""
 
-msgid "Create role"
+msgid "Regions name"
 msgstr ""
 
-msgid "Edit role"
+msgid "Create new region"
 msgstr ""
 
-msgid "Create new"
+msgid "Edit region"
 msgstr ""
 
-msgid "Edit role: {{name}}"
+msgid "name"
 msgstr ""
 
-msgid "Create token"
+msgid "Show all districts"
 msgstr ""
 
-msgid "Token details"
+msgid "settlements name"
 msgstr ""
 
-msgid "Show token details"
+msgid "Create new settlements"
 msgstr ""
 
-msgid "Create new token"
+msgid "Edit settlement"
 msgstr ""
 
-msgid "Create user"
+msgid "Sign in"
 msgstr ""
 
-msgid "Create user role"
+msgid "Auth error {{code}}"
 msgstr ""
 
-msgid "Email"
-msgstr ""
-
-msgid "Show user details"
-msgstr ""
-
-msgid "Create new user"
-msgstr ""
-
-msgid "User details"
-msgstr ""
-
-msgctxt "api:read"
-msgid "some"
-msgstr ""
-
-msgctxt "api:write"
-msgid "some"
-msgstr ""
-
-msgctxt "entity:read"
-msgid "legal"
-msgstr ""
-
-msgctxt "entity:write"
-msgid "legal"
-msgstr ""
-
-msgctxt "request:write"
-msgid "employee"
-msgstr ""
-
-msgctxt "token"
-msgid "access"
-msgstr ""
-
-msgctxt "at"
-msgid "Expires"
+msgid "Enter with EHEALTH"
 msgstr ""

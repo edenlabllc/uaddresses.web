@@ -91,7 +91,7 @@ export default class DistrictsPage extends React.Component {
             <div id="district-table" className={styles.table}>
               <Table
                 columns={[
-                  { key: 'districts', title: t('districts') },
+                  { key: 'districts', title: t('districts name') },
                   { key: 'koatuu', title: t('koatuu') },
                   { key: 'region', title: t('region') },
                   { key: 'edit', title: t('Action') },
@@ -127,7 +127,7 @@ export default class DistrictsPage extends React.Component {
               />
             </div>
             <div className={styles.block}>
-              <Button to="/regions/create">{t('Create new region')}</Button>
+              <Button to="/regions/create">{t('Create new disrict')}</Button>
             </div>
             {
               false && <div className={styles.pagination}>

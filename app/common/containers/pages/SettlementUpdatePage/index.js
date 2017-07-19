@@ -51,7 +51,7 @@ export default class SettlementUpdatePage extends React.Component {
     return (
       <FormPageWrapper
         id="update-settlement-page"
-        title={t('Edit settlement: {{name}}', { name: settlement.name })}
+        title={t('Edit settlement')}
         back="/settlements"
       >
         <Helmet title={t('Edit settlement: {{name}}', { name: settlement.name })} />

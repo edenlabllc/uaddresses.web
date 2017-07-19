@@ -97,7 +97,7 @@ export default class SettlementsPage extends React.Component {
             <div id="settlements-table" className={styles.table}>
               <Table
                 columns={[
-                  { key: 'name', title: t('name') },
+                  { key: 'settlements', title: t('settlements name') },
                   { key: 'type', title: t('type') },
                   { key: 'koatuu', title: t('koatuu') },
                   { key: 'mountain_group', title: t('mountain group') },
@@ -106,7 +106,7 @@ export default class SettlementsPage extends React.Component {
                 data={(settlements || [])
                   .sort((a, b) => a.name.localeCompare(b.name))
                   .map(item => ({
-                    name: (<div className={styles.name}>
+                    settlements: (<div className={styles.name}>
                       <Button
                         id={`edit-settlements-button-${item.name}`}
                         theme="link"
@@ -137,7 +137,7 @@ export default class SettlementsPage extends React.Component {
               />
             </div>
             <div className={styles.block}>
-              <Button to="/regions/create">{t('Create new region')}</Button>
+              <Button to="/regions/create">{t('Create new settlements')}</Button>
             </div>
             <div className={styles.pagination}>
               {

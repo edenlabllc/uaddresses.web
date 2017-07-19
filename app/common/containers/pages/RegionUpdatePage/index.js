@@ -35,7 +35,7 @@ export default class RegionUpdatePage extends React.Component {
   render() {
     const { t, region, districts = [], updateRegion } = this.props;
     return (
-      <FormPageWrapper id="update-region-page" title={t('Edit region: {{name}}', { name: region.name })} back="/regions">
+      <FormPageWrapper id="update-region-page" title={t('Edit region')} back="/regions">
         <Helmet title={t('Edit region: {{name}}', { name: region.name })} />
         <div className={styles.block}>
           <RegionForm
@@ -48,7 +48,7 @@ export default class RegionUpdatePage extends React.Component {
           <div id="district-table" className={styles.table}>
             <Table
               columns={[
-                { key: 'name', title: t('name') },
+                { key: 'name', title: t('districts name') },
                 { key: 'koatuu', title: t('koatuu') },
               ]}
               data={(districts || [])
