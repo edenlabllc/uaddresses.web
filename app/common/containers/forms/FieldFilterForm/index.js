@@ -21,7 +21,7 @@ export default class FieldFilterForm extends React.Component {
           <Field
             type="text"
             labelText={label}
-            placeholder={t(`Enter ${name}`)}
+            placeholder={t('Enter {{name}}', { name: t(name) })}
             name={name}
             component={FieldInput}
           />

@@ -89,9 +89,11 @@ export default class RegionsPage extends React.Component {
             }
           />
         </div>
-        <div className={styles.block}>
-          <Button to="/regions/create">{t('Create new region')}</Button>
-        </div>
+        {
+          false && <div className={styles.block}>
+            <Button to="/regions/create">{t('Create new region')}</Button>
+          </div>
+        }
 
         {/* <div className={styles.pagination}>
           <Pagination

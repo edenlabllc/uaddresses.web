@@ -69,14 +69,14 @@ export default class StreetsPage extends React.Component {
       streets = [],
       onSelectRegion,
       onSelectDistrict,
-      location,
-      paging,
+      location = [],
+      paging = [],
       t,
     } = this.props;
 
     return (
-      <div id="settlements-page">
-        <Helmet title={t('Settlements')} />
+      <div id="streets-page">
+        <Helmet title={t('Streets')} />
         <H1>{t('Streets')}</H1>
         <FormRow>
           <FormColumn>
@@ -112,7 +112,7 @@ export default class StreetsPage extends React.Component {
           </FormColumn>
         </FormRow>
         <div>
-          <div id="settlements-table" className={styles.table}>
+          <div id="streets-table" className={styles.table}>
             <Table
               columns={[
                 { key: 'name', title: t('street name') },
@@ -138,14 +138,16 @@ export default class StreetsPage extends React.Component {
               </div>
             )
           }
-          <div className={styles.pagination}>
-            <Pagination
-              location={location}
-              more={paging.has_more}
-              after={paging.cursors.starting_after}
-              before={paging.cursors.ending_before}
-            />
-          </div>
+          {
+            false && <div className={styles.pagination}>
+              <Pagination
+                location={location}
+                more={paging.has_more}
+                after={paging.cursors.starting_after}
+                before={paging.cursors.ending_before}
+              />
+            </div>
+          }
         </div>
       </div>
     );
