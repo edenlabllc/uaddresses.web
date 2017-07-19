@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2017-07-19 16:33+0300\n"
-"PO-Revision-Date: 2017-07-19 16:35+0300\n"
+"POT-Creation-Date: 2017-07-19 16:47+0300\n"
+"PO-Revision-Date: 2017-07-19 16:48+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: uk\n"
@@ -142,11 +142,13 @@ msgstr "Створити новий район"
 msgid "Edit district: {{name}}"
 msgstr "Редагування району  {{name}}"
 
+#, fuzzy
+#| msgid "Settlements"
 msgid "settlements"
 msgstr "Населені пункти"
 
 msgid "type"
-msgstr ""
+msgstr "тип"
 
 msgid "mountain group"
 msgstr "Гірського типу"
@@ -172,6 +174,9 @@ msgstr "Створити новий регіон"
 msgid "Edit region"
 msgstr "Редагування області"
 
+msgid "Edit region: {{name}}"
+msgstr "Редагування області:  {{name}}"
+
 msgid "Show all districts"
 msgstr "Показати всі райони"
 
@@ -193,8 +198,8 @@ msgstr ""
 msgid "Enter with EHEALTH"
 msgstr "Ввійти через EHEALTH"
 
-msgid "name"
-msgstr ""
+msgid "street name"
+msgstr "Назва вулиці"
 
 msgid "Create new street"
 msgstr "Створити нову вулицю"

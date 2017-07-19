@@ -15,20 +15,6 @@ import { fetchSettlement } from './redux';
 
 import styles from './styles.scss';
 
-// const street_types = {
-//   STREET: 'вулиця',
-//   SQUARE: 'площа',
-//   RIVER_SIDE: 'набережна',
-//   PASS: 'провулок',
-//   MICRODISTRICT: 'мікрорайон',
-//   MAIDAN: 'майдан',
-//   HIGHWAY: 'шосе',
-//   BOULEVARD: 'бульвар',
-//   BLIND_STREET: 'тупик',
-//   AVENUE: 'проспект',
-//   ASCENT: 'узвіз',
-// };
-
 const settlement_type = {
   VILLAGE: 'село',
   TOWNSHIP: 'селище міського типу',

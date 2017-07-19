@@ -26,6 +26,20 @@ import { fetchStreets, fetchDistrictByRegion, fetchSettlements } from './redux';
 
 import styles from './styles.scss';
 
+const street_types = {
+  STREET: 'вулиця',
+  SQUARE: 'площа',
+  RIVER_SIDE: 'набережна',
+  PASS: 'провулок',
+  MICRODISTRICT: 'мікрорайон',
+  MAIDAN: 'майдан',
+  HIGHWAY: 'шосе',
+  BOULEVARD: 'бульвар',
+  BLIND_STREET: 'тупик',
+  AVENUE: 'проспект',
+  ASCENT: 'узвіз',
+};
+
 @withRouter
 @withStyles(styles)
 @translate()
@@ -101,7 +115,7 @@ export default class StreetsPage extends React.Component {
           <div id="settlements-table" className={styles.table}>
             <Table
               columns={[
-                { key: 'name', title: t('name') },
+                { key: 'name', title: t('street name') },
                 { key: 'type', title: t('type') },
               ]}
               data={(streets || [])
@@ -111,7 +125,7 @@ export default class StreetsPage extends React.Component {
                     {item.name}
                   </div>),
                   type: <div className={styles.name}>
-                    {item.type}
+                    {street_types[item.type]}
                   </div>,
                 }))
               }

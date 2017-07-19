@@ -22,6 +22,14 @@ import { fetchSettlements, fetchDistrictByRegion } from './redux';
 
 import styles from './styles.scss';
 
+const settlement_type = {
+  VILLAGE: 'село',
+  TOWNSHIP: 'селище міського типу',
+  SETTLEMENT: 'селище',
+  CITY: 'місто',
+};
+
+
 @withRouter
 @withStyles(styles)
 @translate()
@@ -54,13 +62,10 @@ export default class SettlementsPage extends React.Component {
       t,
     } = this.props;
 
-    const getRegionAndDistrict = location.query.region && location.query.district ?
-      `${location.query.region} Region => ${location.query.district} District` : '';
-
     return (
       <div id="settlements-page">
         <Helmet title={t('Settlements')} />
-        <H1>{t(`Settlements ${getRegionAndDistrict && getRegionAndDistrict}`)}</H1>
+        <H1>{t('Settlements')}</H1>
         <FormRow>
           <FormColumn>
             <QueryFieldFilterForm
@@ -98,8 +103,8 @@ export default class SettlementsPage extends React.Component {
               <Table
                 columns={[
                   { key: 'settlements', title: t('settlements name') },
-                  { key: 'type', title: t('type') },
                   { key: 'koatuu', title: t('koatuu') },
+                  { key: 'type', title: t('type') },
                   { key: 'mountain_group', title: t('mountain group') },
                   { key: 'edit', title: t('Action') },
                 ]}
@@ -116,11 +121,11 @@ export default class SettlementsPage extends React.Component {
                         {item.name}
                       </Button>
                     </div>),
-                    type: <div className={styles.name}>
-                      {item.type}
-                    </div>,
                     koatuu: <div className={styles.name}>
                       {item.koatuu}
+                    </div>,
+                    type: <div className={styles.name}>
+                      {settlement_type[item.type]}
                     </div>,
                     mountain_group: <div className={styles.name}>
                       <YesNo bool={item.mountain_group} />
