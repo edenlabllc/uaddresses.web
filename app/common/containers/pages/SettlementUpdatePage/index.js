@@ -54,7 +54,7 @@ export default class SettlementUpdatePage extends React.Component {
         title={t('Edit settlement')}
         back="/settlements"
       >
-        <Helmet title={t('Edit settlement: {{name}}', { name: settlement.name })} />
+        <Helmet title={t('Edit settlement')} />
         <div className={styles.block}>
           <SettlementForm
             initialValues={{

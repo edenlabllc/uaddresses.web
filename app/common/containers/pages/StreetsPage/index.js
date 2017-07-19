@@ -7,7 +7,7 @@ import Helmet from 'react-helmet';
 import { filterParams } from 'helpers/url';
 import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
 
-// import { H1 } from '@components/Title';
+import { H1 } from '@components/Title';
 import Table from '@components/Table';
 import Button from '@components/Button';
 import { FormRow, FormColumn } from '@components/Form';
@@ -60,15 +60,10 @@ export default class StreetsPage extends React.Component {
       t,
     } = this.props;
 
-    // const getRegionAndDistrict = location.query.region && location.query.district ?
-    //   `${location.query.region} Region => ${location.query.district} District` : '';
-
     return (
       <div id="settlements-page">
         <Helmet title={t('Settlements')} />
-        {
-          // <H1>{t(`Settlements ${getRegionAndDistrict && getRegionAndDistrict}`)}</H1>
-        }
+        <H1>{t('Streets')}</H1>
         <FormRow>
           <FormColumn>
             <QueryFieldFilterForm
@@ -94,6 +89,7 @@ export default class StreetsPage extends React.Component {
             <QueryFieldFilterForm
               name="settlement"
               form="settlement-filter-form"
+              disabled={settlements.length === 0}
               onChange={({ settlement }) =>
                 filterParams({ settlement_id: settlement.name }, this.props, true)
               }
@@ -124,7 +120,7 @@ export default class StreetsPage extends React.Component {
           {
             false && (
               <div className={styles.block}>
-                <Button to="/regions/create">{t('Create new region')}</Button>
+                <Button to="/streets/create">{t('Create new street')}</Button>
               </div>
             )
           }

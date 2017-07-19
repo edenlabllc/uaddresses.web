@@ -30,7 +30,7 @@ export default class QueryFieldFilterForm extends React.Component {
             name={name}
             component={Select}
             emptyText={t('Not found')}
-            placeholder={t(`Choose ${name}`)}
+            placeholder={t('Choose {{name}}', { name: t(name) })}
             onChangeSearch={val => this.setState({ active: val })}
             options={
               data

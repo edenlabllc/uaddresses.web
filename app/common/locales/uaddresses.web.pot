@@ -6,8 +6,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2017-07-19 16:05+0300\n"
-"PO-Revision-Date: 2017-07-19T13:05:34.009Z\n"
+"POT-Creation-Date: 2017-07-19 16:32+0300\n"
+"PO-Revision-Date: 2017-07-19T13:23:57.941Z\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "X-Generator: Poedit 2.0.2\n"
@@ -19,15 +19,6 @@ msgid "Yes"
 msgstr ""
 
 msgid "No"
-msgstr ""
-
-msgid "ap."
-msgstr ""
-
-msgid "Area"
-msgstr ""
-
-msgid "region"
 msgstr ""
 
 msgid "UAddresses"
@@ -52,9 +43,6 @@ msgid "Streets"
 msgstr ""
 
 msgid "Documentation"
-msgstr ""
-
-msgid "app:authorize"
 msgstr ""
 
 msgid "Name"
@@ -88,6 +76,9 @@ msgid "Search"
 msgstr ""
 
 msgid "Not found"
+msgstr ""
+
+msgid "Choose {{name}}"
 msgstr ""
 
 msgid "Zaopizhzhya region"
@@ -135,6 +126,9 @@ msgstr ""
 msgid "koatuu"
 msgstr ""
 
+msgid "region"
+msgstr ""
+
 msgid "Action"
 msgstr ""
 
@@ -177,7 +171,7 @@ msgstr ""
 msgid "Edit region"
 msgstr ""
 
-msgid "name"
+msgid "Edit region: {{name}}"
 msgstr ""
 
 msgid "Show all districts"
@@ -199,4 +193,10 @@ msgid "Auth error {{code}}"
 msgstr ""
 
 msgid "Enter with EHEALTH"
+msgstr ""
+
+msgid "name"
+msgstr ""
+
+msgid "Create new street"
 msgstr ""

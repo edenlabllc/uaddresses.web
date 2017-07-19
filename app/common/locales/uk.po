@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2017-07-19 16:05+0300\n"
-"PO-Revision-Date: 2017-07-19 16:06+0300\n"
+"POT-Creation-Date: 2017-07-19 16:33+0300\n"
+"PO-Revision-Date: 2017-07-19 16:35+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: uk\n"
@@ -21,15 +21,6 @@ msgstr "Так"
 
 msgid "No"
 msgstr "Ні"
-
-msgid "ap."
-msgstr "вул."
-
-msgid "Area"
-msgstr "Зона"
-
-msgid "region"
-msgstr "область"
 
 msgid "UAddresses"
 msgstr ""
@@ -54,9 +45,6 @@ msgstr "Вулиці"
 
 msgid "Documentation"
 msgstr "Документація"
-
-msgid "app:authorize"
-msgstr ""
 
 msgid "Name"
 msgstr "Назва"
@@ -90,6 +78,9 @@ msgstr "Пошук"
 
 msgid "Not found"
 msgstr "Даних не знайдено"
+
+msgid "Choose {{name}}"
+msgstr "Оберіть {{name}}"
 
 msgid "Zaopizhzhya region"
 msgstr ""
@@ -135,6 +126,9 @@ msgstr "Назви районів"
 
 msgid "koatuu"
 msgstr ""
+
+msgid "region"
+msgstr "область"
 
 msgid "Action"
 msgstr "Дії"
@@ -182,7 +176,7 @@ msgid "Show all districts"
 msgstr "Показати всі райони"
 
 msgid "settlements name"
-msgstr "Назви населених пунктів"
+msgstr "Населені пункти"
 
 msgid "Create new settlements"
 msgstr "Зберегти новий населений пункт"
@@ -191,10 +185,16 @@ msgid "Edit settlement"
 msgstr "Редагування населеного пункту"
 
 msgid "Sign in"
-msgstr ""
+msgstr "Ввійти"
 
 msgid "Auth error {{code}}"
 msgstr ""
 
 msgid "Enter with EHEALTH"
+msgstr "Ввійти через EHEALTH"
+
+msgid "name"
 msgstr ""
+
+msgid "Create new street"
+msgstr "Створити нову вулицю"
