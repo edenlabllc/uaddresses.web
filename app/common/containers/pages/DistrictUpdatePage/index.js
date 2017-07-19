@@ -10,6 +10,7 @@ import Button from '@components/Button';
 
 import FormPageWrapper from 'containers/blocks/FormPageWrapper';
 import DistrictForm from 'containers/forms/DistrictForm';
+import YesNo from 'components/YesNo';
 
 import { getDistrict, getSettlements } from 'reducers';
 import { updateDistrict } from 'redux/districts';
@@ -20,7 +21,7 @@ import styles from './styles.scss';
 
 @provideHooks({
   fetch: ({ dispatch, params: { region, district } }) => Promise.all([
-    dispatch(fetchDistricts({ region, district })),
+    dispatch(fetchDistricts({ region, name: district })),
     dispatch(fetchSettlements({ region, district })),
   ]),
 })
@@ -46,16 +47,15 @@ export default class DistrictUpdatePage extends React.Component {
         <div id="settlements-table" className={styles.table}>
           <Table
             columns={[
-              { key: 'name', title: t('name') },
+              { key: 'settlements', title: t('settlements') },
               { key: 'type', title: t('type') },
               { key: 'koatuu', title: t('koatuu') },
               { key: 'mountain_group', title: t('mountain group') },
-              { key: 'edit', title: t('Action') },
             ]}
             data={(settlements || [])
               .sort((a, b) => a.name.localeCompare(b.name))
               .map(item => ({
-                name: (<div className={styles.name}>
+                settlements: (<div className={styles.name}>
                   <name
                     id={`edit-settlements-button-${item.name}`}
                     theme="link"
@@ -72,7 +72,7 @@ export default class DistrictUpdatePage extends React.Component {
                   {item.koatuu}
                 </div>,
                 mountain_group: <div className={styles.name}>
-                  {item.mountain_group}
+                  <YesNo bool={item.mountain_group} />
                 </div>,
               })
             )}

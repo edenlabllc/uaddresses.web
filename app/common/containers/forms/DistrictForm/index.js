@@ -89,8 +89,6 @@ export default class DistrictForm extends React.Component {
               <Button type="submit" disabled={!this.isChanged}>{
                 submitting ? t('Saving...') : (this.isChanged ? t('Update District') : t('Saved'))
               }</Button>
-              <Button color="red" onClick={() => this.setState({ onDelete: true })}>{submitting ? t('Deleting...') : t('Delete District')
-              }</Button>
             </ButtonsGroup>)
           }
           {

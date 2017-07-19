@@ -34,7 +34,6 @@ import styles from './styles.scss';
 export default class RegionUpdatePage extends React.Component {
   render() {
     const { t, region, districts = [], updateRegion } = this.props;
-    console.log(region, districts);
 
     return (
       <FormPageWrapper id="update-region-page" title={t('Edit region: {{name}}', { name: region.name })} back="/regions">

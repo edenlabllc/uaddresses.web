@@ -92,8 +92,6 @@ export default class RegionForm extends React.Component {
               <Button type="submit" disabled={!this.isChanged}>{
                 submitting ? t('Saving...') : (this.isChanged ? t('Update Region') : t('Saved'))
               }</Button>
-              <Button color="red" onClick={() => this.setState({ onDelete: true })}>{submitting ? t('Deleting...') : t('Delete Region')
-              }</Button>
             </ButtonsGroup>)
           }
           {

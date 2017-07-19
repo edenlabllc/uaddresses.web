@@ -18,7 +18,7 @@ import Pagination from 'components/CursorPagination';
 import {
   getAllRegions,
   getDistricts,
-  // getSettlements,
+  getSettlements,
   getStreets,
 } from 'reducers';
 
@@ -39,12 +39,11 @@ import styles from './styles.scss';
     streets: getStreets(state, state.pages.StreetsPage.streets),
     regionsAll: getAllRegions(state),
     districtsFromRegion: getDistricts(state, state.pages.StreetsPage.regionDistricts),
-    // settlements: getSettlements(state, state.pages.StreetsPage.settlements),
+    settlements: getSettlements(state, state.pages.StreetsPage.settlements),
   }),
   dispatch => ({
     onSelectRegion: id => dispatch(fetchDistrictByRegion(id)),
     onSelectDistrict: id => dispatch(fetchSettlements(id)),
-    onSelectSettlements: id => dispatch(fetchStreets(id)),
   })
 )
 export default class StreetsPage extends React.Component {
@@ -56,12 +55,10 @@ export default class StreetsPage extends React.Component {
       streets = [],
       onSelectRegion,
       onSelectDistrict,
-      onSelectSettlements,
       location,
       paging,
       t,
     } = this.props;
-    console.log(regionsAll, districtsFromRegion, settlements);
 
     // const getRegionAndDistrict = location.query.region && location.query.district ?
     //   `${location.query.region} Region => ${location.query.district} District` : '';
@@ -97,10 +94,9 @@ export default class StreetsPage extends React.Component {
             <QueryFieldFilterForm
               name="settlement"
               form="settlement-filter-form"
-              onChange={({ settlement }) => {
-                onSelectSettlements(settlement.name);
-                return filterParams({ settlement_id: settlement.name }, this.props, true);
-              }}
+              onChange={({ settlement }) =>
+                filterParams({ settlement_id: settlement.name }, this.props, true)
+              }
               data={settlements}
             />
           </FormColumn>

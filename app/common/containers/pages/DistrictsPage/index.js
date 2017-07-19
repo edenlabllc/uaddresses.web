@@ -40,7 +40,6 @@ export default class DistrictsPage extends React.Component {
 
   render() {
     const { districts = [], regions = [], t, location, paging } = this.props;
-    console.log(districts);
     return (
       <div id="districts-page">
         <Helmet title={t('Districts')} />
@@ -92,7 +91,7 @@ export default class DistrictsPage extends React.Component {
             <div id="district-table" className={styles.table}>
               <Table
                 columns={[
-                  { key: 'district', title: t('district') },
+                  { key: 'districts', title: t('districts') },
                   { key: 'koatuu', title: t('koatuu') },
                   { key: 'region', title: t('region') },
                   { key: 'edit', title: t('Action') },
@@ -100,12 +99,12 @@ export default class DistrictsPage extends React.Component {
                 data={(districts || [])
                   .sort((a, b) => a.name.localeCompare(b.name))
                   .map(item => ({
-                    district: (<div className={styles.name}>
+                    districts: (<div className={styles.name}>
                       <Button
-                        id={`view-settlements-button-${item.district}`}
+                        id={`view-settlements-button-${item.name}`}
                         theme="link"
                         color="red"
-                        to={`/settlements?region=${item.region}&district=${item.district}`}
+                        to={`/settlements?region=${item.region}&district=${item.name}`}
                       >
                         {item.name}
                       </Button>
@@ -117,9 +116,9 @@ export default class DistrictsPage extends React.Component {
                       {item.region}
                     </div>,
                     edit: (<Button
-                      id={`edit-district-button-${item.district}`}
+                      id={`edit-district-button-${item.name}`}
                       theme="link"
-                      to={`/districts/${item.region}/${item.district}`}
+                      to={`/districts/${item.region}/${item.name}`}
                     >
                       { t('Edit') }
                     </Button>),

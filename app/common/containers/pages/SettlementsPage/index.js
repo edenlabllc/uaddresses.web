@@ -15,6 +15,7 @@ import { FormRow, FormColumn } from '@components/Form';
 
 import QueryFieldFilterForm from 'containers/forms/QueryFieldFilterForm';
 import Pagination from 'components/CursorPagination';
+import YesNo from 'components/YesNo';
 
 import { getSettlements, getAllRegions, getDistricts } from 'reducers';
 import { fetchSettlements, fetchDistrictByRegion } from './redux';
@@ -96,23 +97,23 @@ export default class SettlementsPage extends React.Component {
             <div id="settlements-table" className={styles.table}>
               <Table
                 columns={[
-                  { key: 'settlement_name', title: t('settlement_name') },
+                  { key: 'name', title: t('name') },
                   { key: 'type', title: t('type') },
                   { key: 'koatuu', title: t('koatuu') },
                   { key: 'mountain_group', title: t('mountain group') },
                   { key: 'edit', title: t('Action') },
                 ]}
                 data={(settlements || [])
-                  .sort((a, b) => a.settlement_name.localeCompare(b.settlement_name))
+                  .sort((a, b) => a.name.localeCompare(b.name))
                   .map(item => ({
-                    settlement_name: (<div className={styles.name}>
+                    name: (<div className={styles.name}>
                       <Button
                         id={`edit-settlements-button-${item.name}`}
                         theme="link"
                         color="red"
                         to={`/streets?settlement_id=${item.id}`}
                       >
-                        {item.settlement_name}
+                        {item.name}
                       </Button>
                     </div>),
                     type: <div className={styles.name}>
@@ -122,7 +123,7 @@ export default class SettlementsPage extends React.Component {
                       {item.koatuu}
                     </div>,
                     mountain_group: <div className={styles.name}>
-                      {item.mountain_group}
+                      <YesNo bool={item.mountain_group} />
                     </div>,
                     edit: (<Button
                       id={`edit-settlements-button-${item.id}`}
