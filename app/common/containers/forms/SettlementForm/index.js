@@ -8,8 +8,9 @@ import { reduxFormValidate } from 'react-nebo15-validate';
 import { Confirm } from '@components/Popup';
 import Form, { FormRow, FormBlock, FormButtons, FormColumn } from '@components/Form';
 import Button, { ButtonsGroup } from '@components/Button';
+import FieldCheckbox from '@components/reduxForm/FieldCheckbox';
 import FieldInput from '@components/reduxForm/FieldInput';
-import Checkbox from '@components/Checkbox';
+
 import { Select } from '@components/Select';
 
 import ConfirmFormChanges from 'containers/blocks/ConfirmFormChanges';
@@ -18,10 +19,12 @@ import styles from './styles.scss';
 
 const getValues = getFormValues('district-form');
 
-
-const street_types = ['дорога', 'урочище', 'шлях', 'набережна', 'вулиця відсутня', 'лінія', 'квартал', 'завулок', 'містечко',
-  'острів', 'спуск', 'в’їзд', 'майдан', 'мікрорайон', 'жилий масив', 'шосе', 'парк', 'тупік', 'хутір', 'проїзд',
-  'провулок', 'бульвар', 'проспект', 'узвіз', 'вулиця', 'площа', 'селище'];
+const settlement_type = {
+  VILLAGE: 'село',
+  TOWNSHIP: 'селище міського типу',
+  SETTLEMENT: 'селище',
+  CITY: 'місто',
+};
 
 @translate()
 @withStyles(styles)
@@ -76,7 +79,7 @@ export default class SettlementForm extends React.Component {
           <FormRow>
             <FormColumn>
               <Field
-                name="settlement_name"
+                name="name"
                 component={FieldInput}
                 labelText={t('Settlement Name')}
               />
@@ -94,17 +97,20 @@ export default class SettlementForm extends React.Component {
             <FormColumn>
               <Field
                 name="type"
-                labelText={t('type')}
+                labelText={t('settlement type')}
                 component={Select}
-                placeholder="Select street type"
-                options={street_types.map((i, key) => ({ title: i, name: key }))}
+                placeholder="Select settlement type"
+                options={Object.keys(settlement_type).map(i => ({
+                  name: i,
+                  title: settlement_type[i],
+                }))}
               />
             </FormColumn>
             <FormColumn>
               <Field
                 labelText="mountain_group"
                 name="mountain_group"
-                component={Checkbox}
+                component={FieldCheckbox}
               />
             </FormColumn>
           </FormRow>

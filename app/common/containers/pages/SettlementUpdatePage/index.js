@@ -15,11 +15,32 @@ import { fetchSettlement } from './redux';
 
 import styles from './styles.scss';
 
+// const street_types = {
+//   STREET: 'вулиця',
+//   SQUARE: 'площа',
+//   RIVER_SIDE: 'набережна',
+//   PASS: 'провулок',
+//   MICRODISTRICT: 'мікрорайон',
+//   MAIDAN: 'майдан',
+//   HIGHWAY: 'шосе',
+//   BOULEVARD: 'бульвар',
+//   BLIND_STREET: 'тупик',
+//   AVENUE: 'проспект',
+//   ASCENT: 'узвіз',
+// };
+
+const settlement_type = {
+  VILLAGE: 'село',
+  TOWNSHIP: 'селище міського типу',
+  SETTLEMENT: 'селище',
+  CITY: 'місто',
+};
+
 @translate()
 @withStyles(styles)
 @provideHooks({
-  fetch: ({ dispatch, params: { region, district } }) =>
-    dispatch(fetchSettlement({ region, district })),
+  fetch: ({ dispatch, params: { name } }) =>
+    dispatch(fetchSettlement({ name })),
 })
 @connect(state => ({
   settlement: getSettlement(state, state.pages.SettlementUpdatePage.settlement[0]),
@@ -30,13 +51,21 @@ export default class SettlementUpdatePage extends React.Component {
     return (
       <FormPageWrapper
         id="update-settlement-page"
-        title={t('Edit settlement: {{name}}', { name: settlement.settlement_name })}
+        title={t('Edit settlement: {{name}}', { name: settlement.name })}
         back="/settlements"
       >
         <Helmet title={t('Edit settlement: {{name}}', { name: settlement.name })} />
         <div className={styles.block}>
           <SettlementForm
-            initialValues={settlement}
+            initialValues={{
+              ...settlement,
+              type: {
+                name: Object.keys(settlement_type).filter(i =>
+                  settlement_type[i] === settlement.type),
+                title: Object.values(settlement_type).filter(i =>
+                  settlement_type[settlement.type] === i),
+              },
+            }}
             onSubmit={values => updateSettlement(settlement.id, values)}
             edit
           />

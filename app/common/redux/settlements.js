@@ -72,6 +72,7 @@ export const updateSettlement = (id, body) => invoke({
   body: {
     settlement: {
       ...body,
+      type: body.type.name,
     },
   },
 });

@@ -63,7 +63,7 @@ export const configureRoutes = ({ store }) => { // eslint-disable-line
           </Route>
           <Route path="settlements">
             <IndexRoute component={SettlementsPage} />
-            <Route path=":region/:id" component={SettlementUpdatePage} />
+            <Route path=":name" component={SettlementUpdatePage} />
           </Route>
           <Route path="streets">
             <IndexRoute component={StreetsPage} />
