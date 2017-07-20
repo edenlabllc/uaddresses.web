@@ -20,10 +20,15 @@ import { fetchSettlements } from './redux';
 import styles from './styles.scss';
 
 @provideHooks({
-  fetch: ({ dispatch, params: { id } }) => Promise.all([
-    dispatch(fetchDistrictById(id)),
-    dispatch(fetchSettlements({ district_id: id })),
-  ]),
+  fetch: ({ dispatch, params: { id } }) =>
+    dispatch(fetchDistrictById(id))
+    .then((action) => {
+      // TODO: replace when API will receive
+      // district_id and region_id as query  params instead of names
+      if (action.error) return action;
+      const district = action.payload.entities.districts[action.payload.result];
+      return dispatch(fetchSettlements({ district: district.name }));
+    }),
 })
 @connect((state, { params: { id } }) => ({
   district: getDistrict(state, id),

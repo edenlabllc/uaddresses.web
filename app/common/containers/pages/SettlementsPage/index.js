@@ -18,8 +18,8 @@ import Pagination from 'components/CursorPagination';
 import YesNo from 'components/YesNo';
 import { settlement_type } from 'helpers/dictionaries';
 
-import { getSettlements, getAllRegions, getDistricts } from 'reducers';
-import { fetchSettlements, fetchDistricts } from './redux';
+import { getSettlements, getAllRegions, getDistricts, getRegion, getDistrict } from 'reducers';
+import { fetchSettlements, fetchDistrictByRegion } from './redux';
 
 import styles from './styles.scss';
 
@@ -27,33 +27,49 @@ import styles from './styles.scss';
 @withStyles(styles)
 @translate()
 @provideHooks({
-  fetch: ({ dispatch, location: { query } }) => Promise.all([
-    dispatch(fetchSettlements({ region: query.region, district: query.district })),
-    dispatch(fetchDistricts({ region: query.region })),
-  ]),
+  fetch: ({
+    dispatch,
+    getState,
+    location: { query: { region_id, district_id, starting_after, ending_before } },
+  }) =>
+    (region_id ? dispatch(fetchDistrictByRegion(region_id)) : Promise.resolve())
+    .then(() => {
+      // TODO: replace when API will receive
+      // district_id and region_id as query  params instead of names
+      const state = getState();
+      const district = district_id && getDistrict(state, district_id);
+      const region = region_id && getRegion(state, region_id);
+      return dispatch(fetchSettlements({
+        district: district && district.district,
+        region: region && region.name,
+        starting_after,
+        ending_before,
+      }));
+    }),
 })
 @connect(
-  state => ({
+  (state, { location: { query: { region_id, district_id } } }) => ({
     ...state.pages.SettlementsPage,
     settlements: getSettlements(state, state.pages.SettlementsPage.settlements),
-    regionsAll: getAllRegions(state),
-    districtsFromRegion: getDistricts(state, state.pages.SettlementsPage.regionDistricts),
+    regions: getAllRegions(state),
+    districts: getDistricts(state, state.pages.SettlementsPage.districts),
+    selectedRegion: region_id && getRegion(state, region_id),
+    selectedDistrict: district_id && getDistrict(state, district_id),
   }),
   { reset }
 )
 export default class SettlementsPage extends React.Component {
-  state = {
-    reset: true,
-  };
   render() {
     const {
       settlements = [],
-      regionsAll = [],
-      districtsFromRegion = [],
+      regions = [],
+      districts = [],
       location,
       reset,
       paging,
       t,
+      selectedRegion,
+      selectedDistrict,
     } = this.props;
 
     return (
@@ -66,39 +82,42 @@ export default class SettlementsPage extends React.Component {
               name="region"
               form="region-filter-form"
               placeholder={t('Enter region')}
-              initialValues={location.query.region && ({
-                region: {
-                  name: regionsAll.filter(i => i.name === location.query.region)[0].id,
-                  title: location.query.region,
+              initialValues={{
+                region: selectedRegion && {
+                  name: selectedRegion.id,
+                  title: selectedRegion.name,
                 },
-              })}
+              }}
               onChange={({ region }) => {
-                this.setState({ reset: false }, () => {
+                setTimeout(() => {
+                  filterParams({ region_id: region.name, district_id: '' }, this.props, true);
                   reset('district-filter-form');
-                  filterParams({ region: region.title }, this.props, true);
                 });
               }}
-              data={regionsAll}
+              data={regions}
             />
           </FormColumn>
           <FormColumn>
             <QueryFieldFilterForm
               name="district"
               placeholder={t('Enter district')}
-              disabled={districtsFromRegion.length === 0}
+              disabled={districts.length === 0}
               form="district-filter-form"
               onChange={({ district }) => {
-                district && this.setState({ reset: true }, () => {
-                  filterParams({ district: district.title }, this.props);
+                setTimeout(() => {
+                  filterParams({ district_id: district.name }, this.props);
                 });
               }}
-              initialValues={this.state.reset && location.query.district && ({
-                district: {
-                  name: (districtsFromRegion.filter(i => i.name === location.query.district)[0]).id,
-                  title: location.query.district,
+              initialValues={{
+                district: selectedDistrict && {
+                  name: selectedDistrict.id,
+                  title: selectedDistrict.district,
                 },
-              })}
-              data={districtsFromRegion.map(i => ({ id: i.id, name: i.name }))}
+              }}
+              data={districts.map(i => ({
+                id: i.id,
+                name: i.district,
+              }))}
             />
           </FormColumn>
         </FormRow>
