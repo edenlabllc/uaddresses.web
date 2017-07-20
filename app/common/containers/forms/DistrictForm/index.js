@@ -13,12 +13,12 @@ import ConfirmFormChanges from 'containers/blocks/ConfirmFormChanges';
 
 import styles from './styles.scss';
 
-const getValues = getFormValues('region-form');
+const getValues = getFormValues('district-form');
 
 @translate()
 @withStyles(styles)
 @reduxForm({
-  form: 'region-form',
+  form: 'district-form',
   validate: reduxFormValidate({
     name: {
       required: true,
@@ -27,14 +27,11 @@ const getValues = getFormValues('region-form');
       required: true,
     },
   }),
-  initialValues: {
-    scope: '',
-  },
 })
 @connect(state => ({
   values: getValues(state),
 }))
-export default class RegionForm extends React.Component {
+export default class DistrictForm extends React.Component {
   constructor(props) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
@@ -71,7 +68,7 @@ export default class RegionForm extends React.Component {
                 name="name"
                 component={FieldInput}
                 labelText={t('Name')}
-                placeholder={t('Zaopizhzhya region')}
+                placeholder={t('Zaopizhzhya district')}
               />
             </FormColumn>
           </FormRow>
@@ -90,14 +87,14 @@ export default class RegionForm extends React.Component {
           {
             edit && (<ButtonsGroup>
               <Button type="submit" disabled={!this.isChanged}>{
-                submitting ? t('Saving...') : (this.isChanged ? t('Update Region') : t('Saved'))
+                submitting ? t('Saving...') : (this.isChanged ? t('Update District') : t('Saved'))
               }</Button>
             </ButtonsGroup>)
           }
           {
             !edit && (<ButtonsGroup>
               <Button type="submit" disabled={!this.isChanged}>{
-                submitting ? t('Saving...') : (this.isChanged ? t('Save New Region') : t('Saved'))
+                submitting ? t('Saving...') : (this.isChanged ? t('Save New District') : t('Saved'))
               }</Button>
             </ButtonsGroup>)
           }
@@ -111,7 +108,7 @@ export default class RegionForm extends React.Component {
           id="confirm-delete"
           onCancel={() => this.setState({ onDelete: false })}
           onConfirm={() => onDelete(this.state.savedValues.id)}
-        >{ t('Are you sure want to delete this region?') }</Confirm>
+        >{ t('Are you sure want to delete this district?') }</Confirm>
       </Form>
     );
   }

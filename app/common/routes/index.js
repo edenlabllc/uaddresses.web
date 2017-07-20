@@ -4,10 +4,21 @@ import { Route, IndexRoute, IndexRedirect } from 'react-router';
 
 import App from 'containers/layouts/App';
 import Main from 'containers/layouts/Main';
+import PreloadData from 'containers/layouts/PreloadData';
 
 import RegionsPage from 'containers/pages/RegionsPage';
 // import RegionCreatePage from 'containers/pages/RegionCreatePage';
 import RegionUpdatePage from 'containers/pages/RegionUpdatePage';
+
+import DistrictsPage from 'containers/pages/DistrictsPage';
+import DistrictUpdatePage from 'containers/pages/DistrictUpdatePage';
+
+import SettlementsPage from 'containers/pages/SettlementsPage';
+import SettlementUpdatePage from 'containers/pages/SettlementUpdatePage';
+// import DistrictUpdatePage from 'containers/pages/DistrictUpdatePage';
+
+import StreetsPage from 'containers/pages/StreetsPage';
+
 import SignInPage from 'containers/pages/SignInPage';
 import NotFoundPage from 'containers/pages/NotFoundPage';
 
@@ -40,20 +51,30 @@ export const configureRoutes = ({ store }) => { // eslint-disable-line
 
   return (
     <Route component={App}>
-      <Route component={Main} onEnter={requireAuth}>
-        <Route path="/">
+      <Route path="/" component={Main} onEnter={requireAuth}>
+        <Route component={PreloadData}>
           <IndexRedirect to="/regions" />
-
           <Route path="regions">
             <IndexRoute component={RegionsPage} />
-            {/* <Route path="create" component={RegionCreatePage} /> */}
             <Route path=":id" component={RegionUpdatePage} />
+          </Route>
+          <Route path="districts">
+            <IndexRoute component={DistrictsPage} />
+            <Route path=":id" component={DistrictUpdatePage} />
+          </Route>
+          <Route path="settlements">
+            <IndexRoute component={SettlementsPage} />
+            <Route path=":id" component={SettlementUpdatePage} />
+          </Route>
+          <Route path="streets">
+            <IndexRoute component={StreetsPage} />
           </Route>
         </Route>
       </Route>
-
       <Route path="sign-in" component={SignInPage} />
-      <Route path="*" component={NotFoundPage} />
+      <Route component={Main}>
+        <Route path="*" component={NotFoundPage} />
+      </Route>
     </Route>
   );
 };

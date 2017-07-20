@@ -7,25 +7,40 @@ import { district } from 'schemas';
 import { invoke } from './api';
 
 export const fetchDistricts = ({ ...options, limit = 10 } = {}, { useCache = false } = {}) =>
-invoke({
-  endpoint: createUrl(`${API_URL}/search/districts`, { ...options, limit }),
+  invoke({
+    endpoint: createUrl(`${API_URL}/search/districts`, { ...options, limit }),
+    method: 'GET',
+    headers: {
+      'content-type': 'application/json',
+    },
+    bailout: state =>
+      useCache && state.data.districts && Object.keys(state.data.districts),
+    types: ['districts/FETCH_DISTRICTS_REQUEST', {
+      type: 'districts/FETCH_DISTRICTS_SUCCESS',
+      payload: (action, state, res) => res.clone().json().then(
+        json => normalize(json.data, [district])
+      ),
+      meta: (action, state, res) =>
+        res.clone().json().then(json => json.paging),
+    }, 'districts/FETCH_DISTRICTS_FAILURE'],
+  });
+
+export const fetchDistrictsByRegionId = (id, { ...options, limit = 10 } = {}) => invoke({
+  endpoint: createUrl(`${API_URL}/details/region/${id}/districts`, { ...options, ...limit }),
   method: 'GET',
   headers: {
     'content-type': 'application/json',
   },
-  bailout: state => useCache && state.data.districts,
-  types: ['districts/FETCH_DISTRICTS_REQUEST', {
-    type: 'districts/FETCH_DISTRICTS_SUCCESS',
-    payload: (action, state, res) => res.clone().json().then(
+  types: ['districts/FETCH_DISTRICTS_BY_REGION_ID_REQUEST', {
+    type: 'districts/FETCH_DISTRICTS_BY_REGION_ID_SUCCESS',
+    payload: (action, state, res) => res.json().then(
       json => normalize(json.data, [district])
     ),
-    meta: (action, state, res) =>
-      res.clone().json().then(json => json.paging),
-  }, 'districts/FETCH_DISTRICTS_FAILURE'],
+  }, 'districts/FETCH_DISTRICTS_BY_REGION_ID_FAILURE'],
 });
 
-export const fetchDistrictByID = id => invoke({
-  endpoint: `${API_URL}/admin/districts/${id}`,
+export const fetchDistrictById = id => invoke({
+  endpoint: `${API_URL}/districts/${id}`,
   method: 'GET',
   headers: {
     'content-type': 'application/json',
@@ -38,27 +53,27 @@ export const fetchDistrictByID = id => invoke({
   }, 'districts/FETCH_DISTRICT_BY_ID_FAILURE'],
 });
 
-export const createDistrict = body => invoke({
-  endpoint: `${API_URL}/admin/districts`,
-  method: 'POST',
-  headers: {
-    'content-type': 'application/json',
-  },
-  types: ['districts/CREATE_DISTRICT_REQUEST', {
-    type: 'districts/CREATE_DISTRICT_SUCCESS',
-    payload: (action, state, res) => res.json().then(
-      json => normalize(json.data, district)
-    ),
-  }, 'districts/CREATE_DISTRICT_FAILURE'],
-  body: {
-    district: {
-      ...body,
-    },
-  },
-});
+// export const createDistrict = body => invoke({
+//   endpoint: `${API_URL}/districts`,
+//   method: 'POST',
+//   headers: {
+//     'content-type': 'application/json',
+//   },
+//   types: ['districts/CREATE_DISTRICT_REQUEST', {
+//     type: 'districts/CREATE_DISTRICT_SUCCESS',
+//     payload: (action, state, res) => res.json().then(
+//       json => normalize(json.data, district)
+//     ),
+//   }, 'districts/CREATE_DISTRICT_FAILURE'],
+//   body: {
+//     district: {
+//       ...body,
+//     },
+//   },
+// });
 
 export const updateDistrict = (id, body) => invoke({
-  endpoint: `${API_URL}/admin/districts/${id}`,
+  endpoint: `${API_URL}/districts/${id}`,
   method: 'PATCH',
   headers: {
     'content-type': 'application/json',
@@ -77,7 +92,7 @@ export const updateDistrict = (id, body) => invoke({
 });
 
 export const deleteDistrict = id => invoke({
-  endpoint: `${API_URL}/admin/districts/${id}`,
+  endpoint: `${API_URL}/districts/${id}`,
   method: 'DELETE',
   headers: {
     'content-type': 'application/json',
@@ -91,12 +106,13 @@ export default handleAction(
   combineActions(
     'districts/FETCH_DISTRICTS_SUCCESS',
     'districts/FETCH_DISTRICT_BY_ID_SUCCESS',
-    'districts/CREATE_DISTRICT_SUCCESS',
+    'districts/FETCH_DISTRICTS_BY_REGION_ID_SUCCESS',
+    // 'districts/CREATE_DISTRICT_SUCCESS',
     'districts/UPDATE_DISTRICT_SUCCESS'
   ),
   (state, action) => ({
     ...state,
     ...action.payload.entities.districts,
   }),
-  null
+  {}
 );

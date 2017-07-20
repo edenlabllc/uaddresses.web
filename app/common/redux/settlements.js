@@ -8,12 +8,13 @@ import { invoke } from './api';
 
 export const fetchSettlements = ({ ...options, limit = 10 } = {}, { useCache = false } = {}) =>
 invoke({
-  endpoint: createUrl(`${API_URL}/search/settlements`, { ...options, limit }),
+  endpoint: createUrl(`${API_URL}/search/settlements`, { ...options }),
   method: 'GET',
   headers: {
     'content-type': 'application/json',
   },
-  bailout: state => useCache && state.data.settlements,
+  bailout: state =>
+    useCache && state.data.settlements && Object.keys(state.data.settlements).length,
   types: ['settlements/FETCH_SETTLEMENTS_REQUEST', {
     type: 'settlements/FETCH_SETTLEMENTS_SUCCESS',
     payload: (action, state, res) => res.clone().json().then(
@@ -24,7 +25,7 @@ invoke({
   }, 'settlements/FETCH_SETTLEMENTS_FAILURE'],
 });
 
-export const fetchSettlementByID = id => invoke({
+export const fetchSettlementById = id => invoke({
   endpoint: `${API_URL}/settlements/${id}`,
   method: 'GET',
   headers: {
@@ -72,6 +73,7 @@ export const updateSettlement = (id, body) => invoke({
   body: {
     settlement: {
       ...body,
+      type: body.type.name,
     },
   },
 });
@@ -98,5 +100,5 @@ export default handleAction(
     ...state,
     ...action.payload.entities.settlements,
   }),
-  null
+  {}
 );

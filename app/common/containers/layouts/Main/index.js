@@ -1,5 +1,4 @@
 import React from 'react';
-
 import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
 
 import Icon from '@components/Icon';

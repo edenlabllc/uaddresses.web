@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2017-05-31 16:22+0300\n"
-"PO-Revision-Date: 2017-05-31 16:24+0300\n"
+"POT-Creation-Date: 2017-07-21 02:31+0200\n"
+"PO-Revision-Date: 2017-07-21 02:32+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: uk\n"
@@ -11,61 +11,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 2.0.2\n"
+"X-Generator: Poedit 1.8.1\n"
 
-msgid "Required field"
-msgstr "Обов'язкове поле"
-
-msgid "Invalid email format"
-msgstr "Невірний формат Email"
-
-msgid "Invalid surname"
-msgstr "Невірне прізвище"
-
-msgid "Length must be less than <%= params %>"
-msgstr "Довжина має бути менше ніж <%= params %>"
-
-msgid "Invalid card number"
-msgstr "Невірний номер карти"
-
-msgid "Card with such names already exist"
-msgstr "Карта з такою назвою вже існує"
-
-msgid "Card with such number already exist"
-msgstr "Карта з таким номером вже існує"
-
-msgid "Support only {{types}} cards"
-msgstr "Ми підтримуємо тільки картки {{types}}"
-
-msgid "Minimal value is <%= params %>"
-msgstr "Мінімальне значення <%= params %>"
-
-msgid "Maximum value is <%= params %>"
-msgstr "Максимальне значення <%= params %>"
-
-msgid "Confirm"
-msgstr "Підтвердити"
-
-msgid "Cancel"
-msgstr "Відмінити"
-
-msgid "No data"
-msgstr "Дані вітсутні"
+msgid "1234567890"
+msgstr ""
 
 msgid "Yes"
 msgstr "Так"
 
 msgid "No"
 msgstr "Ні"
-
-msgid "ap."
-msgstr "вул."
-
-msgid "Area"
-msgstr "Зона"
-
-msgid "region"
-msgstr "область"
 
 msgid "UAddresses"
 msgstr ""
@@ -76,264 +31,134 @@ msgstr "У вас є незбережені зміни"
 msgid "Are you sure want to leave this page?"
 msgstr "Ви впевнені, що хочете залишити цю сторінку?"
 
-msgid "Tokens"
-msgstr "Токени"
+msgid "Regions"
+msgstr "Області"
 
-msgid "Approvals"
-msgstr "Підтвердження"
+msgid "Districts"
+msgstr "Райони"
 
-msgid "Users"
-msgstr "Користувачі"
+msgid "Settlements"
+msgstr "Населені пункти"
 
-msgid "Roles"
-msgstr "Ролі"
-
-msgid "Client Types"
-msgstr "Типи клієнтів"
-
-msgid "Clients"
-msgstr "Клієнти"
+msgid "Streets"
+msgstr "Вулиці"
 
 msgid "Documentation"
 msgstr "Документація"
 
-msgid "app:authorize"
-msgstr ""
+msgid "Name"
+msgstr "Назва"
 
-msgid "User roles"
-msgstr "Ролі користувача"
+msgid "Zaopizhzhya district"
+msgstr "Запорізький район"
 
-msgid "Client"
-msgstr "Клієнти"
-
-msgid "Role"
-msgstr "Ролі"
-
-msgid "Actions"
-msgstr "Дії"
-
-msgid "Delete user role"
-msgstr "Видалити роль користувача"
-
-msgid "Create new user role"
-msgstr "Створити нову роль для користувача"
-
-msgid "Are you sure?"
-msgstr "Ви впевнені?"
-
-msgid "Are you sure want to delete this user role?"
-msgstr "Ви впевнені, що хочете видалити роль цього користувача?"
-
-msgid "User ID"
-msgstr "Ідентифікатор користувача"
-
-msgid "Client id"
-msgstr "Ідентифікатор клієнта"
-
-msgid "Enter scopes"
-msgstr "Введіть доступні дії"
+msgid "Koatuu"
+msgstr "КОАТУУ"
 
 msgid "Saving..."
 msgstr "Збереження…"
 
-msgid "Update Role"
-msgstr "Змінити роль"
+msgid "Update District"
+msgstr "Оновити район"
 
 msgid "Saved"
 msgstr "Збережено"
 
+msgid "Save New District"
+msgstr "Зберегти новий район"
+
+msgid "Are you sure?"
+msgstr "Ви впевнені?"
+
+msgid "Are you sure want to delete this district?"
+msgstr "Ви впевнені, що хочете видалити цей райой?"
+
+msgid "Search"
+msgstr "Пошук"
+
+msgid "Not found"
+msgstr "Даних не знайдено"
+
+msgid "Zaopizhzhya region"
+msgstr "Запорізька область"
+
+msgid "Update Region"
+msgstr "Оновити регіон"
+
+msgid "Save New Region"
+msgstr "Зберегти новий регіон"
+
+msgid "Are you sure want to delete this region?"
+msgstr "В впевнені, що хочете видалити цей регіон?"
+
+msgid "Settlement Name"
+msgstr "Назва населеного пункту"
+
+msgid "settlement type"
+msgstr "Тип населеного пункта"
+
+msgid "Update Settlement"
+msgstr "Редагувати населений пункт"
+
 msgid "Deleting..."
 msgstr "Видалення"
 
-msgid "Delete Role"
-msgstr "Видатити роль"
+msgid "Delete Settlement"
+msgstr "Видалити населений пункт"
 
-msgid "Save New Role"
-msgstr "Зберегти нову роль"
+msgid "Save New Settlement"
+msgstr "Зберегти новий населений пункт"
 
-msgid "Are you sure want to delete this role?"
-msgstr "В впевнені, що хочете видалити цю роль?"
+msgid "Are you sure want to delete this settlement?"
+msgstr "Ви впевнені, що хочете видалити цей населений пункт?"
 
-msgid "Approval ID"
-msgstr "Ідентифікатор підтвердження"
-
-msgid "Update approval"
-msgstr "Оновити підвердження"
-
-msgid "Delete Approval"
-msgstr "Видалити підтвердження"
-
-msgid "Are you sure want to delete this approval?"
-msgstr "Ви впевнені, що хочете видалити підтвердження?"
-
-msgid "Client name"
-msgstr "Ім’я клієнта"
-
-msgid "eHealth portal"
+msgid "head-keywords"
 msgstr ""
 
-msgid "Redirect uri"
-msgstr "Адреса зворотнього виклику"
-
-msgid "Client type id"
-msgstr "Ідентифіктор типу клієнта"
-
-msgid "Create New Client"
-msgstr "Створити нового клієнта"
-
-msgid "Update Client"
-msgstr "Редагувати клієнта"
-
-msgid "Delete client"
-msgstr "Видалити клієнта"
-
-msgid "Are you sure want to delete this client?"
-msgstr "Ви впевнені, що хочете видалити цього клієнта?"
-
-msgid "Client Type name"
-msgstr "Назва типу клієнта"
-
-msgid "Update Client Type"
-msgstr "Оновити тип клієнта"
-
-msgid "Delete Client Type"
-msgstr "Видалити тип клієнта"
-
-msgid "Save New Client Type"
-msgstr "Зберерегти тип клієнта"
-
-msgid "Are you sure want to delete this client type?"
-msgstr "Ви впевнені, що хочете видалити тип клієнта?"
-
-msgid "Role name"
-msgstr "Назва ролі"
-
-msgid "ID"
-msgstr "Ідентифікатор"
-
-msgid "b5e3318e-2192-4676"
+msgid "head-description"
 msgstr ""
 
-msgid "Name"
-msgstr "Назва"
+msgid "Enter region"
+msgstr "Введіть область"
 
-msgid "Value"
-msgstr "Значення"
+msgid "Enter district name"
+msgstr "Введіть назву району"
 
-msgid "bkZ2b3BsND"
-msgstr ""
+msgid "Enter koatuu"
+msgstr "Введіть КОАТУУ"
 
-msgid "22/01/2018"
-msgstr ""
+msgid "districts name"
+msgstr "Назви районів"
 
-msgid "Scope"
-msgstr "Доступні дії"
+msgid "koatuu"
+msgstr "КОАТУУ"
 
-msgid "Client ID"
-msgstr "Ідентифікатор кліента"
-
-msgid "Grant type"
-msgstr "Тип авторизаційного токену"
-
-msgid "password"
-msgstr ""
-
-msgid "http://example.com/resource"
-msgstr ""
-
-msgid "8d3c0349-353e-48ef"
-msgstr ""
-
-msgid "Delete token"
-msgstr "Видалити токен"
-
-msgid "Save New Token"
-msgstr "Зберегти новий токен"
-
-msgid "Failed"
-msgstr "Невдало"
-
-msgid "Are you sure want to delete this token?"
-msgstr "Ви впевненні, що хочете видалити цей токен?"
-
-msgid "User email"
-msgstr "Електронна пошта користувача"
-
-msgid "example@gmail.com"
-msgstr ""
-
-msgid "Password"
-msgstr "Пароль"
-
-msgid "Create New User"
-msgstr "Створити нового користувача"
-
-msgid "Update User"
-msgstr "Оновити користувача"
-
-msgid "Delete user"
-msgstr "Видалити користувача"
-
-msgid "Are you sure want to delete this user?"
-msgstr "Ви впевнені, що хочете видалити цього користувача?"
-
-msgid "Role id"
-msgstr "Ідентифікатор ролі"
-
-msgid "Create User Role"
-msgstr "Створити роль для користувача"
-
-msgid "OAuth2 flow, validation, proxy"
-msgstr "OAuth2 потік, сервій валідації, проксі"
-
-msgid ""
-"Authentication, client and role management service. Token verification "
-"service."
-msgstr ""
-"Сервіси управління аутентифікацією, клієнтами та ролями. Сервіс "
-"перевірки токенів."
-
-msgid "Create approval"
-msgstr "Створити підвердження"
-
-msgid "Id"
-msgstr "Ідентифікатор"
+msgid "region"
+msgstr "область"
 
 msgid "Action"
 msgstr "Дії"
 
-msgid "Edit approval"
-msgstr "Редагувати підтвердження"
+msgid "Edit"
+msgstr "Редагувати"
 
-msgid "Create new approval"
-msgstr "Створити нове підтвердження"
+msgid "Create new disrict"
+msgstr "Створити новий район"
 
-msgid "Create client"
-msgstr "Створити клієнта"
+msgid "Edit district: {{name}}"
+msgstr "Редагування району  {{name}}"
 
-msgid "Details"
-msgstr "Деталі"
+msgid "settlement name"
+msgstr "Назва населеного пункту"
 
-msgid "Show client details"
-msgstr "Показати деталі клієнта"
+msgid "type"
+msgstr "тип"
 
-msgid "Create new client"
-msgstr "Створити нового клієнта"
+msgid "mountain group"
+msgstr "Гірського типу"
 
-msgid "Create client type"
-msgstr "Створити тип клієнта"
-
-msgid "Edit client type"
-msgstr "Редагувати тип клієнта"
-
-msgid "Create new client type"
-msgstr "Cтворити новий тип клієнта"
-
-msgid "Edit client type: {{name}}"
-msgstr "Редагувати тип клієнта: {{name}}"
-
-msgid "Update client"
-msgstr "Редагувати клієнта"
+msgid "Show all settlements"
+msgstr "Показати всі населені пункти"
 
 msgid "Page Not Found"
 msgstr "Сторінка не знайдена"
@@ -341,78 +166,60 @@ msgstr "Сторінка не знайдена"
 msgid "Requested page not found. Maybe you are looking for"
 msgstr "Запитувана сторінка не знайдена."
 
-msgid "Go to dashboard"
+msgid "Go to home page"
 msgstr "Перейти на головну"
 
-msgid "Create role"
-msgstr "Створити роль"
+msgid "Regions name"
+msgstr "Назви регіонів"
 
-msgid "Edit role"
-msgstr "Редагувати роль"
+msgid "Create new region"
+msgstr "Створити новий регіон"
 
-msgid "Create new"
-msgstr "створити нову"
+msgid "Edit region"
+msgstr "Редагування області"
 
-msgid "Edit role: {{name}}"
-msgstr "Редагування ролі  {{name}}"
+msgid "Edit region: {{name}}"
+msgstr "Редагування області:  {{name}}"
 
-msgid "Create token"
-msgstr "Створити токен"
+msgid "Show all districts"
+msgstr "Показати всі райони"
 
-msgid "Token details"
-msgstr "Деталі токена"
+msgid "Enter district"
+msgstr "Введіть район"
 
-msgid "Show token details"
-msgstr "Показати деталі токена"
+msgid "settlements name"
+msgstr "Населені пункти"
 
-msgid "Create new token"
-msgstr "Створити новий токен"
+msgid "Create new settlements"
+msgstr "Сворити новий населений пункт"
 
-msgid "Create user"
-msgstr "Створити користувача"
+msgid "Edit settlement"
+msgstr "Редагування населеного пункту"
 
-msgid "Create user role"
-msgstr "Створити роль для користувача"
+msgid "Show all streets"
+msgstr "Показати всі вулиці"
 
-msgid "Email"
-msgstr "Електронна пошта"
+msgid "Sign in"
+msgstr "Ввійти"
 
-msgid "Show user details"
-msgstr "Деталі користувача"
+msgid "Auth error {{code}}"
+msgstr "Помилка входу: {{code}}"
 
-msgid "Create new user"
-msgstr "Створити нового користувача"
+msgid "Enter with EHEALTH"
+msgstr "Ввійти через EHEALTH"
 
-msgid "User details"
-msgstr "Деталі користувача"
+msgid "Enter settlement"
+msgstr "Введіть населений пункт"
 
-msgctxt "api:read"
-msgid "some"
-msgstr ""
+msgid "street name"
+msgstr "Назва вулиці"
 
-msgctxt "api:write"
-msgid "some"
-msgstr ""
+msgid "Create new street"
+msgstr "Створити нову вулицю"
 
-msgctxt "entity:read"
-msgid "legal"
-msgstr ""
+msgctxt "group"
+msgid "mountain"
+msgstr "Гірська група"
 
-msgctxt "entity:write"
-msgid "legal"
-msgstr ""
-
-msgctxt "request:write"
-msgid "employee"
-msgstr ""
-
-msgctxt "token"
-msgid "access"
-msgstr ""
-
-msgctxt "at"
-msgid "Expires"
-msgstr "Дійсний до"
-
-#~ msgid "Role ID"
-#~ msgstr "Ідентифікатор ролі"
+#~ msgid "settlements"
+#~ msgstr "Населені пункти"

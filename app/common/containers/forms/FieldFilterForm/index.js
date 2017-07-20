@@ -14,16 +14,16 @@ import styles from './styles.scss';
 })
 export default class FieldFilterForm extends React.Component {
   render() {
-    const { handleSubmit, submitting, t, name, submitBtn, label } = this.props;
+    const { handleSubmit, submitting, t, name, submitBtn, label, placeholder } = this.props;
     return (
       <form className={styles.main} onSubmit={handleSubmit}>
         <div>
           <Field
-            type="text"
-            labelText={label}
-            placeholder={t(`Enter ${name}`)}
             name={name}
+            type="text"
             component={FieldInput}
+            labelText={label}
+            placeholder={placeholder}
           />
         </div>
         {

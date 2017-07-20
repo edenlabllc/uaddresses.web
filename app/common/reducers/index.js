@@ -14,9 +14,16 @@ import settlements from 'redux/settlements';
 import streets from 'redux/streets';
 
 import Aside from 'containers/blocks/Aside/redux';
-
 import RegionsPage from 'containers/pages/RegionsPage/redux';
 import RegionUpdatePage from 'containers/pages/RegionUpdatePage/redux';
+
+import DistrictsPage from 'containers/pages/DistrictsPage/redux';
+import DistrictUpdatePage from 'containers/pages/DistrictUpdatePage/redux';
+
+import SettlementsPage from 'containers/pages/SettlementsPage/redux';
+import SettlementUpdatePage from 'containers/pages/SettlementUpdatePage/redux';
+
+import StreetsPage from 'containers/pages/StreetsPage/redux';
 
 const blocks = combineReducers({
   Aside,
@@ -25,6 +32,14 @@ const blocks = combineReducers({
 const pages = combineReducers({
   RegionsPage,
   RegionUpdatePage,
+
+  DistrictsPage,
+  DistrictUpdatePage,
+
+  SettlementsPage,
+  SettlementUpdatePage,
+
+  StreetsPage,
 });
 
 const data = combineReducers({
@@ -61,7 +76,7 @@ export const getDistrict = (state, id) => denormalize(id, schemas.district, stat
 
 export const getSettlements = (state, ids) => denormalize(ids, [schemas.settlement], state.data);
 export const getAllSettlements = state =>
-getSettlements(state, Object.keys(state.data.settlements));
+  getSettlements(state, Object.keys(state.data.settlements));
 export const getSettlement = (state, id) => denormalize(id, schemas.settlement, state.data);
 
 export const getStreets = (state, ids) => denormalize(ids, [schemas.street], state.data);

@@ -19,7 +19,7 @@ export default class ConfirmFormChanges extends React.Component {
         return true;
       }
 
-      this.setState({ showConfirm: true, location: location.pathname });
+      this.setState({ showConfirm: true, location: location.pathname + location.search });
 
       return false;
     });
@@ -33,7 +33,7 @@ export default class ConfirmFormChanges extends React.Component {
 
   confirmLocation() {
     this.setState({ showConfirm: false, isConfirmed: true }, () => {
-      this.props.router.replace(this.state.location);
+      this.props.router.push(this.state.location);
     });
   }
 

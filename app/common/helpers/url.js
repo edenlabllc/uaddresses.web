@@ -11,8 +11,8 @@ export const createUrl = (endpoint, options) => {
   return Url.format(url);
 };
 
-export const filterParams = (filter, { router, location }) => {
-  const newFilter = {
+export const filterParams = (filter, { router, location }, withClear = false) => {
+  const newFilter = withClear ? { ...filter } : {
     ...location.query,
     ...filter,
   };

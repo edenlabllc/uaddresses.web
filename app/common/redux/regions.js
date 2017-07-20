@@ -6,13 +6,14 @@ import { region } from 'schemas';
 
 import { invoke } from './api';
 
-export const fetchRegions = ({ ...options, limit = 10 } = {}, { useCache = false } = {}) => invoke({
+export const fetchRegions = ({ ...options, limit = 99 } = {}, { useCache = false } = {}) => invoke({
   endpoint: createUrl(`${API_URL}/search/regions`, { ...options, limit }),
   method: 'GET',
   headers: {
     'content-type': 'application/json',
   },
-  bailout: state => useCache && state.data.regions,
+  bailout: state =>
+    useCache && state.data.regions && Object.keys(state.data.regions).length,
   types: ['regions/FETCH_REGIONS_REQUEST', {
     type: 'regions/FETCH_REGIONS_SUCCESS',
     payload: (action, state, res) => res.clone().json().then(
@@ -97,5 +98,5 @@ export default handleAction(
     ...state,
     ...action.payload.entities.regions,
   }),
-  null
+  {}
 );

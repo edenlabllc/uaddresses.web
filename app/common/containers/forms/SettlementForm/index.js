@@ -7,34 +7,45 @@ import { reduxFormValidate } from 'react-nebo15-validate';
 
 import { Confirm } from '@components/Popup';
 import Form, { FormRow, FormBlock, FormButtons, FormColumn } from '@components/Form';
-import FieldInput from '@components/reduxForm/FieldInput';
 import Button, { ButtonsGroup } from '@components/Button';
+import FieldCheckbox from '@components/reduxForm/FieldCheckbox';
+import FieldInput from '@components/reduxForm/FieldInput';
+
+import { Select } from '@components/Select';
+
 import ConfirmFormChanges from 'containers/blocks/ConfirmFormChanges';
 
 import styles from './styles.scss';
 
-const getValues = getFormValues('region-form');
+const getValues = getFormValues('district-form');
+
+const settlement_type = {
+  VILLAGE: 'село',
+  TOWNSHIP: 'селище міського типу',
+  SETTLEMENT: 'селище',
+  CITY: 'місто',
+};
 
 @translate()
 @withStyles(styles)
 @reduxForm({
-  form: 'region-form',
+  form: 'settlement-form',
   validate: reduxFormValidate({
-    name: {
+    settlement_name: {
       required: true,
     },
     koatuu: {
       required: true,
     },
+    type: {
+      required: true,
+    },
   }),
-  initialValues: {
-    scope: '',
-  },
 })
 @connect(state => ({
   values: getValues(state),
 }))
-export default class RegionForm extends React.Component {
+export default class SettlementForm extends React.Component {
   constructor(props) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
@@ -70,12 +81,9 @@ export default class RegionForm extends React.Component {
               <Field
                 name="name"
                 component={FieldInput}
-                labelText={t('Name')}
-                placeholder={t('Zaopizhzhya region')}
+                labelText={t('Settlement Name')}
               />
             </FormColumn>
-          </FormRow>
-          <FormRow>
             <FormColumn>
               <Field
                 name="koatuu"
@@ -85,19 +93,44 @@ export default class RegionForm extends React.Component {
               />
             </FormColumn>
           </FormRow>
+          <FormRow>
+            <FormColumn>
+              <Field
+                name="type"
+                labelText={t('settlement type')}
+                component={Select}
+                placeholder="Select settlement type"
+                options={Object.keys(settlement_type).map(i => ({
+                  name: i,
+                  title: settlement_type[i],
+                }))}
+              />
+            </FormColumn>
+            <FormColumn>
+              <div className={styles.checkbox}>
+                <Field
+                  labelText={t('mountain_group')}
+                  name="mountain_group"
+                  component={FieldCheckbox}
+                />
+              </div>
+            </FormColumn>
+          </FormRow>
         </FormBlock>
         <FormButtons>
           {
             edit && (<ButtonsGroup>
               <Button type="submit" disabled={!this.isChanged}>{
-                submitting ? t('Saving...') : (this.isChanged ? t('Update Region') : t('Saved'))
+                submitting ? t('Saving...') : (this.isChanged ? t('Update Settlement') : t('Saved'))
+              }</Button>
+              <Button color="red" onClick={() => this.setState({ onDelete: true })}>{submitting ? t('Deleting...') : t('Delete Settlement')
               }</Button>
             </ButtonsGroup>)
           }
           {
             !edit && (<ButtonsGroup>
               <Button type="submit" disabled={!this.isChanged}>{
-                submitting ? t('Saving...') : (this.isChanged ? t('Save New Region') : t('Saved'))
+                submitting ? t('Saving...') : (this.isChanged ? t('Save New Settlement') : t('Saved'))
               }</Button>
             </ButtonsGroup>)
           }
@@ -111,7 +144,7 @@ export default class RegionForm extends React.Component {
           id="confirm-delete"
           onCancel={() => this.setState({ onDelete: false })}
           onConfirm={() => onDelete(this.state.savedValues.id)}
-        >{ t('Are you sure want to delete this region?') }</Confirm>
+        >{ t('Are you sure want to delete this settlement?') }</Confirm>
       </Form>
     );
   }
