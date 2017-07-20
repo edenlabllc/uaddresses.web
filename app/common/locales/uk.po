@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2017-07-21 02:31+0200\n"
-"PO-Revision-Date: 2017-07-21 02:32+0200\n"
+"POT-Creation-Date: 2017-07-21 02:46+0200\n"
+"PO-Revision-Date: 2017-07-21 02:46+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: uk\n"
@@ -45,6 +45,9 @@ msgstr "Вулиці"
 
 msgid "Documentation"
 msgstr "Документація"
+
+msgid "Logout"
+msgstr "Вийти"
 
 msgid "Name"
 msgstr "Назва"

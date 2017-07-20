@@ -1,6 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 
-import { AUTH_COOKIE_NAME } from 'config';
+import { AUTH_COOKIE_NAME, PUBLIC_INDEX_ROUTE } from 'config';
 
 export const getToken = () => (dispatch, getState, { cookies }) =>
   cookies.get(AUTH_COOKIE_NAME, { path: '/' });
@@ -27,6 +27,11 @@ export const login = token => dispatch =>
     setToken(token),
     setData({ token }),
   ]);
+
+export const logoutAndRedirect = (redirectTo = PUBLIC_INDEX_ROUTE) => dispatch =>
+  dispatch(logout()).then(() => {
+    window.location.pathname = redirectTo;
+  });
 
 export default handleActions({
   [setData]: (state, action) => action.payload,

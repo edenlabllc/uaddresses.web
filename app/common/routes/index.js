@@ -26,11 +26,13 @@ import { getOAuthUser } from 'reducers';
 import { fetchRegions } from 'redux/regions';
 import { isLoginned, logout } from 'redux/session';
 
+import { PUBLIC_INDEX_ROUTE } from 'config';
+
 export const configureRoutes = ({ store }) => { // eslint-disable-line
   const requireAuth = (nextState, replace, next) =>
     store.dispatch(isLoginned()).then((loginned) => {
       if (!loginned) {
-        replace({ pathname: '/sign-in' });
+        replace({ pathname: PUBLIC_INDEX_ROUTE });
         return next();
       }
 
@@ -42,7 +44,7 @@ export const configureRoutes = ({ store }) => { // eslint-disable-line
       return store.dispatch(fetchRegions()).then((action) => {
         if (action.error) {
           store.dispatch(logout());
-          replace({ pathname: '/sign-in' });
+          replace({ pathname: PUBLIC_INDEX_ROUTE });
         }
 
         return next();

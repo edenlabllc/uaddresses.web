@@ -5,6 +5,8 @@ import classnames from 'classnames';
 import { Link } from 'react-router';
 import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
 
+import { logoutAndRedirect } from 'redux/session';
+
 import NavItem from '@components/NavItem';
 import Icon from '@components/Icon';
 
@@ -14,7 +16,7 @@ import styles from './styles.scss';
 @translate()
 @connect(state => ({
   location: state.routing,
-}))
+}), { logoutAndRedirect })
 export default class Nav extends React.Component {
   componentWillReceiveProps(props) {
     if (props.isOpen) {
@@ -24,7 +26,7 @@ export default class Nav extends React.Component {
     }
   }
   render() {
-    const { isOpen, t } = this.props;
+    const { isOpen, t, logoutAndRedirect } = this.props;
 
     return (
       <nav className={classnames(styles.nav, isOpen && styles.open)}>
@@ -48,6 +50,13 @@ export default class Nav extends React.Component {
               <Icon name="doc" />
               { t('Documentation') }
             </a>
+          </li>
+        </ul>
+        <ul className={styles.down}>
+          <li>
+            <button onClick={() => logoutAndRedirect()}>
+              { t('Logout') }
+            </button>
           </li>
         </ul>
       </nav>

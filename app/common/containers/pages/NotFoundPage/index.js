@@ -14,7 +14,7 @@ export default class NotFoundPage extends React.Component {
         <Helmet title={t('Page Not Found')} />
         <H1>{ t('Page Not Found') }</H1>
         <p>
-          { t('Requested page not found. Maybe you are looking for') }
+          { t('Requested page not found. Maybe you are looking for') } {' '}
           <Button theme="link" to="/" >{ t('Go to home page') }</Button>.
         </p>
       </div>

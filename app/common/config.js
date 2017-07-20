@@ -24,6 +24,7 @@ export const OAUTH_URL = config.OAUTH_URL || process.env.OAUTH_URL || 'http://au
 export const OAUTH_REDIRECT_PATH = config.OAUTH_REDIRECT_PATH || process.env.OAUTH_REDIRECT_PATH || '/auth/redirect';
 export const OAUTH_REDIRECT_URL = config.OAUTH_REDIRECT_URL || process.env.OAUTH_REDIRECT_URL || `${HOSTNAME}${OAUTH_REDIRECT_PATH}`;
 
+export const PUBLIC_INDEX_ROUTE = '/sign-in';
 export const API_PROXY_PATH = '/api';
 
 // for internal app usage. for example for XHR requests or server side rendering
