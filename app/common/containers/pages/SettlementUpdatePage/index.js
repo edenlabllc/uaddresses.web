@@ -10,17 +10,11 @@ import SettlementForm from 'containers/forms/SettlementForm';
 
 import { getSettlement } from 'reducers';
 import { updateSettlement } from 'redux/settlements';
+import { settlement_type } from 'helpers/dictionaries';
 
 import { fetchSettlement } from './redux';
 
 import styles from './styles.scss';
-
-const settlement_type = {
-  VILLAGE: 'село',
-  TOWNSHIP: 'селище міського типу',
-  SETTLEMENT: 'селище',
-  CITY: 'місто',
-};
 
 @translate()
 @withStyles(styles)

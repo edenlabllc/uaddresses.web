@@ -5,6 +5,7 @@ import { translate } from 'react-i18next';
 import { provideHooks } from 'redial';
 import Helmet from 'react-helmet';
 import { filterParams } from 'helpers/url';
+import { street_types } from 'helpers/dictionaries';
 import { reset } from 'redux-form';
 import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
 
@@ -26,20 +27,6 @@ import {
 import { fetchStreets, fetchDistrictByRegion, fetchSettlements } from './redux';
 
 import styles from './styles.scss';
-
-const street_types = {
-  STREET: 'вулиця',
-  SQUARE: 'площа',
-  RIVER_SIDE: 'набережна',
-  PASS: 'провулок',
-  MICRODISTRICT: 'мікрорайон',
-  MAIDAN: 'майдан',
-  HIGHWAY: 'шосе',
-  BOULEVARD: 'бульвар',
-  BLIND_STREET: 'тупик',
-  AVENUE: 'проспект',
-  ASCENT: 'узвіз',
-};
 
 @withRouter
 @withStyles(styles)
