@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2017-07-20 13:23+0300\n"
-"PO-Revision-Date: 2017-07-20 13:24+0300\n"
+"POT-Creation-Date: 2017-07-21 02:31+0200\n"
+"PO-Revision-Date: 2017-07-21 02:32+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: uk\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 2.0.2\n"
+"X-Generator: Poedit 1.8.1\n"
 
 msgid "1234567890"
 msgstr ""
@@ -80,7 +80,7 @@ msgid "Not found"
 msgstr "Даних не знайдено"
 
 msgid "Zaopizhzhya region"
-msgstr ""
+msgstr "Запорізька область"
 
 msgid "Update Region"
 msgstr "Оновити регіон"
@@ -148,8 +148,8 @@ msgstr "Створити новий район"
 msgid "Edit district: {{name}}"
 msgstr "Редагування району  {{name}}"
 
-msgid "settlements"
-msgstr "Населені пункти"
+msgid "settlement name"
+msgstr "Назва населеного пункту"
 
 msgid "type"
 msgstr "тип"
@@ -196,6 +196,9 @@ msgstr "Сворити новий населений пункт"
 msgid "Edit settlement"
 msgstr "Редагування населеного пункту"
 
+msgid "Show all streets"
+msgstr "Показати всі вулиці"
+
 msgid "Sign in"
 msgstr "Ввійти"
 
@@ -213,3 +216,10 @@ msgstr "Назва вулиці"
 
 msgid "Create new street"
 msgstr "Створити нову вулицю"
+
+msgctxt "group"
+msgid "mountain"
+msgstr "Гірська група"
+
+#~ msgid "settlements"
+#~ msgstr "Населені пункти"

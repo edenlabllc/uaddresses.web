@@ -107,11 +107,13 @@ export default class SettlementForm extends React.Component {
               />
             </FormColumn>
             <FormColumn>
-              <Field
-                labelText="mountain_group"
-                name="mountain_group"
-                component={FieldCheckbox}
-              />
+              <div className={styles.checkbox}>
+                <Field
+                  labelText={t('mountain_group')}
+                  name="mountain_group"
+                  component={FieldCheckbox}
+                />
+              </div>
             </FormColumn>
           </FormRow>
         </FormBlock>

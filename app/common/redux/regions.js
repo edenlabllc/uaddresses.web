@@ -12,7 +12,8 @@ export const fetchRegions = ({ ...options, limit = 99 } = {}, { useCache = false
   headers: {
     'content-type': 'application/json',
   },
-  bailout: state => useCache && state.data.regions,
+  bailout: state =>
+    useCache && state.data.regions && Object.keys(state.data.regions).length,
   types: ['regions/FETCH_REGIONS_REQUEST', {
     type: 'regions/FETCH_REGIONS_SUCCESS',
     payload: (action, state, res) => res.clone().json().then(
@@ -97,5 +98,5 @@ export default handleAction(
     ...state,
     ...action.payload.entities.regions,
   }),
-  null
+  {}
 );

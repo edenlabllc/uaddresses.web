@@ -8,11 +8,9 @@ export const pagingRegions = createAction('regionsPage/ADD_PAGING');
 export const fetchRegions = options => dispatch =>
   dispatch(fromRegions.fetchRegions(options))
   .then((action) => {
-    if (action.error) throw action;
-    return [
-      dispatch(getRegions(action.payload.result)),
-      // dispatch(pagingRegions(action.meta)),
-    ];
+    if (action.error) return action;
+    dispatch(getRegions(action.payload.result));
+    return action;
   });
 
 const regions = handleAction(getRegions, (state, action) => action.payload, []);

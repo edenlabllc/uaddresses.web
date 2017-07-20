@@ -51,7 +51,7 @@ export default class SettlementUpdatePage extends React.Component {
           />
         </div>
         <div className={styles.block}>
-          <Button to={`/streets?settlement_id=${settlement.id}`}>{t('Show all streets')}</Button>
+          <Button to={`/streets?settlement_id=${settlement.id}&district_id=${settlement.district_id}&region_id=${settlement.region_id}`}>{t('Show all streets')}</Button>
         </div>
       </FormPageWrapper>
     );

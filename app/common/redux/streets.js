@@ -13,7 +13,7 @@ invoke({
   headers: {
     'content-type': 'application/json',
   },
-  bailout: state => useCache && state.data.streets,
+  bailout: state => useCache && state.data.streets && Object.keys(state.data.streets).length,
   types: ['streets/FETCH_STREETS_REQUEST', {
     type: 'streets/FETCH_STREETS_SUCCESS',
     payload: (action, state, res) => res.clone().json().then(
@@ -98,5 +98,5 @@ export default handleAction(
     ...state,
     ...action.payload.entities.streets,
   }),
-  null
+  {}
 );

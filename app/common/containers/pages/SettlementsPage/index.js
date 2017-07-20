@@ -45,7 +45,7 @@ import styles from './styles.scss';
         starting_after,
         ending_before,
       }));
-    }),
+    }).catch(() => {}),
 })
 @connect(
   (state, { location: { query: { region_id, district_id } } }) => ({
@@ -140,7 +140,7 @@ export default class SettlementsPage extends React.Component {
                         id={`edit-settlements-button-${item.name}`}
                         theme="link"
                         color="red"
-                        to={`/streets?settlement_id=${item.id}`}
+                        to={`/settlements/${item.id}`}
                       >
                         {item.name}
                       </Button>

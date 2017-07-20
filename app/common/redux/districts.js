@@ -13,7 +13,8 @@ export const fetchDistricts = ({ ...options, limit = 10 } = {}, { useCache = fal
     headers: {
       'content-type': 'application/json',
     },
-    bailout: state => useCache && state.data.districts,
+    bailout: state =>
+      useCache && state.data.districts && Object.keys(state.data.districts),
     types: ['districts/FETCH_DISTRICTS_REQUEST', {
       type: 'districts/FETCH_DISTRICTS_SUCCESS',
       payload: (action, state, res) => res.clone().json().then(
@@ -113,5 +114,5 @@ export default handleAction(
     ...state,
     ...action.payload.entities.districts,
   }),
-  null
+  {}
 );

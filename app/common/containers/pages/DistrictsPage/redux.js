@@ -8,11 +8,12 @@ export const pagingDistricts = createAction('districtsPage/ADD_PAGING');
 export const fetchDistricts = options => dispatch =>
   Object.keys(options).length && dispatch(fromDistricts.fetchDistricts(options))
     .then((action) => {
-      if (action.error) throw action;
-      return [
-        dispatch(getDistricts(action.payload.result)),
-        dispatch(pagingDistricts(action.meta)),
-      ];
+      if (action.error) return action;
+
+      dispatch(getDistricts(action.payload.result));
+      dispatch(pagingDistricts(action.meta));
+
+      return action;
     });
 
 const districts = handleAction(getDistricts, (state, action) => action.payload, []);

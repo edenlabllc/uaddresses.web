@@ -13,7 +13,8 @@ invoke({
   headers: {
     'content-type': 'application/json',
   },
-  bailout: state => useCache && state.data.settlements,
+  bailout: state =>
+    useCache && state.data.settlements && Object.keys(state.data.settlements).length,
   types: ['settlements/FETCH_SETTLEMENTS_REQUEST', {
     type: 'settlements/FETCH_SETTLEMENTS_SUCCESS',
     payload: (action, state, res) => res.clone().json().then(
@@ -99,5 +100,5 @@ export default handleAction(
     ...state,
     ...action.payload.entities.settlements,
   }),
-  null
+  {}
 );
