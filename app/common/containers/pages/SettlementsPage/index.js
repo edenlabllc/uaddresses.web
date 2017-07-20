@@ -19,7 +19,7 @@ import YesNo from 'components/YesNo';
 import { settlement_type } from 'helpers/dictionaries';
 
 import { getSettlements, getAllRegions, getDistricts } from 'reducers';
-import { fetchSettlements, fetchDistrictByRegion } from './redux';
+import { fetchSettlements, fetchDistricts } from './redux';
 
 import styles from './styles.scss';
 
@@ -27,8 +27,10 @@ import styles from './styles.scss';
 @withStyles(styles)
 @translate()
 @provideHooks({
-  fetch: ({ dispatch, location: { query } }) =>
-    dispatch(fetchSettlements(query)),
+  fetch: ({ dispatch, location: { query } }) => Promise.all([
+    dispatch(fetchSettlements({ region: query.region, district: query.district })),
+    dispatch(fetchDistricts({ region: query.region })),
+  ]),
 })
 @connect(
   state => ({
@@ -37,21 +39,19 @@ import styles from './styles.scss';
     regionsAll: getAllRegions(state),
     districtsFromRegion: getDistricts(state, state.pages.SettlementsPage.regionDistricts),
   }),
-  dispatch => ({
-    onSelectRegion: id => Promise.all([
-      dispatch(fetchDistrictByRegion(id)),
-      dispatch(reset('district-filter-form')),
-    ]),
-  })
+  { reset }
 )
 export default class SettlementsPage extends React.Component {
+  state = {
+    reset: true,
+  };
   render() {
     const {
       settlements = [],
       regionsAll = [],
       districtsFromRegion = [],
       location,
-      onSelectRegion,
+      reset,
       paging,
       t,
     } = this.props;
@@ -73,22 +73,33 @@ export default class SettlementsPage extends React.Component {
                 },
               })}
               onChange={({ region }) => {
-                onSelectRegion(region.name);
-                return filterParams({ region: region.title }, this.props, true);
+                this.setState({ reset: false }, () => {
+                  reset('district-filter-form');
+                  filterParams({ region: region.title }, this.props, true);
+                });
               }}
               data={regionsAll}
             />
           </FormColumn>
           <FormColumn>
             <QueryFieldFilterForm
+              enableReinitialize
               name="district"
               placeholder={t('Enter district')}
               disabled={districtsFromRegion.length === 0}
               form="district-filter-form"
-              onChange={({ district }) =>
-                district && filterParams({ district: district.title }, this.props)
-              }
-              data={districtsFromRegion.map(i => ({ id: i.id, name: i.district }))}
+              onChange={({ district }) => {
+                district && this.setState({ reset: true }, () => {
+                  filterParams({ district: district.title }, this.props);
+                });
+              }}
+              initialValues={this.state.reset && location.query.district && ({
+                district: {
+                  name: (districtsFromRegion.filter(i => i.name === location.query.district)[0]).id,
+                  title: location.query.district,
+                },
+              })}
+              data={districtsFromRegion.map(i => ({ id: i.id, name: i.name }))}
             />
           </FormColumn>
         </FormRow>
@@ -142,7 +153,7 @@ export default class SettlementsPage extends React.Component {
               </div>
             }
             {
-              false && <div className={styles.pagination}>
+              <div className={styles.pagination}>
                 <Pagination
                   location={location}
                   more={paging.has_more}
