@@ -5,7 +5,7 @@ module.exports = {
   },
   elements: {
     main: {
-      selector: '#roles-page',
+      selector: '#sign-in-page',
     },
   },
   commands: [{
