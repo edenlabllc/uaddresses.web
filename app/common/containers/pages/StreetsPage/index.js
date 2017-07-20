@@ -5,6 +5,7 @@ import { translate } from 'react-i18next';
 import { provideHooks } from 'redial';
 import Helmet from 'react-helmet';
 import { filterParams } from 'helpers/url';
+import { reset } from 'redux-form';
 import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
 
 import { H1 } from '@components/Title';
@@ -56,8 +57,15 @@ const street_types = {
     settlements: getSettlements(state, state.pages.StreetsPage.settlements),
   }),
   dispatch => ({
-    onSelectRegion: id => dispatch(fetchDistrictByRegion(id)),
-    onSelectDistrict: id => dispatch(fetchSettlements(id)),
+    onSelectRegion: id => Promise.all([
+      dispatch(fetchDistrictByRegion(id)),
+      dispatch(reset('district-filter-form')),
+      dispatch(reset('settlement-filter-form')),
+    ]),
+    onSelectDistrict: id => Promise.all([
+      dispatch(fetchSettlements(id)),
+      dispatch(reset('settlement-filter-form')),
+    ]),
   })
 )
 export default class StreetsPage extends React.Component {
@@ -92,7 +100,7 @@ export default class StreetsPage extends React.Component {
               name="district"
               disabled={districtsFromRegion.length === 0}
               form="district-filter-form"
-              onChange={({ district }) => onSelectDistrict(district.title)}
+              onChange={({ district }) => district && onSelectDistrict(district.title)}
               data={districtsFromRegion.map(i => ({ id: i.id, name: i.district }))}
             />
           </FormColumn>
@@ -105,7 +113,7 @@ export default class StreetsPage extends React.Component {
               form="settlement-filter-form"
               disabled={settlements.length === 0}
               onChange={({ settlement }) =>
-                filterParams({ settlement_id: settlement.name }, this.props, true)
+                settlement && filterParams({ settlement_id: settlement.name }, this.props, true)
               }
               data={settlements}
             />

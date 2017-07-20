@@ -45,8 +45,10 @@ const settlement_type = {
     districtsFromRegion: getDistricts(state, state.pages.SettlementsPage.regionDistricts),
   }),
   dispatch => ({
-    onSelectRegion: id => dispatch(fetchDistrictByRegion(id)),
-    onSelectNewRegion: () => dispatch(reset('district-filter-form')),
+    onSelectRegion: id => Promise.all([
+      dispatch(fetchDistrictByRegion(id)),
+      dispatch(reset('district-filter-form')),
+    ]),
   })
 )
 export default class SettlementsPage extends React.Component {
@@ -57,7 +59,6 @@ export default class SettlementsPage extends React.Component {
       districtsFromRegion = [],
       location,
       onSelectRegion,
-      onSelectNewRegion,
       paging,
       t,
     } = this.props;
@@ -79,7 +80,6 @@ export default class SettlementsPage extends React.Component {
               })}
               onChange={({ region }) => {
                 onSelectRegion(region.name);
-                onSelectNewRegion();
                 return filterParams({ region: region.title }, this.props, true);
               }}
               data={regionsAll}
