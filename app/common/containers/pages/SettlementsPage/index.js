@@ -83,7 +83,6 @@ export default class SettlementsPage extends React.Component {
           </FormColumn>
           <FormColumn>
             <QueryFieldFilterForm
-              enableReinitialize
               name="district"
               placeholder={t('Enter district')}
               disabled={districtsFromRegion.length === 0}
