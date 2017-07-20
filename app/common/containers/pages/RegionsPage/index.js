@@ -31,7 +31,7 @@ export default class RegionsPage extends React.Component {
     const { regions = [], t } = this.props;
 
     return (
-      <div id="roles-page">
+      <div id="regions-page">
         <Helmet title={t('Regions')} />
         <H1>{ t('Regions') }</H1>
         <div id="regions-table" className={styles.table}>
@@ -47,10 +47,10 @@ export default class RegionsPage extends React.Component {
                 ...item,
                 name: (<div className={styles.name}>
                   <Button
-                    id={`edit-districts-button-${item.id}`}
+                    id={`edit-regions-button-${item.id}`}
                     theme="link"
                     color="red"
-                    to={`/districts?region=${item.name}`}
+                    to={`/regions/${item.id}`}
                   >
                     {item.name}
                   </Button>
@@ -58,7 +58,7 @@ export default class RegionsPage extends React.Component {
                 edit: (<Button
                   id={`edit-region-button-${item.id}`}
                   theme="link"
-                  to={`/regions/${item.id}/${item.name}`}
+                  to={`/regions/${item.id}`}
                 >
                   { t('Edit') }
                 </Button>),

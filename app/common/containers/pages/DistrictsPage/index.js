@@ -15,7 +15,7 @@ import QueryFieldFilterForm from 'containers/forms/QueryFieldFilterForm';
 import FieldFilterForm from 'containers/forms/FieldFilterForm';
 import Pagination from 'components/CursorPagination';
 
-import { getDistricts, getAllRegions } from 'reducers';
+import { getDistricts, getAllRegions, getRegion } from 'reducers';
 import { fetchDistricts } from './redux';
 
 import styles from './styles.scss';
@@ -24,22 +24,27 @@ import styles from './styles.scss';
 @withStyles(styles)
 @translate()
 @provideHooks({
-  fetch: ({ dispatch, location: { query } }) =>
-    dispatch(fetchDistricts(query)),
+  fetch: ({ dispatch, location: { query: { name, koatuu, region_id } } }) =>
+    dispatch(fetchDistricts({ name, koatuu, region_id })),
 })
-@connect(state => ({
+@connect((state, { location: { query: { region_id } } }) => ({
   ...state.pages.DistrictsPage,
   districts: getDistricts(state, state.pages.DistrictsPage.districts),
   regions: getAllRegions(state),
+  selectedRegion: region_id && getRegion(state, region_id),
 }))
 export default class DistrictsPage extends React.Component {
 
-  state = {
-    selected: this.props.location.query.region ? this.props.location.query.region : '',
-  };
-
   render() {
-    const { districts = [], regions = [], t, location, paging } = this.props;
+    const {
+      districts = [],
+      regions = [],
+      selectedRegion,
+      location: { query },
+      t,
+      paging,
+    } = this.props;
+
     return (
       <div id="districts-page">
         <Helmet title={t('Districts')} />
@@ -50,16 +55,15 @@ export default class DistrictsPage extends React.Component {
               name="region"
               placeholder={t('Enter region')}
               form="district-filter-form"
-              initialValues={location.query.region && ({
-                region: {
-                  name: regions.filter(i => i.name === location.query.region)[0].id,
-                  title: location.query.region,
+              initialValues={{
+                region: selectedRegion && {
+                  name: selectedRegion.id,
+                  title: selectedRegion.name,
                 },
-              })}
-              onChange={(region) => {
-                this.setState({ selected: region.region.title });
-                return filterParams({ region: region.region.title }, this.props);
               }}
+              onChange={({ region }) => setTimeout(() => {
+                filterParams({ region_id: region.name }, this.props);
+              })}
               data={regions}
             />
           </FormColumn>
@@ -71,7 +75,7 @@ export default class DistrictsPage extends React.Component {
               name="name"
               form="districts_name_form"
               placeholder={t('Enter district name')}
-              initialValues={location.query}
+              initialValues={{ name: query.name }}
               onSubmit={({ name }) => filterParams({ name }, this.props)}
               submitBtn
             />
@@ -81,7 +85,7 @@ export default class DistrictsPage extends React.Component {
               name="koatuu"
               form="districts_koatuu_form"
               placeholder={t('Enter koatuu')}
-              initialValues={location.query}
+              initialValues={{ koatuu: query.koatuu }}
               onSubmit={({ koatuu }) => filterParams({ koatuu }, this.props)}
               submitBtn
             />
@@ -102,10 +106,10 @@ export default class DistrictsPage extends React.Component {
                   .map(item => ({
                     districts: (<div className={styles.name}>
                       <Button
-                        id={`view-settlements-button-${item.name}`}
+                        id={`view-district-button-${item.name}`}
                         theme="link"
                         color="red"
-                        to={`/settlements?region=${item.region}&district=${item.name}`}
+                        to={`/districts/${item.id}`}
                       >
                         {item.name}
                       </Button>
@@ -119,7 +123,7 @@ export default class DistrictsPage extends React.Component {
                     edit: (<Button
                       id={`edit-district-button-${item.name}`}
                       theme="link"
-                      to={`/districts/${item.region}/${item.name}`}
+                      to={`/districts/${item.id}`}
                     >
                       { t('Edit') }
                     </Button>),

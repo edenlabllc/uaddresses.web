@@ -24,19 +24,32 @@ export const fetchDistricts = ({ ...options, limit = 10 } = {}, { useCache = fal
     }, 'districts/FETCH_DISTRICTS_FAILURE'],
   });
 
-
-export const fetchDistrictByID = (id, { ...options, limit = 10 } = {}) => invoke({
+export const fetchDistrictsByRegionId = (id, { ...options, limit = 10 } = {}) => invoke({
   endpoint: createUrl(`${API_URL}/details/region/${id}/districts`, { ...options, ...limit }),
   method: 'GET',
   headers: {
     'content-type': 'application/json',
   },
-  types: ['districts/FETCH_DISTRICT_BY_REGION_ID_REQUEST', {
-    type: 'districts/FETCH_DISTRICT_BY_REGION_ID_SUCCESS',
+  types: ['districts/FETCH_DISTRICTS_BY_REGION_ID_REQUEST', {
+    type: 'districts/FETCH_DISTRICTS_BY_REGION_ID_SUCCESS',
     payload: (action, state, res) => res.json().then(
       json => normalize(json.data, [district])
     ),
-  }, 'districts/FETCH_DISTRICT_BY_REGION_ID_FAILURE'],
+  }, 'districts/FETCH_DISTRICTS_BY_REGION_ID_FAILURE'],
+});
+
+export const fetchDistrictById = id => invoke({
+  endpoint: `${API_URL}/districts/${id}`,
+  method: 'GET',
+  headers: {
+    'content-type': 'application/json',
+  },
+  types: ['districts/FETCH_DISTRICT_BY_ID_REQUEST', {
+    type: 'districts/FETCH_DISTRICT_BY_ID_SUCCESS',
+    payload: (action, state, res) => res.json().then(
+      json => normalize(json.data, district)
+    ),
+  }, 'districts/FETCH_DISTRICT_BY_ID_FAILURE'],
 });
 
 // export const createDistrict = body => invoke({
@@ -91,7 +104,8 @@ export const deleteDistrict = id => invoke({
 export default handleAction(
   combineActions(
     'districts/FETCH_DISTRICTS_SUCCESS',
-    'districts/FETCH_DISTRICT_BY_REGION_ID_SUCCESS',
+    'districts/FETCH_DISTRICT_BY_ID_SUCCESS',
+    'districts/FETCH_DISTRICTS_BY_REGION_ID_SUCCESS',
     // 'districts/CREATE_DISTRICT_SUCCESS',
     'districts/UPDATE_DISTRICT_SUCCESS'
   ),

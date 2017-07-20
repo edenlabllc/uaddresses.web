@@ -19,7 +19,7 @@ export const fetchSettlements = options => dispatch =>
     });
 
 export const fetchDistrictByRegion = id => dispatch =>
-  dispatch(fromDistricts.fetchDistrictByID(id, { limit: 100 })).then((action) => {
+  dispatch(fromDistricts.fetchDistrictsByRegionId(id, { limit: 100 })).then((action) => {
     if (action.error) throw action;
     return dispatch(getRegionDistricts(action.payload.result));
   });

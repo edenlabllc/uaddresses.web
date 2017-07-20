@@ -24,7 +24,7 @@ invoke({
   }, 'settlements/FETCH_SETTLEMENTS_FAILURE'],
 });
 
-export const fetchSettlementByID = id => invoke({
+export const fetchSettlementById = id => invoke({
   endpoint: `${API_URL}/settlements/${id}`,
   method: 'GET',
   headers: {

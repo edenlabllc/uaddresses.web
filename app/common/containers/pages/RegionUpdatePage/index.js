@@ -11,7 +11,7 @@ import Button from '@components/Button';
 import FormPageWrapper from 'containers/blocks/FormPageWrapper';
 import RegionForm from 'containers/forms/RegionForm';
 
-import { fetchRegions, updateRegion } from 'redux/regions';
+import { fetchRegionByID, updateRegion } from 'redux/regions';
 import { getRegion, getDistricts } from 'reducers';
 
 import { fetchDistricts } from './redux';
@@ -19,9 +19,9 @@ import { fetchDistricts } from './redux';
 import styles from './styles.scss';
 
 @provideHooks({
-  fetch: ({ dispatch, params: { region } }) => Promise.all([
-    dispatch(fetchRegions({ name: region })),
-    dispatch(fetchDistricts({ region })),
+  fetch: ({ dispatch, params: { id } }) => Promise.all([
+    dispatch(fetchRegionByID(id)),
+    dispatch(fetchDistricts({ region_id: id, region: 's' })),
   ]),
 })
 @connect((state, { params: { id } }) => ({
@@ -56,10 +56,10 @@ export default class RegionUpdatePage extends React.Component {
                 .map(item => ({
                   name: (<div className={styles.name}>
                     <Button
-                      id={`view-settlements-button-${item.name}`}
+                      id={`view-districts-button-${item.name}`}
                       theme="link"
                       color="red"
-                      to={`/settlements?region=${item.region}&district=${item.name}`}
+                      to={`/districts/${item.id}`}
                     >
                       {item.name}
                     </Button>
@@ -72,7 +72,7 @@ export default class RegionUpdatePage extends React.Component {
             />
           </div>
           <div className={styles.block}>
-            <Button to={`/districts?region=${districts[0].region}`}>{t('Show all districts')}</Button>
+            <Button to={`/districts?region_id=${region.id}`}>{t('Show all districts')}</Button>
           </div>
         </div>
       </FormPageWrapper>

@@ -56,15 +56,15 @@ export const configureRoutes = ({ store }) => { // eslint-disable-line
           <IndexRedirect to="/regions" />
           <Route path="regions">
             <IndexRoute component={RegionsPage} />
-            <Route path=":id/:region" component={RegionUpdatePage} />
+            <Route path=":id" component={RegionUpdatePage} />
           </Route>
           <Route path="districts">
             <IndexRoute component={DistrictsPage} />
-            <Route path=":region/:district" component={DistrictUpdatePage} />
+            <Route path=":id" component={DistrictUpdatePage} />
           </Route>
           <Route path="settlements">
             <IndexRoute component={SettlementsPage} />
-            <Route path=":name" component={SettlementUpdatePage} />
+            <Route path=":id" component={SettlementUpdatePage} />
           </Route>
           <Route path="streets">
             <IndexRoute component={StreetsPage} />

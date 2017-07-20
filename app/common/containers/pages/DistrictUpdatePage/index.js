@@ -13,27 +13,27 @@ import DistrictForm from 'containers/forms/DistrictForm';
 import YesNo from 'components/YesNo';
 
 import { getDistrict, getSettlements } from 'reducers';
-import { updateDistrict } from 'redux/districts';
+import { updateDistrict, fetchDistrictById } from 'redux/districts';
 
-import { fetchDistricts, fetchSettlements } from './redux';
+import { fetchSettlements } from './redux';
 
 import styles from './styles.scss';
 
 @provideHooks({
-  fetch: ({ dispatch, params: { region, district } }) => Promise.all([
-    dispatch(fetchDistricts({ region, name: district })),
-    dispatch(fetchSettlements({ region, district })),
+  fetch: ({ dispatch, params: { id } }) => Promise.all([
+    dispatch(fetchDistrictById(id)),
+    dispatch(fetchSettlements({ district_id: id })),
   ]),
 })
-@connect(state => ({
-  district: getDistrict(state, state.pages.DistrictUpdatePage.district[0]),
+@connect((state, { params: { id } }) => ({
+  district: getDistrict(state, id),
   settlements: getSettlements(state, state.pages.DistrictUpdatePage.settlements),
 }), { updateDistrict })
 @withStyles(styles)
 @translate()
 export default class DistrictUpdatePage extends React.Component {
   render() {
-    const { t, district = [], settlements = [], updateDistrict } = this.props;
+    const { t, district, settlements = [], updateDistrict } = this.props;
     return (
       <FormPageWrapper id="update-district-page" title={t('Edit district: {{name}}', { name: district.name })} back="/districts">
         <Helmet title={t('Edit district: {{name}}', { name: district.name })} />
@@ -47,7 +47,7 @@ export default class DistrictUpdatePage extends React.Component {
         <div id="settlements-table" className={styles.table}>
           <Table
             columns={[
-              { key: 'settlements', title: t('settlements') },
+              { key: 'name', title: t('settlement name') },
               { key: 'type', title: t('type') },
               { key: 'koatuu', title: t('koatuu') },
               { key: 'mountain_group', title: t('mountain group') },
@@ -55,15 +55,15 @@ export default class DistrictUpdatePage extends React.Component {
             data={(settlements || [])
               .sort((a, b) => a.name.localeCompare(b.name))
               .map(item => ({
-                settlements: (<div className={styles.name}>
-                  <name
+                name: (<div className={styles.name}>
+                  <Button
                     id={`edit-settlements-button-${item.name}`}
                     theme="link"
                     color="red"
-                    to={`/streets?settlement_name=${item.name}&settlement_id=${item.id}`}
+                    to={`/settlements/${item.id}`}
                   >
                     {item.name}
-                  </name>
+                  </Button>
                 </div>),
                 type: <div className={styles.name}>
                   {item.type}
@@ -79,7 +79,7 @@ export default class DistrictUpdatePage extends React.Component {
           />
         </div>
         <div className={styles.block}>
-          <Button to={`/settlements?region=${this.props.params.region}&district=${this.props.params.district}`}>{t('Show all settlements')}</Button>
+          <Button to={`/settlements?district_id=${district.id}&region_id=${district.region_id}`}>{t('Show all settlements')}</Button>
         </div>
       </FormPageWrapper>
     );

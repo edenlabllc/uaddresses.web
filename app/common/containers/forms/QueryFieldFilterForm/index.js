@@ -18,9 +18,9 @@ export default class QueryFieldFilterForm extends React.Component {
     };
   }
   render() {
-    const { data, name, disabled, placeholder, t } = this.props;
+    const { data, name, handleSubmit, disabled, placeholder, t } = this.props;
     return (
-      <form>
+      <form handleSubmit={handleSubmit}>
         <div>
           <Field
             searchable

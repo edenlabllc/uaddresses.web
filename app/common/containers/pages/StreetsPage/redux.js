@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { handleAction, createAction } from 'redux-actions';
 import * as fromStreets from 'redux/streets';
-import { fetchDistrictByID } from 'redux/districts';
+import { fetchDistrictsByRegionId } from 'redux/districts';
 import * as fromSettlements from 'redux/settlements';
 
 export const getRegionDistricts = createAction('streetsPage/GET_REGION_DISTRICTS');
@@ -22,7 +22,7 @@ export const fetchStreets = options => dispatch =>
       });
 
 export const fetchDistrictByRegion = id => dispatch =>
-  dispatch(fetchDistrictByID(id, { limit: 100 })).then((action) => {
+  dispatch(fetchDistrictsByRegionId(id, { limit: 100 })).then((action) => {
     if (action.error) throw action;
     return dispatch(getRegionDistricts(action.payload.result));
   });

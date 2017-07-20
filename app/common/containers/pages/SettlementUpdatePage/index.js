@@ -8,22 +8,22 @@ import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
 import FormPageWrapper from 'containers/blocks/FormPageWrapper';
 import SettlementForm from 'containers/forms/SettlementForm';
 
-import { getSettlement } from 'reducers';
-import { updateSettlement } from 'redux/settlements';
-import { settlement_type } from 'helpers/dictionaries';
+import Button from '@components/Button';
 
-import { fetchSettlement } from './redux';
+import { getSettlement } from 'reducers';
+import { updateSettlement, fetchSettlementById } from 'redux/settlements';
+import { settlement_type } from 'helpers/dictionaries';
 
 import styles from './styles.scss';
 
 @translate()
 @withStyles(styles)
 @provideHooks({
-  fetch: ({ dispatch, params: { name } }) =>
-    dispatch(fetchSettlement({ name })),
+  fetch: ({ dispatch, params: { id } }) =>
+    dispatch(fetchSettlementById(id)),
 })
-@connect(state => ({
-  settlement: getSettlement(state, state.pages.SettlementUpdatePage.settlement[0]),
+@connect((state, { params: { id } }) => ({
+  settlement: getSettlement(state, id),
 }), { updateSettlement })
 export default class SettlementUpdatePage extends React.Component {
   render() {
@@ -49,6 +49,9 @@ export default class SettlementUpdatePage extends React.Component {
             onSubmit={values => updateSettlement(settlement.id, values)}
             edit
           />
+        </div>
+        <div className={styles.block}>
+          <Button to={`/streets?settlement_id=${settlement.id}`}>{t('Show all streets')}</Button>
         </div>
       </FormPageWrapper>
     );
