@@ -43,11 +43,12 @@ export default class DistrictsPage extends React.Component {
     return (
       <div id="districts-page">
         <Helmet title={t('Districts')} />
-        <H1>{t(`Область ${this.state.selected ? this.state.selected : ''}`)}</H1>
+        <H1>{t('Districts')}</H1>
         <FormRow>
           <FormColumn>
             <QueryFieldFilterForm
               name="region"
+              placeholder={t('Choose region')}
               form="district-filter-form"
               initialValues={location.query.region && ({
                 region: {
@@ -56,9 +57,7 @@ export default class DistrictsPage extends React.Component {
                 },
               })}
               onChange={(region) => {
-                this.setState({
-                  selected: region.region.title,
-                });
+                this.setState({ selected: region.region.title });
                 return filterParams({ region: region.region.title }, this.props);
               }}
               data={regions}
@@ -71,6 +70,7 @@ export default class DistrictsPage extends React.Component {
             <FieldFilterForm
               name="name"
               form="districts_name_form"
+              placeholder={t('Enter district name')}
               initialValues={location.query}
               onSubmit={({ name }) => filterParams({ name }, this.props)}
               submitBtn
@@ -80,6 +80,7 @@ export default class DistrictsPage extends React.Component {
             <FieldFilterForm
               name="koatuu"
               form="districts_koatuu_form"
+              placeholder={t('Enter koatuu')}
               initialValues={location.query}
               onSubmit={({ koatuu }) => filterParams({ koatuu }, this.props)}
               submitBtn

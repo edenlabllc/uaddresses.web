@@ -4,18 +4,13 @@ import { withRouter } from 'react-router';
 import { translate } from 'react-i18next';
 import { provideHooks } from 'redial';
 import Helmet from 'react-helmet';
-import { filterParams } from 'helpers/url';
 import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
 
 import { H1 } from '@components/Title';
 import Table from '@components/Table';
 import Button from '@components/Button';
-import { FormRow, FormColumn } from '@components/Form';
-import QueryFieldFilterForm from 'containers/forms/QueryFieldFilterForm';
 
-// import Pagination from 'components/CursorPagination';
-
-import { getRegions, getAllRegions } from 'reducers';
+import { getRegions } from 'reducers';
 import { fetchRegions } from './redux';
 
 import styles from './styles.scss';
@@ -30,33 +25,15 @@ import styles from './styles.scss';
 @connect(state => ({
   ...state.pages.RegionsPage,
   regions: getRegions(state, state.pages.RegionsPage.regions),
-  regionsList: getAllRegions(state),
 }))
 export default class RegionsPage extends React.Component {
   render() {
-    const { regions = [], regionsList = [], t, location } = this.props;
+    const { regions = [], t } = this.props;
 
     return (
       <div id="roles-page">
         <Helmet title={t('Regions')} />
         <H1>{ t('Regions') }</H1>
-        <FormRow>
-          <FormColumn>
-            <QueryFieldFilterForm
-              name="region"
-              form="region-filter-form"
-              initialValues={location.query.name && ({
-                region: {
-                  name: regionsList.filter(i => i.name === location.query.name)[0].id,
-                  title: location.query.name,
-                },
-              })}
-              onChange={region => filterParams({ name: region.region.title }, this.props)}
-              data={regionsList}
-            />
-          </FormColumn>
-          <FormColumn />
-        </FormRow>
         <div id="regions-table" className={styles.table}>
           <Table
             columns={[
@@ -94,16 +71,6 @@ export default class RegionsPage extends React.Component {
             <Button to="/regions/create">{t('Create new region')}</Button>
           </div>
         }
-
-        {/* <div className={styles.pagination}>
-          <Pagination
-            location={location}
-            more={paging.has_more}
-            after={paging.cursors.starting_after}
-            before={paging.cursors.ending_before}
-          />
-        </div> */}
-
       </div>
     );
   }

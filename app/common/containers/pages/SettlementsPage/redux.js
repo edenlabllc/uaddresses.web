@@ -9,7 +9,7 @@ export const pagingSettlements = createAction('settlementsPage/ADD_PAGING');
 
 export const fetchSettlements = options => dispatch =>
   Object.keys(options).length &&
-  dispatch(fromSettlements.fetchSettlements({ ...options, limit: 100 }))
+  dispatch(fromSettlements.fetchSettlements({ ...options, limit: 20 }))
     .then((action) => {
       if (action.error) throw action;
       return [

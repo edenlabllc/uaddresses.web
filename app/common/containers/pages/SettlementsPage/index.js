@@ -72,6 +72,7 @@ export default class SettlementsPage extends React.Component {
             <QueryFieldFilterForm
               name="region"
               form="region-filter-form"
+              placeholder={t('Choose region')}
               initialValues={location.query.region && ({
                 region: {
                   name: regionsAll.filter(i => i.name === location.query.region)[0].id,
@@ -88,6 +89,7 @@ export default class SettlementsPage extends React.Component {
           <FormColumn>
             <QueryFieldFilterForm
               name="district"
+              placeholder={t('Choose district')}
               disabled={districtsFromRegion.length === 0}
               form="district-filter-form"
               onChange={({ district }) =>
@@ -147,14 +149,12 @@ export default class SettlementsPage extends React.Component {
               </div>
             }
             <div className={styles.pagination}>
-              {
-                false && <Pagination
-                  location={location}
-                  more={paging.has_more}
-                  after={paging.cursors.starting_after}
-                  before={paging.cursors.ending_before}
-                />
-              }
+              <Pagination
+                location={location}
+                more={paging.has_more}
+                after={paging.cursors.starting_after}
+                before={paging.cursors.ending_before}
+              />
             </div>
           </div>
         }

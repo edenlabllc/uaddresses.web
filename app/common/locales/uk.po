@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2017-07-19 17:51+0300\n"
-"PO-Revision-Date: 2017-07-19 17:51+0300\n"
+"POT-Creation-Date: 2017-07-20 13:23+0300\n"
+"PO-Revision-Date: 2017-07-20 13:24+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: uk\n"
@@ -53,7 +53,7 @@ msgid "Zaopizhzhya district"
 msgstr "Запорізький район"
 
 msgid "Koatuu"
-msgstr ""
+msgstr "КОАТУУ"
 
 msgid "Saving..."
 msgstr "Збереження…"
@@ -73,19 +73,11 @@ msgstr "Ви впевнені?"
 msgid "Are you sure want to delete this district?"
 msgstr "Ви впевнені, що хочете видалити цей райой?"
 
-#, fuzzy
-#| msgid "Choose {{name}}"
-msgid "Enter {{name}}"
-msgstr "Оберіть {{name}}"
-
 msgid "Search"
 msgstr "Пошук"
 
 msgid "Not found"
 msgstr "Даних не знайдено"
-
-msgid "Choose {{name}}"
-msgstr "Оберіть {{name}}"
 
 msgid "Zaopizhzhya region"
 msgstr ""
@@ -126,11 +118,20 @@ msgstr ""
 msgid "head-description"
 msgstr ""
 
+msgid "Choose region"
+msgstr "Оберіть область"
+
+msgid "Enter district name"
+msgstr "Введіть назву району"
+
+msgid "Enter koatuu"
+msgstr "Введіть КОАТУУ"
+
 msgid "districts name"
 msgstr "Назви районів"
 
 msgid "koatuu"
-msgstr ""
+msgstr "КОАТУУ"
 
 msgid "region"
 msgstr "область"
@@ -147,8 +148,6 @@ msgstr "Створити новий район"
 msgid "Edit district: {{name}}"
 msgstr "Редагування району  {{name}}"
 
-#, fuzzy
-#| msgid "Settlements"
 msgid "settlements"
 msgstr "Населені пункти"
 
@@ -185,6 +184,9 @@ msgstr "Редагування області:  {{name}}"
 msgid "Show all districts"
 msgstr "Показати всі райони"
 
+msgid "Choose district"
+msgstr "Оберіть район"
+
 msgid "settlements name"
 msgstr "Населені пункти"
 
@@ -203,8 +205,19 @@ msgstr ""
 msgid "Enter with EHEALTH"
 msgstr "Ввійти через EHEALTH"
 
+msgid "Choose settlement"
+msgstr "Оберіть населений пункт"
+
 msgid "street name"
 msgstr "Назва вулиці"
 
 msgid "Create new street"
 msgstr "Створити нову вулицю"
+
+#~ msgid "Choose {{name}}"
+#~ msgstr "Оберіть {{name}}"
+
+#, fuzzy
+#~| msgid "Choose {{name}}"
+#~ msgid "Enter {{name}}"
+#~ msgstr "Оберіть {{name}}"
