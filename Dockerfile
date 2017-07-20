@@ -9,7 +9,7 @@ RUN apk add --update \
     python
 
 COPY package.json /tmp/package.json
-RUN cd /tmp && npm install --production && mkdir -p /opt/app && cp -a /tmp/node_modules /opt/app/
+RUN cd /tmp && npm install --production --quiet && mkdir -p /opt/app && cp -a /tmp/node_modules /opt/app/
 
 WORKDIR /opt/app
 
