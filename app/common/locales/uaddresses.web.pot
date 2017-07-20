@@ -1,4 +1,3 @@
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
@@ -6,11 +5,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
-"POT-Creation-Date: 2017-07-19 17:51+0300\n"
-"PO-Revision-Date: 2017-07-19T14:51:05.262Z\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"X-Generator: Poedit 2.0.2\n"
+"POT-Creation-Date: 2017-07-20T09:53:54.345Z\n"
+"PO-Revision-Date: 2017-07-20T09:53:54.345Z\n"
 
 msgid "1234567890"
 msgstr ""
@@ -162,7 +158,7 @@ msgstr ""
 msgid "Requested page not found. Maybe you are looking for"
 msgstr ""
 
-msgid "Go to dashboard"
+msgid "Go to home page"
 msgstr ""
 
 msgid "Regions name"

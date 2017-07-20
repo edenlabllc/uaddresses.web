@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: i18next-conv\n"
-"POT-Creation-Date: 2017-07-19 17:51+0300\n"
-"PO-Revision-Date: 2017-07-19 17:51+0300\n"
+"POT-Creation-Date: 2017-07-20 12:54+0200\n"
+"PO-Revision-Date: 2017-07-20 12:55+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: uk\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 2.0.2\n"
+"X-Generator: Poedit 1.8.1\n"
 
 msgid "1234567890"
 msgstr ""
@@ -53,7 +53,7 @@ msgid "Zaopizhzhya district"
 msgstr "Запорізький район"
 
 msgid "Koatuu"
-msgstr ""
+msgstr "КОАТУУ"
 
 msgid "Saving..."
 msgstr "Збереження…"
@@ -73,10 +73,8 @@ msgstr "Ви впевнені?"
 msgid "Are you sure want to delete this district?"
 msgstr "Ви впевнені, що хочете видалити цей райой?"
 
-#, fuzzy
-#| msgid "Choose {{name}}"
 msgid "Enter {{name}}"
-msgstr "Оберіть {{name}}"
+msgstr "Введіть {{name}}"
 
 msgid "Search"
 msgstr "Пошук"
@@ -130,7 +128,7 @@ msgid "districts name"
 msgstr "Назви районів"
 
 msgid "koatuu"
-msgstr ""
+msgstr "КОАТУУ"
 
 msgid "region"
 msgstr "область"
@@ -147,8 +145,6 @@ msgstr "Створити новий район"
 msgid "Edit district: {{name}}"
 msgstr "Редагування району  {{name}}"
 
-#, fuzzy
-#| msgid "Settlements"
 msgid "settlements"
 msgstr "Населені пункти"
 
@@ -167,7 +163,7 @@ msgstr "Сторінка не знайдена"
 msgid "Requested page not found. Maybe you are looking for"
 msgstr "Запитувана сторінка не знайдена."
 
-msgid "Go to dashboard"
+msgid "Go to home page"
 msgstr "Перейти на головну"
 
 msgid "Regions name"
@@ -198,7 +194,7 @@ msgid "Sign in"
 msgstr "Ввійти"
 
 msgid "Auth error {{code}}"
-msgstr ""
+msgstr "Помилка входу: {{code}}"
 
 msgid "Enter with EHEALTH"
 msgstr "Ввійти через EHEALTH"
@@ -208,3 +204,6 @@ msgstr "Назва вулиці"
 
 msgid "Create new street"
 msgstr "Створити нову вулицю"
+
+#~ msgid "Go to dashboard"
+#~ msgstr "Перейти на головну"

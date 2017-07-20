@@ -4,6 +4,7 @@ import { Route, IndexRoute, IndexRedirect } from 'react-router';
 
 import App from 'containers/layouts/App';
 import Main from 'containers/layouts/Main';
+import PreloadData from 'containers/layouts/PreloadData';
 
 import RegionsPage from 'containers/pages/RegionsPage';
 // import RegionCreatePage from 'containers/pages/RegionCreatePage';
@@ -50,8 +51,8 @@ export const configureRoutes = ({ store }) => { // eslint-disable-line
 
   return (
     <Route component={App}>
-      <Route component={Main} onEnter={requireAuth}>
-        <Route path="/">
+      <Route path="/" component={Main} onEnter={requireAuth}>
+        <Route component={PreloadData}>
           <IndexRedirect to="/regions" />
           <Route path="regions">
             <IndexRoute component={RegionsPage} />
@@ -70,9 +71,10 @@ export const configureRoutes = ({ store }) => { // eslint-disable-line
           </Route>
         </Route>
       </Route>
-
       <Route path="sign-in" component={SignInPage} />
-      <Route path="*" component={NotFoundPage} />
+      <Route component={Main}>
+        <Route path="*" component={NotFoundPage} />
+      </Route>
     </Route>
   );
 };
