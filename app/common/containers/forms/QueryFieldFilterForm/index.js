@@ -23,7 +23,7 @@ export default class QueryFieldFilterForm extends React.Component {
       <form>
         <div>
           <Field
-            // searchable
+            searchable
             disabled={disabled}
             type="text"
             name={name}
