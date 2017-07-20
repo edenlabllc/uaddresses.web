@@ -48,7 +48,7 @@ export default class DistrictsPage extends React.Component {
           <FormColumn>
             <QueryFieldFilterForm
               name="region"
-              placeholder={t('Choose region')}
+              placeholder={t('Enter region')}
               form="district-filter-form"
               initialValues={location.query.region && ({
                 region: {

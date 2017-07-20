@@ -72,7 +72,7 @@ export default class SettlementsPage extends React.Component {
             <QueryFieldFilterForm
               name="region"
               form="region-filter-form"
-              placeholder={t('Choose region')}
+              placeholder={t('Enter region')}
               initialValues={location.query.region && ({
                 region: {
                   name: regionsAll.filter(i => i.name === location.query.region)[0].id,
@@ -89,7 +89,7 @@ export default class SettlementsPage extends React.Component {
           <FormColumn>
             <QueryFieldFilterForm
               name="district"
-              placeholder={t('Choose district')}
+              placeholder={t('Enter district')}
               disabled={districtsFromRegion.length === 0}
               form="district-filter-form"
               onChange={({ district }) =>

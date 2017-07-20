@@ -91,7 +91,7 @@ export default class StreetsPage extends React.Component {
             <QueryFieldFilterForm
               name="region"
               form="region-filter-form"
-              placeholder={t('Choose region')}
+              placeholder={t('Enter region')}
               onChange={({ region }) => onSelectRegion(region.name)}
               data={regionsAll}
             />
@@ -99,7 +99,7 @@ export default class StreetsPage extends React.Component {
           <FormColumn>
             <QueryFieldFilterForm
               name="district"
-              placeholder={t('Choose district')}
+              placeholder={t('Enter district')}
               disabled={districtsFromRegion.length === 0}
               form="district-filter-form"
               onChange={({ district }) => district && onSelectDistrict(district.title)}
@@ -110,7 +110,7 @@ export default class StreetsPage extends React.Component {
             <QueryFieldFilterForm
               name="settlement"
               form="settlement-filter-form"
-              placeholder={t('Choose settlement')}
+              placeholder={t('Enter settlement')}
               disabled={settlements.length === 0}
               onChange={({ settlement }) =>
               settlement && filterParams({ settlement_id: settlement.name }, this.props, true)

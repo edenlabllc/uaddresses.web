@@ -22,7 +22,7 @@ export const CLIENT_ID = config.CLIENT_ID || process.env.CLIENT_ID || '0423bab7-
 export const SCOPES = config.SCOPES || process.env.SCOPES || 'address:read address:write';
 export const OAUTH_URL = config.OAUTH_URL || process.env.OAUTH_URL || 'http://auth.dev.ehealth.world/sign-in';
 export const OAUTH_REDIRECT_PATH = config.OAUTH_REDIRECT_PATH || process.env.OAUTH_REDIRECT_PATH || '/auth/redirect';
-export const OAUTH_REDIRECT_URL = config.OAUTH_REDIRECT_URL || `${HOSTNAME}${OAUTH_REDIRECT_PATH}`;
+export const OAUTH_REDIRECT_URL = config.OAUTH_REDIRECT_URL || process.env.OAUTH_REDIRECT_URL || `${HOSTNAME}${OAUTH_REDIRECT_PATH}`;
 
 export const API_PROXY_PATH = '/api';
 

@@ -117,7 +117,7 @@ msgstr ""
 msgid "head-description"
 msgstr ""
 
-msgid "Choose region"
+msgid "Enter region"
 msgstr ""
 
 msgid "Enter district name"
@@ -165,7 +165,7 @@ msgstr ""
 msgid "Requested page not found. Maybe you are looking for"
 msgstr ""
 
-msgid "Go to dashboard"
+msgid "Go to home page"
 msgstr ""
 
 msgid "Regions name"
@@ -183,7 +183,7 @@ msgstr ""
 msgid "Show all districts"
 msgstr ""
 
-msgid "Choose district"
+msgid "Enter district"
 msgstr ""
 
 msgid "settlements name"
@@ -204,7 +204,7 @@ msgstr ""
 msgid "Enter with EHEALTH"
 msgstr ""
 
-msgid "Choose settlement"
+msgid "Enter settlement"
 msgstr ""
 
 msgid "street name"

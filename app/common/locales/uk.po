@@ -118,8 +118,8 @@ msgstr ""
 msgid "head-description"
 msgstr ""
 
-msgid "Choose region"
-msgstr "Оберіть область"
+msgid "Enter region"
+msgstr "Введіть область"
 
 msgid "Enter district name"
 msgstr "Введіть назву району"
@@ -166,7 +166,7 @@ msgstr "Сторінка не знайдена"
 msgid "Requested page not found. Maybe you are looking for"
 msgstr "Запитувана сторінка не знайдена."
 
-msgid "Go to dashboard"
+msgid "Go to home page"
 msgstr "Перейти на головну"
 
 msgid "Regions name"
@@ -184,8 +184,8 @@ msgstr "Редагування області:  {{name}}"
 msgid "Show all districts"
 msgstr "Показати всі райони"
 
-msgid "Choose district"
-msgstr "Оберіть район"
+msgid "Enter district"
+msgstr "Введіть район"
 
 msgid "settlements name"
 msgstr "Населені пункти"
@@ -200,24 +200,16 @@ msgid "Sign in"
 msgstr "Ввійти"
 
 msgid "Auth error {{code}}"
-msgstr ""
+msgstr "Помилка входу: {{code}}"
 
 msgid "Enter with EHEALTH"
 msgstr "Ввійти через EHEALTH"
 
-msgid "Choose settlement"
-msgstr "Оберіть населений пункт"
+msgid "Enter settlement"
+msgstr "Введіть населений пункт"
 
 msgid "street name"
 msgstr "Назва вулиці"
 
 msgid "Create new street"
 msgstr "Створити нову вулицю"
-
-#~ msgid "Choose {{name}}"
-#~ msgstr "Оберіть {{name}}"
-
-#, fuzzy
-#~| msgid "Choose {{name}}"
-#~ msgid "Enter {{name}}"
-#~ msgstr "Оберіть {{name}}"
