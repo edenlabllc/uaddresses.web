@@ -25,6 +25,8 @@ export const OAUTH_REDIRECT_PATH = config.OAUTH_REDIRECT_PATH || process.env.OAU
 export const OAUTH_REDIRECT_URL = config.OAUTH_REDIRECT_URL || process.env.OAUTH_REDIRECT_URL || `${HOSTNAME}${OAUTH_REDIRECT_PATH}`;
 
 export const PUBLIC_INDEX_ROUTE = '/sign-in';
+export const PRIVATE_INDEX_ROUTE = '/regions';
+
 export const API_PROXY_PATH = '/api';
 
 // for internal app usage. for example for XHR requests or server side rendering
