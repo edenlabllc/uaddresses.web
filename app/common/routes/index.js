@@ -29,6 +29,7 @@ import { PUBLIC_INDEX_ROUTE } from 'config';
 export const configureRoutes = ({ store }) => { // eslint-disable-line
   const requireAuth = (nextState, replace, next) =>
     store.dispatch(isLoginned()).then((loginned) => {
+      console.log('is loginned', loginned);
       if (!loginned) {
         replace({ pathname: PUBLIC_INDEX_ROUTE });
         return next();
@@ -37,9 +38,11 @@ export const configureRoutes = ({ store }) => { // eslint-disable-line
       const currentState = store.getState();
       const person = getOAuthUser(currentState);
 
+      console.log('person', person);
       if (person) return next();
 
       return store.dispatch(fetchRegions()).then((action) => {
+        console.log('fetch regions', action);
         if (action.error) {
           store.dispatch(logout());
           replace({ pathname: PUBLIC_INDEX_ROUTE });
@@ -52,7 +55,7 @@ export const configureRoutes = ({ store }) => { // eslint-disable-line
   return (
     <Route component={App}>
       <IndexRedirect to="regions" />
-      <Route path="/" component={Main} onEnter={requireAuth}>
+      <Route component={Main} onEnter={requireAuth}>
         <Route component={PreloadData}>
           <Route path="regions">
             <IndexRoute component={RegionsPage} />

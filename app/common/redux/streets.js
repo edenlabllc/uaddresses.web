@@ -8,7 +8,7 @@ import { invoke } from './api';
 
 export const fetchStreets = ({ ...options, limit = 10 } = {}, { useCache = false } = {}) =>
 invoke({
-  endpoint: createUrl(`${API_URL}/search/streets`, { ...options, limit }),
+  endpoint: createUrl(`${API_URL}/streets`, { ...options, limit }),
   method: 'GET',
   headers: {
     'content-type': 'application/json',

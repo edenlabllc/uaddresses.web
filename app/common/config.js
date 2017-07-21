@@ -30,4 +30,4 @@ export const PRIVATE_INDEX_ROUTE = '/regions';
 export const API_PROXY_PATH = '/api';
 
 // for internal app usage. for example for XHR requests or server side rendering
-export const API_URL = typeof window !== 'undefined' ? API_PROXY_PATH : API_ENDPOINT;
+export const API_URL = __CLIENT__ ? API_PROXY_PATH : API_ENDPOINT;
