@@ -5,6 +5,8 @@ import { provideHooks } from 'redial';
 import Helmet from 'react-helmet';
 import withStyles from 'withStyles';
 
+import { settlement_type } from 'helpers/dictionaries';
+
 import Table from '@components/Table';
 import Button from '@components/Button';
 
@@ -71,7 +73,7 @@ export default class DistrictUpdatePage extends React.Component {
                   </Button>
                 </div>),
                 type: <div className={styles.name}>
-                  {item.type}
+                  {settlement_type[item.type]}
                 </div>,
                 koatuu: <div className={styles.name}>
                   {item.koatuu}
