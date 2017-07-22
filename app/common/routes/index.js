@@ -39,7 +39,7 @@ export const configureRoutes = ({ store }) => { // eslint-disable-line
 
       if (person) return next();
 
-      return store.dispatch(fetchRegions()).then((action) => {
+      return store.dispatch(fetchRegions({ limit: 0 })).then((action) => {
         if (action.error) {
           store.dispatch(logout());
           replace({ pathname: PUBLIC_INDEX_ROUTE });
@@ -51,9 +51,9 @@ export const configureRoutes = ({ store }) => { // eslint-disable-line
 
   return (
     <Route component={App}>
-      <IndexRedirect to="regions" />
-      <Route path="/" component={Main} onEnter={requireAuth}>
-        <Route component={PreloadData}>
+      <Route component={Main} onEnter={requireAuth}>
+        <Route path="/" component={PreloadData}>
+          <IndexRedirect to="regions" />
           <Route path="regions">
             <IndexRoute component={RegionsPage} />
             <Route path=":id" component={RegionUpdatePage} />
