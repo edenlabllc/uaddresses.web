@@ -139,7 +139,6 @@ export default class SettlementsPage extends React.Component {
                       <Button
                         id={`settlements-button-${item.name}`}
                         theme="link"
-                        inheritColor
                         disabled={!selectedDistrict}
                         color="red"
                         to={`/streets?region_id=${selectedRegion && selectedRegion.id}&district_id=${selectedDistrict && selectedDistrict.id}&settlement_id=${item.id}`}
