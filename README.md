@@ -5,7 +5,7 @@
 
 [![Build history](https://buildstats.info/travisci/chart/Nebo15/uaddresses.web)](https://travis-ci.org/Nebo15/uaddresses.web)
 
-API: https://github.com/Nebo15/uaddresses.api
+API: https://github.com/edenlabllc/uaddresses.api
 
 
 ## Demo
@@ -17,7 +17,7 @@ Try it here: http://uaddresses-web.herokuapp.com/
 
 ### Heroku One-Click Deployment
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/nebo15/uaddresses.web)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/edenlabllc/uaddresses.web)
 
 ### Docker
 
@@ -35,7 +35,7 @@ Application supports these environment variables:
 
 ## Docs
 
-Dashboard works on top of [UAddresses management API](http://docs.uaddress.apiary.io/).
+Dashboard works on top of [UAddresses management API](http://docs.uaddressesapi.apiary.io/).
 
 ## Technologies
 
