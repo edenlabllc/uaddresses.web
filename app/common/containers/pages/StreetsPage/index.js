@@ -97,7 +97,7 @@ export default class StreetsPage extends React.Component {
               onChange={({ region = {} }) => {
                 reset('district-filter-form');
                 reset('settlement-filter-form');
-                filterParams({ region_id: region.name, district_id: '', settlement_id: '' }, this.props, true);
+                return filterParams({ region_id: region.name }, this.props, true);
               }}
               initialValues={{
                 region: selectedRegion && ({
@@ -114,9 +114,10 @@ export default class StreetsPage extends React.Component {
               placeholder={t('Enter district')}
               disabled={districts.length === 0}
               form="district-filter-form"
-              onChange={({ district = {} }) => {
+              onChange={({ district }) => {
                 reset('settlement-filter-form');
-                filterParams({ district_id: district.name }, this.props);
+                console.log('district', district);
+                district && filterParams({ district_id: district.name }, this.props);
               }}
               initialValues={{
                 district: selectedDistrict && ({
@@ -133,7 +134,7 @@ export default class StreetsPage extends React.Component {
               form="settlement-filter-form"
               placeholder={t('Enter settlement')}
               disabled={settlements.length === 0}
-              onChange={({ settlement = {} }) =>
+              onChange={({ settlement }) =>
                 settlement && filterParams({ settlement_id: settlement.name }, this.props)
               }
               initialValues={{

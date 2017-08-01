@@ -24,7 +24,6 @@ export const filterParams = (filter, { router, location }, withClear = false) =>
 
     return target;
   }, { });
-
   router.push({
     ...location,
     query,
