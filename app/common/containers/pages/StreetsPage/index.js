@@ -116,7 +116,6 @@ export default class StreetsPage extends React.Component {
               form="district-filter-form"
               onChange={({ district }) => {
                 reset('settlement-filter-form');
-                console.log('district', district);
                 district && filterParams({ district_id: district.name }, this.props);
               }}
               initialValues={{
