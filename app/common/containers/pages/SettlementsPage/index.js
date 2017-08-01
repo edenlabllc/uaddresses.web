@@ -137,10 +137,11 @@ export default class SettlementsPage extends React.Component {
                   .map(item => ({
                     settlements: (<div className={styles.name}>
                       <Button
-                        id={`edit-settlements-button-${item.name}`}
+                        id={`settlements-button-${item.name}`}
                         theme="link"
+                        disabled={!selectedDistrict}
                         color="red"
-                        to={`/settlements/${item.id}`}
+                        to={`/streets?region_id=${selectedRegion && selectedRegion.id}&district_id=${selectedDistrict && selectedDistrict.id}&settlement_id=${item.id}`}
                       >
                         {item.name}
                       </Button>
