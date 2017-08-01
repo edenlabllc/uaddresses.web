@@ -97,7 +97,7 @@ export default class StreetsPage extends React.Component {
               onChange={({ region = {} }) => {
                 reset('district-filter-form');
                 reset('settlement-filter-form');
-                return filterParams({ region_id: region.name }, this.props, true);
+                filterParams({ region_id: region.name }, this.props, true);
               }}
               initialValues={{
                 region: selectedRegion && ({
