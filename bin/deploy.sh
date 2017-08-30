@@ -1,4 +1,6 @@
 #!/bin/bash
+set -e 
+
 if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
 	  if [ "$TRAVIS_BRANCH" == "$RELEASE_BRANCH" ]; then
 ## install kubectl
@@ -16,8 +18,8 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
 			git clone https://$GITHUB_TOKEN@github.com/edenlabllc/ehealth.charts.git
 			cd ehealth.charts
 #get version and project name
-			PROJECT_NAME=$(sed -n 's/.*app: :\([^, ]*\).*/\1/pg' "$TRAVIS_BUILD_DIR/mix.exs")
-			PROJECT_VERSION=$(cat "${PROJECT_DIR}/package.json" \
+			#PROJECT_NAME=$(sed -n 's/.*app: :\([^, ]*\).*/\1/pg' "$TRAVIS_BUILD_DIR/mix.exs")
+			PROJECT_VERSION=$(cat "${TRAVIS_BUILD_DIR}/package.json" \
   				| grep version \
  			    | head -1 \
   				| awk -F: '{ print $2 }' \
