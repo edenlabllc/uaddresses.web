@@ -12,27 +12,23 @@ export const setStreets = createAction('streetsPage/SET_STREETS');
 
 export const pagingStreets = createAction('streetsPage/ADD_PAGING');
 
-export const fetchStreets = ({ settlement_id, ending_before, starting_after }) =>
+export const fetchStreets = ({ settlement_id, page }) =>
 (dispatch, getState) => {
   const state = getState();
   const settlement = settlement_id && getSettlement(state, settlement_id);
   if (!settlement) return null;
-  return dispatch(fromStreets.fetchStreets({
-    starting_after,
-    ending_before,
-    settlement_id,
-    limit: 20,
-  })).then((action) => {
-    if (action.error) throw action;
-    return [
-      dispatch(setStreets(action.payload.result)),
-      dispatch(pagingStreets(action.meta)),
-    ];
-  });
+  return dispatch(fromStreets.fetchStreets({ settlement_id, page }))
+    .then((action) => {
+      if (action.error) throw action;
+      return [
+        dispatch(setStreets(action.payload.result)),
+        dispatch(pagingStreets(action.meta)),
+      ];
+    });
 };
 
 export const fetchDistrictByRegion = id => dispatch =>
-  dispatch(fetchDistrictsByRegionId(id, { limit: 100 })).then((action) => {
+  dispatch(fetchDistrictsByRegionId(id, { page_size: 100 })).then((action) => {
     if (action.error) throw action;
     return dispatch(setRegionDistricts(action.payload.result));
   });
@@ -46,7 +42,7 @@ export const fetchSettlements = ({ region_id, district_id }) => (dispatch, getSt
   return dispatch(fromSettlements.fetchSettlements({
     region: region.name,
     district: district.district,
-    limit: 100,
+    page_size: 100,
   })).then((action) => {
     if (action.error) return action;
     dispatch(setSettlements(action.payload.result));

@@ -6,9 +6,9 @@ import { settlement } from 'schemas';
 
 import { invoke } from './api';
 
-export const fetchSettlements = ({ ...options, limit = 10 } = {}, { useCache = false } = {}) =>
+export const fetchSettlements = (options, { useCache = false } = {}) =>
 invoke({
-  endpoint: createUrl(`${API_URL}/settlements`, { ...options }),
+  endpoint: createUrl(`${API_URL}/settlements`, { page_size: 10, ...options }),
   method: 'GET',
   headers: {
     'content-type': 'application/json',

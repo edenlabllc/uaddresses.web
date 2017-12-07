@@ -37,23 +37,17 @@ import styles from './styles.scss';
 @withStyles(styles)
 @translate()
 @provideHooks({
-  fetch: ({ dispatch, location: { query: {
-    region_id,
-    district_id,
-    settlement_id,
-    page,
-    page_size = 5
-  } } }) => Promise.all([
-    dispatch(fetchRegions()),
-    region_id && dispatch(fetchDistrictByRegion(region_id)),
-  ]).then(() => district_id && dispatch(fetchSettlements({ district_id, region_id })))
-  .then(() => settlement_id && dispatch(fetchStreets({
-    region_id,
-    district_id,
-    settlement_id,
-    page,
-    page_size,
-  }))).catch(() => {}),
+  fetch: ({
+    dispatch,
+    location: { query: { region_id, district_id, settlement_id, page } }
+  }) =>
+    Promise.all([
+      dispatch(fetchRegions()),
+      region_id && dispatch(fetchDistrictByRegion(region_id)),
+    ])
+      .then(() => district_id && dispatch(fetchSettlements({ district_id, region_id })))
+      .then(() => settlement_id && dispatch(fetchStreets({ settlement_id, page })))
+      .catch(() => {}),
 })
 @connect(
   (state, { location: { query: { settlement_id, region_id, district_id } } }) => ({

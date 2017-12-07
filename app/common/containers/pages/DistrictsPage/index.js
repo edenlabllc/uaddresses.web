@@ -24,8 +24,8 @@ import styles from './styles.scss';
 @withStyles(styles)
 @translate()
 @provideHooks({
-  fetch: ({ dispatch, location: { query: { name, koatuu, region_id } } }) =>
-    dispatch(fetchDistricts({ name, koatuu, region_id })),
+  fetch: ({ dispatch, location: { query: { name, koatuu, region_id, page } } }) =>
+    dispatch(fetchDistricts({ name, koatuu, region_id, page })),
 })
 @connect((state, { location: { query: { region_id } } }) => ({
   ...state.pages.DistrictsPage,
@@ -138,13 +138,11 @@ export default class DistrictsPage extends React.Component {
                 </div>
               )
             }
-            {
-              false && <Pagination
-                currentPage={paging.page_number}
-                totalPages={paging.total_pages}
-                location={location}
-              />
-            }
+            <Pagination
+              currentPage={paging.page_number}
+              totalPages={paging.total_pages}
+              location={location}
+            />
           </div>
 
         }

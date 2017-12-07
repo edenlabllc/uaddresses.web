@@ -30,7 +30,7 @@ import styles from './styles.scss';
   fetch: ({
     dispatch,
     getState,
-    location: { query: { region_id, district_id, page, page_size = 5 } },
+    location: { query: { region_id, district_id, page } },
   }) =>
     (region_id ? dispatch(fetchDistrictByRegion(region_id)) : Promise.resolve())
     .then(() => {
@@ -42,8 +42,7 @@ import styles from './styles.scss';
       return dispatch(fetchSettlements({
         district: district && district.district,
         region: region && region.name,
-        page,
-        page_size,
+        page
       }));
     }).catch(() => {}),
 })

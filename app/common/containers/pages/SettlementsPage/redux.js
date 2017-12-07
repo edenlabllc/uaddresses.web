@@ -9,7 +9,7 @@ export const pagingSettlements = createAction('settlementsPage/ADD_PAGING');
 
 export const fetchSettlements = options => dispatch =>
   Object.keys(options).length &&
-  dispatch(fromSettlements.fetchSettlements({ ...options, limit: 10 }))
+  dispatch(fromSettlements.fetchSettlements({ ...options, page_size: 10 }))
     .then((action) => {
       if (action.error) return action;
       return [
@@ -19,14 +19,14 @@ export const fetchSettlements = options => dispatch =>
     });
 
 export const fetchDistrictByRegion = id => dispatch =>
-  dispatch(fromDistricts.fetchDistrictsByRegionId(id, { limit: 100 })).then((action) => {
+  dispatch(fromDistricts.fetchDistrictsByRegionId(id, { page_size: 100 })).then((action) => {
     if (action.error) return action;
     return dispatch(setRegionDistricts(action.payload.result));
   });
 
 export const fetchDistricts = region => dispatch =>
   Object.keys(region).length &&
-    dispatch(fromDistricts.fetchDistricts({ ...region, limit: 100 })).then((action) => {
+    dispatch(fromDistricts.fetchDistricts({ ...region, page_size: 100 })).then((action) => {
       if (action.error) return action;
       return dispatch(setRegionDistricts(action.payload.result));
     });

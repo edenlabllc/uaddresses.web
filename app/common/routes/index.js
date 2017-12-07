@@ -39,7 +39,7 @@ export const configureRoutes = ({ store }) => { // eslint-disable-line
 
       if (person) return next();
 
-      return store.dispatch(fetchRegions({ limit: 0 })).then((action) => {
+      return store.dispatch(fetchRegions({ page_size: 0 })).then((action) => {
         if (action.error) {
           store.dispatch(logout());
           replace({ pathname: PUBLIC_INDEX_ROUTE });

@@ -6,7 +6,7 @@ import * as fromSettlements from 'redux/settlements';
 export const setSettlements = createAction('districtUpdate/GET_SETTLEMENTS');
 
 export const fetchSettlements = options => dispatch =>
-  dispatch(fromSettlements.fetchSettlements({ ...options, limit: 10 }))
+  dispatch(fromSettlements.fetchSettlements({ ...options, page_size: 10 }))
     .then((action) => {
       if (action.error) throw action;
       return dispatch(setSettlements(action.payload.result));
