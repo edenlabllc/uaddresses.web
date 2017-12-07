@@ -17,7 +17,7 @@ import { FormRow, FormColumn } from '@components/Form';
 import { fetchRegions } from 'redux/regions';
 
 import QueryFieldFilterForm from 'containers/forms/QueryFieldFilterForm';
-import Pagination from 'components/CursorPagination';
+import Pagination from 'components/Pagination';
 
 import {
   getAllRegions,
@@ -41,8 +41,8 @@ import styles from './styles.scss';
     region_id,
     district_id,
     settlement_id,
-    starting_after,
-    ending_before,
+    page,
+    page_size = 5
   } } }) => Promise.all([
     dispatch(fetchRegions()),
     region_id && dispatch(fetchDistrictByRegion(region_id)),
@@ -51,8 +51,8 @@ import styles from './styles.scss';
     region_id,
     district_id,
     settlement_id,
-    starting_after,
-    ending_before,
+    page,
+    page_size,
   }))).catch(() => {}),
 })
 @connect(
@@ -76,7 +76,7 @@ export default class StreetsPage extends React.Component {
       settlements = [],
       streets = [],
       location = [],
-      paging = [],
+      paging,
       t,
       reset,
       selectedRegion,
@@ -173,16 +173,11 @@ export default class StreetsPage extends React.Component {
               </div>
             )
           }
-          {
-            false && <div className={styles.pagination}>
-              <Pagination
-                location={location}
-                more={paging.has_more}
-                after={paging.cursors.starting_after}
-                before={paging.cursors.ending_before}
-              />
-            </div>
-          }
+          <Pagination
+            currentPage={paging.page_number}
+            totalPages={paging.total_pages}
+            location={location}
+          />
         </div>
       </div>
     );

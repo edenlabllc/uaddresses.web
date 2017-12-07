@@ -13,7 +13,7 @@ import Button from '@components/Button';
 import { FormRow, FormColumn } from '@components/Form';
 import QueryFieldFilterForm from 'containers/forms/QueryFieldFilterForm';
 import FieldFilterForm from 'containers/forms/FieldFilterForm';
-import Pagination from 'components/CursorPagination';
+import Pagination from 'components/Pagination';
 
 import { getDistricts, getAllRegions, getRegion } from 'reducers';
 import { fetchDistricts } from './redux';
@@ -139,14 +139,11 @@ export default class DistrictsPage extends React.Component {
               )
             }
             {
-              false && <div className={styles.pagination}>
-                <Pagination
-                  location={location}
-                  more={paging.has_more}
-                  after={paging.cursors.starting_after}
-                  before={paging.cursors.ending_before}
-                />
-              </div>
+              false && <Pagination
+                currentPage={paging.page_number}
+                totalPages={paging.total_pages}
+                location={location}
+              />
             }
           </div>
 
