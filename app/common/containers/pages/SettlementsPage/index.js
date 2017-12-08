@@ -42,7 +42,7 @@ import styles from './styles.scss';
       return dispatch(fetchSettlements({
         district: district && district.district,
         region: region && region.name,
-        page
+        page,
       }));
     }).catch(() => {}),
 })

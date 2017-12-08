@@ -39,7 +39,7 @@ import styles from './styles.scss';
 @provideHooks({
   fetch: ({
     dispatch,
-    location: { query: { region_id, district_id, settlement_id, page } }
+    location: { query: { region_id, district_id, settlement_id, page } },
   }) =>
     Promise.all([
       dispatch(fetchRegions()),
