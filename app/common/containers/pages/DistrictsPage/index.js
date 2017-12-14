@@ -13,7 +13,7 @@ import Button from '@components/Button';
 import { FormRow, FormColumn } from '@components/Form';
 import QueryFieldFilterForm from 'containers/forms/QueryFieldFilterForm';
 import FieldFilterForm from 'containers/forms/FieldFilterForm';
-import Pagination from 'components/CursorPagination';
+import Pagination from 'components/Pagination';
 
 import { getDistricts, getAllRegions, getRegion } from 'reducers';
 import { fetchDistricts } from './redux';
@@ -24,8 +24,8 @@ import styles from './styles.scss';
 @withStyles(styles)
 @translate()
 @provideHooks({
-  fetch: ({ dispatch, location: { query: { name, koatuu, region_id } } }) =>
-    dispatch(fetchDistricts({ name, koatuu, region_id })),
+  fetch: ({ dispatch, location: { query: { name, koatuu, region_id, page } } }) =>
+    dispatch(fetchDistricts({ name, koatuu, region_id, page })),
 })
 @connect((state, { location: { query: { region_id } } }) => ({
   ...state.pages.DistrictsPage,
@@ -138,16 +138,11 @@ export default class DistrictsPage extends React.Component {
                 </div>
               )
             }
-            {
-              false && <div className={styles.pagination}>
-                <Pagination
-                  location={location}
-                  more={paging.has_more}
-                  after={paging.cursors.starting_after}
-                  before={paging.cursors.ending_before}
-                />
-              </div>
-            }
+            <Pagination
+              currentPage={paging.page_number}
+              totalPages={paging.total_pages}
+              location={location}
+            />
           </div>
 
         }

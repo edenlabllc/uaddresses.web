@@ -17,7 +17,7 @@ import { FormRow, FormColumn } from '@components/Form';
 import { fetchRegions } from 'redux/regions';
 
 import QueryFieldFilterForm from 'containers/forms/QueryFieldFilterForm';
-import Pagination from 'components/CursorPagination';
+import Pagination from 'components/Pagination';
 
 import {
   getAllRegions,
@@ -37,23 +37,17 @@ import styles from './styles.scss';
 @withStyles(styles)
 @translate()
 @provideHooks({
-  fetch: ({ dispatch, location: { query: {
-    region_id,
-    district_id,
-    settlement_id,
-    starting_after,
-    ending_before,
-  } } }) => Promise.all([
-    dispatch(fetchRegions()),
-    region_id && dispatch(fetchDistrictByRegion(region_id)),
-  ]).then(() => district_id && dispatch(fetchSettlements({ district_id, region_id })))
-  .then(() => settlement_id && dispatch(fetchStreets({
-    region_id,
-    district_id,
-    settlement_id,
-    starting_after,
-    ending_before,
-  }))).catch(() => {}),
+  fetch: ({
+    dispatch,
+    location: { query: { region_id, district_id, settlement_id, page } },
+  }) =>
+    Promise.all([
+      dispatch(fetchRegions()),
+      region_id && dispatch(fetchDistrictByRegion(region_id)),
+    ])
+      .then(() => district_id && dispatch(fetchSettlements({ district_id, region_id })))
+      .then(() => settlement_id && dispatch(fetchStreets({ settlement_id, page })))
+      .catch(() => {}),
 })
 @connect(
   (state, { location: { query: { settlement_id, region_id, district_id } } }) => ({
@@ -76,7 +70,7 @@ export default class StreetsPage extends React.Component {
       settlements = [],
       streets = [],
       location = [],
-      paging = [],
+      paging,
       t,
       reset,
       selectedRegion,
@@ -173,16 +167,11 @@ export default class StreetsPage extends React.Component {
               </div>
             )
           }
-          {
-            false && <div className={styles.pagination}>
-              <Pagination
-                location={location}
-                more={paging.has_more}
-                after={paging.cursors.starting_after}
-                before={paging.cursors.ending_before}
-              />
-            </div>
-          }
+          <Pagination
+            currentPage={paging.page_number}
+            totalPages={paging.total_pages}
+            location={location}
+          />
         </div>
       </div>
     );

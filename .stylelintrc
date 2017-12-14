@@ -1,11 +1,6 @@
 {
-  "extends": "stylelint-config-standard",
-  "rules": {
-    "selector-pseudo-class-no-unknown": [true, {
-      ignorePseudoClasses: [
-        "global",
-        "local"
-      ],
-    }] 
-  }
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-css-modules"
+  ]
 }
