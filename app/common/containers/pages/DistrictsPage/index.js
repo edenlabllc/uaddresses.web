@@ -40,7 +40,7 @@ export default class DistrictsPage extends React.Component {
       districts = [],
       regions = [],
       selectedRegion,
-      location: { query },
+      location,
       t,
       paging,
     } = this.props;
@@ -75,7 +75,7 @@ export default class DistrictsPage extends React.Component {
               name="name"
               form="districts_name_form"
               placeholder={t('Enter district name')}
-              initialValues={{ name: query.name }}
+              initialValues={{ name: location.query.name }}
               onSubmit={({ name }) => filterParams({ name }, this.props)}
               submitBtn
             />
@@ -85,7 +85,7 @@ export default class DistrictsPage extends React.Component {
               name="koatuu"
               form="districts_koatuu_form"
               placeholder={t('Enter koatuu')}
-              initialValues={{ koatuu: query.koatuu }}
+              initialValues={{ koatuu: location.query.koatuu }}
               onSubmit={({ koatuu }) => filterParams({ koatuu }, this.props)}
               submitBtn
             />
