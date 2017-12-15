@@ -69,7 +69,7 @@ export default class StreetsPage extends React.Component {
       districts = [],
       settlements = [],
       streets = [],
-      location = [],
+      location,
       paging,
       t,
       reset,
