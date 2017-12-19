@@ -25,6 +25,12 @@ export default class Pagination extends Component {
     currentPage: this.props.currentPage
   };
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.currentPage !== this.props.currentPage) {
+      this.setState({ currentPage: nextProps.currentPage });
+    }
+  }
+
   render() {
     const { totalPages } = this.props;
     const { currentPage } = this.state;
