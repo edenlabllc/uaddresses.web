@@ -14,7 +14,7 @@ import Button from '@components/Button';
 import { FormRow, FormColumn } from '@components/Form';
 
 import QueryFieldFilterForm from 'containers/forms/QueryFieldFilterForm';
-import Pagination from 'components/CursorPagination';
+import Pagination from 'components/Pagination';
 import YesNo from 'components/YesNo';
 import { settlement_type } from 'helpers/dictionaries';
 
@@ -30,7 +30,7 @@ import styles from './styles.scss';
   fetch: ({
     dispatch,
     getState,
-    location: { query: { region_id, district_id, starting_after, ending_before } },
+    location: { query: { region_id, district_id, page } },
   }) =>
     (region_id ? dispatch(fetchDistrictByRegion(region_id)) : Promise.resolve())
     .then(() => {
@@ -42,8 +42,7 @@ import styles from './styles.scss';
       return dispatch(fetchSettlements({
         district: district && district.district,
         region: region && region.name,
-        starting_after,
-        ending_before,
+        page,
       }));
     }).catch(() => {}),
 })
@@ -170,16 +169,11 @@ export default class SettlementsPage extends React.Component {
                 <Button to="/regions/create">{t('Create new settlements')}</Button>
               </div>
             }
-            {
-              <div className={styles.pagination}>
-                <Pagination
-                  location={location}
-                  more={paging.has_more}
-                  after={paging.cursors.starting_after}
-                  before={paging.cursors.ending_before}
-                />
-              </div>
-            }
+            <Pagination
+              currentPage={paging.page_number}
+              totalPages={paging.total_pages}
+              location={location}
+            />
           </div>
         }
       </div>

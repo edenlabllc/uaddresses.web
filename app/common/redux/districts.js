@@ -6,9 +6,9 @@ import { district } from 'schemas';
 
 import { invoke } from './api';
 
-export const fetchDistricts = ({ ...options, limit = 10 } = {}, { useCache = false } = {}) =>
+export const fetchDistricts = (options, { useCache = false } = {}) =>
   invoke({
-    endpoint: createUrl(`${API_URL}/districts`, { ...options, limit }),
+    endpoint: createUrl(`${API_URL}/districts`, { page_size: 10, ...options }),
     method: 'GET',
     headers: {
       'content-type': 'application/json',
@@ -25,8 +25,8 @@ export const fetchDistricts = ({ ...options, limit = 10 } = {}, { useCache = fal
     }, 'districts/FETCH_DISTRICTS_FAILURE'],
   });
 
-export const fetchDistrictsByRegionId = (id, { ...options, limit = 10 } = {}) => invoke({
-  endpoint: createUrl(`${API_URL}/details/region/${id}/districts`, { ...options, ...limit }),
+export const fetchDistrictsByRegionId = (id, options) => invoke({
+  endpoint: createUrl(`${API_URL}/details/region/${id}/districts`, { page_size: 10, ...options }),
   method: 'GET',
   headers: {
     'content-type': 'application/json',

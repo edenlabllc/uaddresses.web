@@ -12,20 +12,23 @@ export const createUrl = (endpoint, options) => {
 };
 
 export const filterParams = (filter, { router, location }, withClear = false) => {
-  const newFilter = withClear ? { ...filter } : {
-    ...location.query,
+  const { query: { page, ...query } } = location; // eslint-disable-line
+
+  const newFilter = withClear ? filter : {
+    ...query,
     ...filter,
   };
 
-  const query = Object.keys(newFilter).reduce((target, key) => {
+  const newQuery = Object.keys(newFilter).reduce((target, key) => {
     if (newFilter[key]) {
       target[key] = newFilter[key]; // eslint-disable-line
     }
 
     return target;
-  }, { });
+  }, {});
+
   router.push({
     ...location,
-    query,
+    query: newQuery,
   });
 };
