@@ -32,3 +32,5 @@ export const filterParams = (filter, { router, location }, withClear = false) =>
     query: newQuery,
   });
 };
+
+export const stripProtocol = url => url && url.replace(/(^\w+:|^)\/\//, '');
