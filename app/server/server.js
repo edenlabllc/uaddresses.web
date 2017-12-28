@@ -39,6 +39,7 @@ Object.keys(assets).forEach((key) => {
 server.locals.resources = resources;
 
 server.locals.CONFIG = escape(JSON.stringify(config));
+server.enable('trust proxy');
 
 server.use(cookieParser());
 server.use(i18nextMiddleware.handle(i18next));
