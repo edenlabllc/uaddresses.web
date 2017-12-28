@@ -41,7 +41,7 @@ export default class SettlementUpdatePage extends React.Component {
               ...settlement,
               type: {
                 name: Object.keys(settlement_type).filter(i =>
-                  settlement_type[i] === settlement.type),
+                  i === settlement.type),
                 title: Object.values(settlement_type).filter(i =>
                   settlement_type[settlement.type] === i),
               },

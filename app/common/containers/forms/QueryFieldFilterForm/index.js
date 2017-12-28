@@ -18,7 +18,20 @@ export default class QueryFieldFilterForm extends React.Component {
     };
   }
   render() {
-    const { data, name, handleSubmit, disabled, placeholder, t } = this.props;
+    const {
+      data,
+      shouldSortData = true,
+      name,
+      handleSubmit,
+      disabled,
+      placeholder,
+      t,
+    } = this.props;
+
+    if (shouldSortData) {
+      data.sort((a, b) => a.name.localeCompare(b.name));
+    }
+
     return (
       <form handleSubmit={handleSubmit}>
         <div>
@@ -33,7 +46,8 @@ export default class QueryFieldFilterForm extends React.Component {
             onChangeSearch={val => this.setState({ active: val })}
             options={
               data
-                .filter(i => new RegExp(this.state.active).test(i.name) === true)
+                .filter(i =>
+                  new RegExp(this.state.active.toLowerCase()).test(i.name.toLowerCase()) === true)
                 .map(i => ({
                   name: i.id,
                   title: i.name,

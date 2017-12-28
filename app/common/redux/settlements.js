@@ -73,7 +73,7 @@ export const updateSettlement = (id, body) => invoke({
   body: {
     settlement: {
       ...body,
-      type: body.type.name,
+      type: Array.isArray(body.type.name) ? body.type.name[0] : body.type.name,
     },
   },
 });
