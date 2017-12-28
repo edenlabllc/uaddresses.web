@@ -20,7 +20,6 @@ import StreetsPage from 'containers/pages/StreetsPage';
 import SignInPage from 'containers/pages/SignInPage';
 import NotFoundPage from 'containers/pages/NotFoundPage';
 
-import { fetchRegions } from 'redux/regions';
 import { verifyToken, getToken } from 'redux/session';
 import { isAuthorized } from 'reducers';
 
@@ -38,11 +37,6 @@ export const configureRoutes = ({ store }) => { // eslint-disable-line
       const { error } = await store.dispatch(verifyToken(token));
       if (error) {
         replace({ pathname: PUBLIC_INDEX_ROUTE });
-      } else {
-        const { error } = await store.dispatch(fetchRegions({ page_size: 0 }));
-        if (error) {
-          replace({ pathname: PUBLIC_INDEX_ROUTE });
-        }
       }
     }
 
