@@ -38,10 +38,14 @@ router.get(config.OAUTH_REDIRECT_PATH, (req, resp) => {
     }
 
     resp.cookie(config.AUTH_COOKIE_NAME, data.value, cookieOption);
-    resp.cookie('userId', data.user_id);
 
     resp.redirect(config.PRIVATE_INDEX_ROUTE);
   });
+});
+
+router.delete('/logout', (req, resp) => {
+  resp.clearCookie(config.AUTH_COOKIE_NAME);
+  resp.status(204).send();
 });
 
 export default router;
