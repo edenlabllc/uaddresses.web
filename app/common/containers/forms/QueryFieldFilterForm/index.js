@@ -47,7 +47,7 @@ export default class QueryFieldFilterForm extends React.Component {
             options={
               data
                 .filter(i =>
-                  new RegExp(this.state.active.toLowerCase()).test(i.name.toLowerCase()) === true)
+                  i.name.toLowerCase().includes(this.state.active.toLowerCase()))
                 .map(i => ({
                   name: i.id,
                   title: i.name,
