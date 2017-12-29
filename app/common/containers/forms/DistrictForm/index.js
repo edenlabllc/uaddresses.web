@@ -25,6 +25,8 @@ const getValues = getFormValues('district-form');
     },
     koatuu: {
       required: true,
+      numeric: true,
+      maxLength: 10,
     },
   }),
 })
