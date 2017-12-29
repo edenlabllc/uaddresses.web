@@ -36,6 +36,8 @@ const settlement_type = {
     },
     koatuu: {
       required: true,
+      numeric: true,
+      maxLength: 10,
     },
     type: {
       required: true,
