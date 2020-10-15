@@ -14,7 +14,17 @@ import styles from './styles.scss';
 })
 export default class FieldFilterForm extends React.Component {
   render() {
-    const { handleSubmit, submitting, t, name, submitBtn, label, placeholder } = this.props;
+    const {
+      handleSubmit,
+      submitting,
+      t,
+      name,
+      submitBtn,
+      label,
+      placeholder,
+      disabled,
+    } = this.props;
+
     return (
       <form className={styles.main} onSubmit={handleSubmit}>
         <div>
@@ -24,12 +34,13 @@ export default class FieldFilterForm extends React.Component {
             component={FieldInput}
             labelText={label}
             placeholder={placeholder}
+            disabled={disabled}
           />
         </div>
         {
           submitBtn && (
             <div>
-              <button className={styles.button} disabled={submitting} type="submit">
+              <button className={styles.button} disabled={disabled || submitting} type="submit">
                 { t('Search') }
               </button>
             </div>
