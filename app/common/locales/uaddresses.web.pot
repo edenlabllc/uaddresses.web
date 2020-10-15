@@ -218,3 +218,15 @@ msgstr ""
 msgctxt "group"
 msgid "mountain"
 msgstr ""
+
+msgid "Street type"
+msgstr ""
+
+msgid "Enter street name"
+msgstr ""
+
+msgid "Enter settlement name"
+msgstr ""
+
+msgid "Show all"
+msgstr ""
