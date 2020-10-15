@@ -25,6 +25,8 @@ export default class QueryFieldFilterForm extends React.Component {
       handleSubmit,
       disabled,
       placeholder,
+      searchable = true,
+      emptyOption,
       t,
     } = this.props;
 
@@ -32,11 +34,24 @@ export default class QueryFieldFilterForm extends React.Component {
       data.sort((a, b) => a.name.localeCompare(b.name));
     }
 
+    const filteredData = data
+      .filter(i =>
+        i.name.toLowerCase().includes(this.state.active.toLowerCase())
+      )
+      .map(i => ({
+        name: i.id,
+        title: i.name,
+      }));
+
+    const options = emptyOption
+      ? [{ name: '', title: emptyOption }, ...filteredData]
+      : filteredData;
+
     return (
       <form handleSubmit={handleSubmit}>
         <div>
           <Field
-            searchable
+            searchable={searchable}
             disabled={disabled}
             type="text"
             name={name}
@@ -44,15 +59,7 @@ export default class QueryFieldFilterForm extends React.Component {
             emptyText={t('Not found')}
             placeholder={placeholder}
             onChangeSearch={val => this.setState({ active: val })}
-            options={
-              data
-                .filter(i =>
-                  i.name.toLowerCase().includes(this.state.active.toLowerCase()))
-                .map(i => ({
-                  name: i.id,
-                  title: i.name,
-                }))
-            }
+            options={options}
           />
         </div>
       </form>
