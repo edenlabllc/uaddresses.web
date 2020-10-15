@@ -13,6 +13,7 @@ import Table from '@components/Table';
 import Button from '@components/Button';
 import { FormRow, FormColumn } from '@components/Form';
 
+import FieldFilterForm from 'containers/forms/FieldFilterForm';
 import QueryFieldFilterForm from 'containers/forms/QueryFieldFilterForm';
 import Pagination from 'components/Pagination';
 import YesNo from 'components/YesNo';
@@ -30,7 +31,7 @@ import styles from './styles.scss';
   fetch: ({
     dispatch,
     getState,
-    location: { query: { region_id, district_id, page } },
+    location: { query: { region_id, district_id, name, koatuu, type, page } },
   }) =>
     (region_id ? dispatch(fetchDistrictByRegion(region_id)) : Promise.resolve())
     .then(() => {
@@ -42,6 +43,9 @@ import styles from './styles.scss';
       return dispatch(fetchSettlements({
         district: district && district.district,
         region: region && region.name,
+        name,
+        koatuu,
+        type,
         page,
       }));
     }).catch(() => {}),
@@ -71,6 +75,8 @@ export default class SettlementsPage extends React.Component {
       selectedDistrict,
     } = this.props;
 
+    const settlementType = location.query.type;
+
     return (
       <div id="settlements-page">
         <Helmet title={t('Settlements')} />
@@ -89,7 +95,7 @@ export default class SettlementsPage extends React.Component {
               }}
               onChange={({ region }) => {
                 setTimeout(() => {
-                  filterParams({ region_id: region.name, district_id: '' }, this.props, true);
+                  filterParams({ region_id: region.name, district_id: '' }, this.props);
                   reset('district-filter-form');
                 });
               }}
@@ -116,6 +122,53 @@ export default class SettlementsPage extends React.Component {
               data={districts.map(i => ({
                 id: i.id,
                 name: i.district,
+              }))}
+            />
+          </FormColumn>
+        </FormRow>
+        <FormRow>
+          <FormColumn>
+            <div className={styles['inputs-сontainer']}>
+              <FieldFilterForm
+                name="name"
+                form="settlements_name_form"
+                placeholder={t('Enter settlement name')}
+                initialValues={{ name: location.query.name }}
+                onSubmit={({ name }) => filterParams({ name }, this.props)}
+                submitBtn
+              />
+            </div>
+          </FormColumn>
+          <FormColumn>
+            <div className={styles['inputs-сontainer']}>
+              <FieldFilterForm
+                name="koatuu"
+                form="settlements_koatuu_form"
+                placeholder={t('Enter koatuu')}
+                initialValues={{ koatuu: location.query.koatuu }}
+                onSubmit={({ koatuu }) => filterParams({ koatuu }, this.props)}
+                submitBtn
+              />
+            </div>
+          </FormColumn>
+          <FormColumn>
+            <QueryFieldFilterForm
+              searchable={false}
+              name="type"
+              placeholder={t('settlement type')}
+              form="settlements_type_form"
+              onChange={({ type }) => filterParams({ type: type.name }, this.props)}
+              initialValues={{
+                type: settlementType && {
+                  name: settlementType,
+                  title: settlement_type[settlementType],
+                },
+              }}
+              emptyOption={t('Show all')}
+              shouldSortData={false}
+              data={Object.keys(settlement_type).map(id => ({
+                id,
+                name: settlement_type[id],
               }))}
             />
           </FormColumn>
