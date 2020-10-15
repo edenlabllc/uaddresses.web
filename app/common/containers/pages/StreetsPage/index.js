@@ -16,6 +16,7 @@ import { FormRow, FormColumn } from '@components/Form';
 
 import { fetchRegions } from 'redux/regions';
 
+import FieldFilterForm from 'containers/forms/FieldFilterForm';
 import QueryFieldFilterForm from 'containers/forms/QueryFieldFilterForm';
 import Pagination from 'components/Pagination';
 
@@ -39,14 +40,14 @@ import styles from './styles.scss';
 @provideHooks({
   fetch: ({
     dispatch,
-    location: { query: { region_id, district_id, settlement_id, page } },
+    location: { query: { region_id, district_id, settlement_id, name, type, page } },
   }) =>
     Promise.all([
       dispatch(fetchRegions()),
       region_id && dispatch(fetchDistrictByRegion(region_id)),
     ])
       .then(() => district_id && dispatch(fetchSettlements({ district_id, region_id })))
-      .then(() => settlement_id && dispatch(fetchStreets({ settlement_id, page })))
+      .then(() => settlement_id && dispatch(fetchStreets({ settlement_id, name, type, page })))
       .catch(() => {}),
 })
 @connect(
@@ -77,6 +78,8 @@ export default class StreetsPage extends React.Component {
       selectedDistrict,
       selectedSettlement,
     } = this.props;
+
+    const steetType = location.query.type;
 
     return (
       <div id="streets-page">
@@ -137,6 +140,43 @@ export default class StreetsPage extends React.Component {
                 }),
               }}
               data={settlements}
+            />
+          </FormColumn>
+        </FormRow>
+        <FormRow>
+          <FormColumn>
+            <div className={styles['inputs-сontainer']}>
+              <FieldFilterForm
+                disabled={!selectedSettlement}
+                name="name"
+                form="street_name_form"
+                placeholder={t('Enter street name')}
+                initialValues={{ name: location.query.name }}
+                onSubmit={({ name }) => filterParams({ name }, this.props)}
+                submitBtn
+              />
+            </div>
+          </FormColumn>
+          <FormColumn>
+            <QueryFieldFilterForm
+              disabled={!selectedSettlement}
+              searchable={false}
+              name="type"
+              placeholder={t('Street type')}
+              form="street_type_form"
+              onChange={({ type }) => filterParams({ type: type.name }, this.props)}
+              initialValues={{
+                type: steetType && {
+                  name: steetType,
+                  title: street_types[steetType],
+                },
+              }}
+              emptyOption={t('Show all')}
+              shouldSortData={false}
+              data={Object.keys(street_types).map(id => ({
+                id,
+                name: street_types[id],
+              }))}
             />
           </FormColumn>
         </FormRow>

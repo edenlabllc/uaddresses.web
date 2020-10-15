@@ -12,12 +12,12 @@ export const setStreets = createAction('streetsPage/SET_STREETS');
 
 export const pagingStreets = createAction('streetsPage/ADD_PAGING');
 
-export const fetchStreets = ({ settlement_id, page }) =>
+export const fetchStreets = ({ settlement_id, ...options }) =>
 (dispatch, getState) => {
   const state = getState();
   const settlement = settlement_id && getSettlement(state, settlement_id);
   if (!settlement) return null;
-  return dispatch(fromStreets.fetchStreets({ settlement_id, page }))
+  return dispatch(fromStreets.fetchStreets({ settlement_id, ...options }))
     .then((action) => {
       if (action.error) throw action;
       return [
