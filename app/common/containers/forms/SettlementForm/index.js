@@ -17,7 +17,7 @@ import ConfirmFormChanges from 'containers/blocks/ConfirmFormChanges';
 
 import styles from './styles.scss';
 
-const getValues = getFormValues('district-form');
+const getValues = getFormValues('settlement-form');
 
 const settlement_type = {
   VILLAGE: 'село',
