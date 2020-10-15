@@ -224,5 +224,17 @@ msgctxt "group"
 msgid "mountain"
 msgstr "Гірська група"
 
+msgid "Street type"
+msgstr "Тип"
+
+msgid "Enter street name"
+msgstr "Введіть назву вулиці"
+
+msgid "Enter settlement name"
+msgstr "Введіть назву населеного пункту"
+
+msgid "Show all"
+msgstr "Показати все"
+
 #~ msgid "settlements"
 #~ msgstr "Населені пункти"
