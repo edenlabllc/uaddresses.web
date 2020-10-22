@@ -16,8 +16,6 @@ export default class SearchField extends React.Component {
     if (Array.isArray(data) && data.length) {
       this.setState({ data });
     }
-
-    return null;
   }
 
   componentDidUpdate(prevProps) {

@@ -58,7 +58,14 @@ export default class SettlementForm extends React.Component {
     };
   }
   onSubmit(values, ...args) {
-    return this.props.onSubmit(values, ...args).then((action) => {
+    const { mountain_group } = values;
+
+    const data = {
+      ...values,
+      mountain_group: Boolean(mountain_group),
+    };
+
+    return this.props.onSubmit(data, ...args).then((action) => {
       if (action.error) return action;
       this.setState({
         savedValues: values,
