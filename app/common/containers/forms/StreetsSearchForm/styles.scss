@@ -1,0 +1,30 @@
+.delimiter {
+  height: 1px;
+  background-color: #dedede;
+  margin: 15px 0;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 -1px;
+
+  .header {
+    width: 32%;
+  }
+
+  .footer {
+    display: flex;
+    flex: 1 1 auto;
+
+    .item,
+    .item-select {
+      width: 100%;
+      margin-right: 10px;
+    }
+
+    .item-select {
+      margin-top: -10px;
+    }
+  }
+}

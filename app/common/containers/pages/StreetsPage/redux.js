@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { combineReducers } from 'redux';
 import { handleAction, createAction } from 'redux-actions';
 import * as fromStreets from 'redux/streets';
@@ -5,6 +6,8 @@ import { fetchDistrictsByRegionId } from 'redux/districts';
 import * as fromSettlements from 'redux/settlements';
 
 import { getDistrict, getRegion, getSettlement } from 'reducers';
+
+const DEFAULT_PAGINATION = { page_number: 1, page_size: 20, total_entries: 0, total_pages: 1 };
 
 export const setRegionDistricts = createAction('streetsPage/SET_REGION_DISTRICTS');
 export const setSettlements = createAction('streetsPage/SET_SETTLEMENTS');
@@ -27,11 +30,18 @@ export const fetchStreets = ({ settlement_id, ...options }) =>
     });
 };
 
+export const clearStreets = () => dispatch => [
+  dispatch(setStreets([])),
+  dispatch(pagingStreets(DEFAULT_PAGINATION))
+];
+
 export const fetchDistrictByRegion = id => dispatch =>
   dispatch(fetchDistrictsByRegionId(id, { page_size: 100 })).then((action) => {
     if (action.error) throw action;
     return dispatch(setRegionDistricts(action.payload.result));
   });
+
+export const clearDistricts = () => dispatch => dispatch(setRegionDistricts([]));
 
 export const fetchSettlements = ({ region_id, district_id }) => (dispatch, getState) => {
   const state = getState();
@@ -50,6 +60,8 @@ export const fetchSettlements = ({ region_id, district_id }) => (dispatch, getSt
     return action;
   });
 };
+
+export const clearSettlements = () => dispatch => dispatch(setSettlements([]));
 
 const districts = handleAction(setRegionDistricts, (state, action) => action.payload, []);
 const settlements = handleAction(setSettlements, (state, action) => action.payload, []);
