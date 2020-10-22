@@ -4,16 +4,16 @@ import { withRouter } from 'react-router';
 import { translate } from 'react-i18next';
 import { provideHooks } from 'redial';
 import Helmet from 'react-helmet';
-import { filterParams } from 'helpers/url';
+import { getFormInitialValues } from 'helpers/getFormInitialValues';
+import { handleSearchFormSubmit } from 'helpers/handleSearchFormSubmit';
+import { sortData } from 'helpers/sortData';
 import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
 
 import { H1 } from '@components/Title';
 import Table from '@components/Table';
 import Button from '@components/Button';
-import { FormRow, FormColumn } from '@components/Form';
-import QueryFieldFilterForm from 'containers/forms/QueryFieldFilterForm';
-import FieldFilterForm from 'containers/forms/FieldFilterForm';
 import Pagination from 'components/Pagination';
+import DistrictsSearchForm from 'containers/forms/DistrictsSearchForm';
 
 import { getDistricts, getAllRegions, getRegion } from 'reducers';
 import { fetchDistricts } from './redux';
@@ -39,58 +39,25 @@ export default class DistrictsPage extends React.Component {
     const {
       districts = [],
       regions = [],
-      selectedRegion,
+      selectedRegion = '',
       location,
       t,
       paging,
     } = this.props;
 
+    const initialValues = getFormInitialValues({ selectedRegion, location });
+
     return (
       <div id="districts-page">
         <Helmet title={t('Districts')} />
         <H1>{t('Districts')}</H1>
-        <FormRow>
-          <FormColumn>
-            <QueryFieldFilterForm
-              name="region"
-              placeholder={t('Enter region')}
-              form="district-filter-form"
-              initialValues={{
-                region: selectedRegion && {
-                  name: selectedRegion.id,
-                  title: selectedRegion.name,
-                },
-              }}
-              onChange={({ region }) => setTimeout(() => {
-                filterParams({ region_id: region.name }, this.props);
-              })}
-              data={regions}
-            />
-          </FormColumn>
-          <FormColumn />
-        </FormRow>
-        <FormRow>
-          <FormColumn>
-            <FieldFilterForm
-              name="name"
-              form="districts_name_form"
-              placeholder={t('Enter district name')}
-              initialValues={{ name: location.query.name }}
-              onSubmit={({ name }) => filterParams({ name }, this.props)}
-              submitBtn
-            />
-          </FormColumn>
-          <FormColumn>
-            <FieldFilterForm
-              name="koatuu"
-              form="districts_koatuu_form"
-              placeholder={t('Enter koatuu')}
-              initialValues={{ koatuu: location.query.koatuu }}
-              onSubmit={({ koatuu }) => filterParams({ koatuu }, this.props)}
-              submitBtn
-            />
-          </FormColumn>
-        </FormRow>
+        <DistrictsSearchForm
+          form="districts-filter-form"
+          regions={sortData(regions)}
+          onSubmit={data => handleSearchFormSubmit(data, this.props)}
+          location={location}
+          initialValues={initialValues}
+        />
         {
           <div>
             <div id="district-table" className={styles.table}>
