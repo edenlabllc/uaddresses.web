@@ -5,22 +5,23 @@ import { translate } from 'react-i18next';
 import { provideHooks } from 'redial';
 import { reset } from 'redux-form';
 import Helmet from 'react-helmet';
-import { filterParams } from 'helpers/url';
+import { sortData } from 'helpers/sortData';
+import { getFormInitialValues } from 'helpers/getFormInitialValues';
+import { handleSearchFormSubmit } from 'helpers/handleSearchFormSubmit';
+
 import withStyles from 'nebo15-isomorphic-style-loader/lib/withStyles';
 
 import { H1 } from '@components/Title';
 import Table from '@components/Table';
 import Button from '@components/Button';
-import { FormRow, FormColumn } from '@components/Form';
 
-import FieldFilterForm from 'containers/forms/FieldFilterForm';
-import QueryFieldFilterForm from 'containers/forms/QueryFieldFilterForm';
+import SettlementsSearchForm from 'containers/forms/SettlementsSearchForm';
 import Pagination from 'components/Pagination';
 import YesNo from 'components/YesNo';
 import { settlement_type } from 'helpers/dictionaries';
 
 import { getSettlements, getAllRegions, getDistricts, getRegion, getDistrict } from 'reducers';
-import { fetchSettlements, fetchDistrictByRegion } from './redux';
+import { fetchSettlements, fetchDistrictByRegion, clearDistricts } from './redux';
 
 import styles from './styles.scss';
 
@@ -33,7 +34,7 @@ import styles from './styles.scss';
     getState,
     location: { query: { region_id, district_id, name, koatuu, type, page } },
   }) =>
-    (region_id ? dispatch(fetchDistrictByRegion(region_id)) : Promise.resolve())
+    (region_id ? dispatch(fetchDistrictByRegion(region_id)) : dispatch(clearDistricts()))
     .then(() => {
       // TODO: replace when API will receive
       // district_id and region_id as query  params instead of names
@@ -68,111 +69,33 @@ export default class SettlementsPage extends React.Component {
       regions = [],
       districts = [],
       location,
-      reset,
       paging,
       t,
-      selectedRegion,
-      selectedDistrict,
+      selectedRegion = '',
+      selectedDistrict = '',
     } = this.props;
 
-    const settlementType = location.query.type;
+    const initialValues = getFormInitialValues({ selectedRegion, selectedDistrict, location });
+    const settlementType = location.query.type || '';
 
     return (
       <div id="settlements-page">
         <Helmet title={t('Settlements')} />
         <H1>{t('Settlements')}</H1>
-        <FormRow>
-          <FormColumn>
-            <QueryFieldFilterForm
-              name="region"
-              form="region-filter-form"
-              placeholder={t('Enter region')}
-              initialValues={{
-                region: selectedRegion && {
-                  name: selectedRegion.id,
-                  title: selectedRegion.name,
-                },
-              }}
-              onChange={({ region }) => {
-                setTimeout(() => {
-                  filterParams({ region_id: region.name, district_id: '' }, this.props);
-                  reset('district-filter-form');
-                });
-              }}
-              data={regions}
-            />
-          </FormColumn>
-          <FormColumn>
-            <QueryFieldFilterForm
-              name="district"
-              placeholder={t('Enter district')}
-              disabled={districts.length === 0}
-              form="district-filter-form"
-              onChange={({ district }) => {
-                setTimeout(() => {
-                  filterParams({ district_id: district.name }, this.props);
-                });
-              }}
-              initialValues={{
-                district: selectedDistrict && {
-                  name: selectedDistrict.id,
-                  title: selectedDistrict.district,
-                },
-              }}
-              data={districts.map(i => ({
-                id: i.id,
-                name: i.district,
-              }))}
-            />
-          </FormColumn>
-        </FormRow>
-        <FormRow>
-          <FormColumn>
-            <div className={styles['inputs-сontainer']}>
-              <FieldFilterForm
-                name="name"
-                form="settlements_name_form"
-                placeholder={t('Enter settlement name')}
-                initialValues={{ name: location.query.name }}
-                onSubmit={({ name }) => filterParams({ name }, this.props)}
-                submitBtn
-              />
-            </div>
-          </FormColumn>
-          <FormColumn>
-            <div className={styles['inputs-сontainer']}>
-              <FieldFilterForm
-                name="koatuu"
-                form="settlements_koatuu_form"
-                placeholder={t('Enter koatuu')}
-                initialValues={{ koatuu: location.query.koatuu }}
-                onSubmit={({ koatuu }) => filterParams({ koatuu }, this.props)}
-                submitBtn
-              />
-            </div>
-          </FormColumn>
-          <FormColumn>
-            <QueryFieldFilterForm
-              searchable={false}
-              name="type"
-              placeholder={t('settlement type')}
-              form="settlements_type_form"
-              onChange={({ type }) => filterParams({ type: type.name }, this.props)}
-              initialValues={{
-                type: settlementType && {
-                  name: settlementType,
-                  title: settlement_type[settlementType],
-                },
-              }}
-              emptyOption={t('Show all')}
-              shouldSortData={false}
-              data={Object.keys(settlement_type).map(id => ({
-                id,
-                name: settlement_type[id],
-              }))}
-            />
-          </FormColumn>
-        </FormRow>
+        <SettlementsSearchForm
+          form="region-filter-form"
+          regions={sortData(regions)}
+          districts={sortData(districts, 'district')}
+          onSubmit={data => handleSearchFormSubmit(data, this.props)}
+          location={location}
+          initialValues={{
+            ...initialValues,
+            type: settlementType && {
+              name: settlementType,
+              title: settlement_type[settlementType],
+            },
+          }}
+        />
         {
           <div>
             <div id="settlements-table" className={styles.table}>
