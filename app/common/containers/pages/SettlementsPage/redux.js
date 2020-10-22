@@ -24,6 +24,8 @@ export const fetchDistrictByRegion = id => dispatch =>
     return dispatch(setRegionDistricts(action.payload.result));
   });
 
+export const clearDistricts = () => dispatch => dispatch(setRegionDistricts([]));
+
 export const fetchDistricts = region => dispatch =>
   Object.keys(region).length &&
     dispatch(fromDistricts.fetchDistricts({ ...region, page_size: 100 })).then((action) => {
