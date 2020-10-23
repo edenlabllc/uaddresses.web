@@ -61,6 +61,31 @@ export const fetchSettlements = ({ region_id, district_id }) => (dispatch, getSt
   });
 };
 
+export const fetchSettlementsSearch = ({
+  name,
+  settlement_id,
+  region_id,
+  district_id
+}) => (dispatch, getState) => {
+  const state = getState();
+  const region = getRegion(state, region_id) || {};
+  const district = getDistrict(state, district_id) || {};
+  const settlement =
+    (settlement_id && getSettlement(state, settlement_id)) || {};
+
+  return dispatch(
+    fromSettlements.fetchSettlements({
+      name: name || settlement.name,
+      region: region.name,
+      district: district.district,
+      page_size: 100
+    })
+  ).then(action => {
+    if (action.error) return action;
+    return dispatch(setSettlements(action.payload.result));
+  });
+};
+
 export const clearSettlements = () => dispatch => dispatch(setSettlements([]));
 
 const districts = handleAction(setRegionDistricts, (state, action) => action.payload, []);

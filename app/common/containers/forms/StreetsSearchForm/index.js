@@ -7,6 +7,7 @@ import FieldInput from '@components/reduxForm/FieldInput';
 import Button from 'components/Button';
 import { street_types } from 'helpers/dictionaries';
 import SearchField from '../SearchField';
+import SearchSettlementsField from '../SearchSettlementsField';
 
 import styles from './styles.scss';
 
@@ -21,7 +22,6 @@ export default class StreetsSearchForm extends React.Component {
       dispatch,
       regions,
       districts,
-      settlements,
       location,
       handleSubmit,
     } = this.props;
@@ -68,15 +68,11 @@ export default class StreetsSearchForm extends React.Component {
             />
           </div>
           <div className={styles.header}>
-            <SearchField
+            <SearchSettlementsField
               name="settlement_id"
               placeholder={t('Enter settlement')}
-              disabled={!settlements.length}
               location={location}
-              data={settlements.map(i => ({
-                name: i.id,
-                title: i.name,
-              }))}
+              data={[]}
               form={form}
               dispatch={dispatch}
               onChange={() => setTimeout(() => dispatch(submit(form)))}
