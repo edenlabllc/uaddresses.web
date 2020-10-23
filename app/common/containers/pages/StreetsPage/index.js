@@ -35,6 +35,7 @@ import {
   fetchStreets,
   fetchSettlements,
   fetchDistrictByRegion,
+  fetchSettlementsSearch,
   clearDistricts,
   clearSettlements,
   clearStreets,
@@ -57,8 +58,8 @@ import styles from './styles.scss';
         : dispatch(clearDistricts())
     ])
       .then(() =>
-        district_id
-          ? dispatch(fetchSettlements({ district_id, region_id }))
+        (region_id || settlement_id)
+          ? dispatch(fetchSettlementsSearch({ settlement_id, district_id, region_id }))
           : dispatch(clearSettlements())
       )
       .then(() =>
