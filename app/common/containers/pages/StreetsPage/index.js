@@ -130,16 +130,31 @@ export default class StreetsPage extends React.Component {
               columns={[
                 { key: 'name', title: t('street name') },
                 { key: 'type', title: t('type') },
+                { key: 'edit', title: t('Action') },
               ]}
               data={(streets || [])
                 .sort((a, b) => a.name.localeCompare(b.name))
                 .map(item => ({
                   name: (<div className={styles.name}>
-                    {item.name}
+                    <Button
+                      id={`edit-street-button-${item.name}`}
+                      theme="link"
+                      color="red"
+                      to={`/streets/${item.id}`}
+                    >
+                      {item.name}
+                    </Button>
                   </div>),
                   type: <div className={styles.name}>
                     {street_types[item.type]}
                   </div>,
+                  edit: (<Button
+                    id={`edit-street-button-${item.id}`}
+                    theme="link"
+                    to={`/streets/${item.id}`}
+                  >
+                    { t('Edit') }
+                  </Button>),
                 }))
               }
             />

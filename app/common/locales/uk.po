@@ -236,5 +236,11 @@ msgstr "Введіть назву населеного пункту"
 msgid "Show all"
 msgstr "Показати все"
 
+msgid "Update street"
+msgstr "Оновити вулицю"
+
+msgid "Edit street"
+msgstr "Редагування вулиці"
+
 #~ msgid "settlements"
 #~ msgstr "Населені пункти"
