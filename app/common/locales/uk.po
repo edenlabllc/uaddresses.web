@@ -242,5 +242,8 @@ msgstr "Оновити вулицю"
 msgid "Edit street"
 msgstr "Редагування вулиці"
 
+msgid "All rights reserved"
+msgstr "Всі права захищені"
+
 #~ msgid "settlements"
 #~ msgstr "Населені пункти"
