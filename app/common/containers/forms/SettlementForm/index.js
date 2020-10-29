@@ -132,8 +132,6 @@ export default class SettlementForm extends React.Component {
               <Button type="submit" disabled={!this.isChanged}>{
                 submitting ? t('Saving...') : (this.isChanged ? t('Update Settlement') : t('Saved'))
               }</Button>
-              <Button color="red" onClick={() => this.setState({ onDelete: true })}>{submitting ? t('Deleting...') : t('Delete Settlement')
-              }</Button>
             </ButtonsGroup>)
           }
           {
@@ -144,6 +142,7 @@ export default class SettlementForm extends React.Component {
             </ButtonsGroup>)
           }
         </FormButtons>
+        <div className={styles.delimiter} />
         <ConfirmFormChanges submitting={submitting} isChanged={this.isChanged} />
         <Confirm
           title={t('Are you sure?')}
