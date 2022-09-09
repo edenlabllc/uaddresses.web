@@ -1,4 +1,4 @@
-FROM nebo15/alpine-node:6.9.5
+FROM node:10.24.1-alpine
 
 EXPOSE 8080
 
