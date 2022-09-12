@@ -24,4 +24,4 @@ RUN rm -rf ./app/client \
 # Clear deps and caches
 RUN apk --purge del python && rm -rf /var/cache/apk/*
 
-CMD ["pm2-docker", "pm2.process.yml"]
+CMD ["node", "--inspect", "static/server.js"]
