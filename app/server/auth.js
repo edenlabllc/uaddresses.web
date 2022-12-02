@@ -26,9 +26,10 @@ router.get(config.OAUTH_REDIRECT_PATH, (req, resp) => {
     return;
   }
 
-  createSessionToken(req.query.code).then(({ data, meta }) => {
-    if (data.error) {
-      resp.redirect(`/sign-in?error=${meta.code}`);
+  createSessionToken(req.query.code).then(({ data, meta, error }) => {
+    const err = (data && data.error) || (error && error.message);
+    if (err) {
+      resp.redirect(`/sign-in?error=${err}(${meta.code})`);
       return;
     }
 
