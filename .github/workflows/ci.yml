@@ -23,7 +23,7 @@ jobs:
           cache: 'npm'
       - run: npm -v
       - run: npm install
-      - run: sudo npm i -g standart-version
+      - run: sudo npm i -g standard-version
       - run: npm install karma --save-dev
       - run: npm install karma-jasmine karma-chrome-launcher jasmine-core --save-dev
       - run: npm ci
