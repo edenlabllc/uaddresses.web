@@ -54,7 +54,7 @@ jobs:
           push: true
           context: .
           file: Dockerfile
-          tags: eu.gcr.io/ehealth-162117/${{ steps.vars.outputs.project_name }}:${{ steps.vars.outputs.image_tag }}
+          tags: eu.gcr.io/ehealth-162117/${{ steps.output.project_name }}:${{ steps.output.image_tag }}
           
       - run: |
           git config --global user.email "cub4lt@gmail.com"
