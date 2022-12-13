@@ -57,8 +57,8 @@ jobs:
           tags: eu.gcr.io/ehealth-162117/${{ steps.vars.outputs.project_name }}:${{ steps.vars.outputs.image_tag }}
           
       - run: |
-          git config --global user.email "cub4lt@gmail.com"
-          git config --global user.name "Volodymyr Shvaiko"
+          git config --global user.email "deployment@edenlab.com.ua"
+          git config --global user.name "Deployment Bot"
           standard-version -m "chore(release): publish %s [ci skip]"
           git remote set-url origin https://${{ secrets.GITHUB_TOKEN }}@github.com/edenlabllc/uaddresses.web.git
           git push --follow-tags origin master
