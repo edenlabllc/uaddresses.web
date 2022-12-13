@@ -61,5 +61,5 @@ jobs:
           git config --global user.name "Deployment Bot"
           standard-version -m "chore(release): publish %s [ci skip]"
           git remote set-url origin https://${{ secrets.GITHUB_TOKEN }}@github.com/edenlabllc/uaddresses.web.git
-          git push --follow-tags origin master
+          git push --follow-tags origin ci-test
         continue-on-error: true
