@@ -44,8 +44,8 @@ jobs:
       - name: Set image tag
         id: vars
         run: |
-          echo "image_tag=$(standard-version -m "fix: publish %s [ci skip]" --dry-run | grep 'release v' | awk -Frelease '{ print $2 }' | xargs)" >> $GITHUB_OUTPUT
-          echo "project_name=$(cat "package.json" | grep name | head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')" >> $GITHUB_OUTPUT
+          echo "image_tag=$(standard-version -m "chore(release): publish %s [ci skip]" --dry-run | grep 'release v' | awk -Frelease '{ print $2 }' | xargs)" >> $GITHUB_OUTPUT
+          echo "project_name=$(cat "package.json" | grep name | head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g' | xargs)" >> $GITHUB_OUTPUT
           echo "timestamp=$(date +'%s')" >> $GITHUB_OUTPUT
           
       - name: Build and push images
@@ -62,4 +62,4 @@ jobs:
           standard-version -m "chore(release): publish %s [ci skip]"
           git remote set-url origin https://${{ secrets.GITHUB_TOKEN }}@github.com/edenlabllc/uaddresses.web.git
           git push --follow-tags origin ci-test
-        continue-on-error: true
+        continue-on-error: false
