@@ -1,6 +1,7 @@
 name: uaadresses-web CI
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
@@ -13,6 +14,7 @@ jobs:
     strategy:
       matrix:
         node-version: [11.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
     - uses: actions/checkout@v3
