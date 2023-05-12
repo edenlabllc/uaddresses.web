@@ -1,6 +1,6 @@
 {
   "name": "uaddresses.web",
-  "version": "0.1.26",
+  "version": "0.1.27",
   "description": "UAddresses Web",
   "repository": "https://github.com/Nebo15/uaddresses.web.git",
   "scripts": {
@@ -155,10 +155,10 @@
     "ghooks": "1.3.2",
     "i18next-extract-gettext": "3.1.3",
     "isparta-loader": "2.0.0",
-    "jasmine-core": "^4.5.0",
-    "karma": "^1.6.0",
+    "jasmine-core": "^4.6.0",
+    "karma": "^1.7.1",
     "karma-chai": "0.1.0",
-    "karma-chrome-launcher": "^3.1.1",
+    "karma-chrome-launcher": "^3.2.0",
     "karma-coverage": "1.1.1",
     "karma-coveralls": "1.1.2",
     "karma-istanbul": "0.0.2",
