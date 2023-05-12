@@ -42,6 +42,7 @@ const config = webpackMerge(
       new webpack.DefinePlugin({
         'process.env': {
           NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
+          REACT_APP_CUSTOM_PSK_HEADER: JSON.stringify(process.env.REACT_APP_CUSTOM_PSK_HEADER),
         },
         __CLIENT__: true,
       }),

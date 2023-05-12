@@ -10,7 +10,7 @@ if (__CLIENT__ && window && window.__CONFIG__ && !__DEV__) {
 export const PORT = config.PORT || process.env.PORT || 8080;
 export const HOSTNAME = typeof window !== 'undefined' ? window.location.origin : (config.HOSTNAME || 'http://localhost:8080');
 
-export const API_ENDPOINT = config.API_ENDPOINT || process.env.API_ENDPOINT || 'https://auth.dev.edenlab.com.ua/api/uaddresses';
+export const API_ENDPOINT = config.API_ENDPOINT || process.env.API_ENDPOINT || 'https://api.dev.edenlab.com.ua/api/uaddresses';
 export const AUTH_ENDPOINT = config.AUTH_ENDPOINT || process.env.AUTH_ENDPOINT || 'https://auth.dev.edenlab.com.ua';
 
 export const SITEMAP_HOSTNAME = process.env.SITEMAP_HOSTNAME || 'https://uaddresses.herokuapp.com'; // used in sitemap
