@@ -15,6 +15,8 @@ WORKDIR /opt/app
 
 COPY . /opt/app
 
+RUN addgroup -g 1001 appgroup && adduser -D -u 1001 -G appgroup appuser
+
 RUN chown -R 1001:1001 /opt/app
 
 RUN npm run build
@@ -26,6 +28,6 @@ RUN rm -rf ./app/client \
 # Clear deps and caches
 RUN apk --purge del python && rm -rf /var/cache/apk/*
 
-USER 1001
+USER 1001:1001
 
 CMD ["node", "--inspect", "static/server.js"]
