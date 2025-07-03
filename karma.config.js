@@ -1,4 +1,3 @@
-
 const karmaWebpack = require('karma-webpack');
 const karmaMocha = require('karma-mocha');
 const karmaChai = require('karma-chai');
@@ -79,7 +78,7 @@ module.exports = (config) => {
       stats: 'errors-only',
     },
 
-    browsers: ['PhantomJS'],
+    browsers: ['ChromeHeadless'],
     client: {
       mocha: {
         timeout: 6000, // 6 seconds - upped from 2 seconds
