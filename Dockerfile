@@ -1,15 +1,15 @@
-FROM node:10.24.1-alpine
+FROM node:18-alpine
 
 EXPOSE 8080
 
 ENV PORT=8080
 ENV NODE_ENV=production
+ENV NODE_OPTIONS=--tls-min-v1.2
 
-RUN apk add --update \
-    python
+RUN apk add --update python3
 
 COPY package.json /tmp/package.json
-RUN cd /tmp && npm install --production --quiet && mkdir -p /opt/app && cp -a /tmp/node_modules /opt/app/
+RUN cd /tmp && npm install --omit=dev --quiet --legacy-peer-deps && mkdir -p /opt/app && cp -a /tmp/node_modules /opt/app/
 
 WORKDIR /opt/app
 
@@ -26,7 +26,7 @@ RUN rm -rf ./app/client \
 	rm -rf ./node_modules/webpack
 
 # Clear deps and caches
-RUN apk --purge del python && rm -rf /var/cache/apk/*
+RUN apk --purge del python3 && rm -rf /var/cache/apk/*
 
 USER 1001:1001
 
