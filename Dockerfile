@@ -2,8 +2,8 @@ FROM node:10.24.1-alpine
 
 EXPOSE 8080
 
-ENV PORT 8080
-ENV NODE_ENV production
+ENV PORT=8080
+ENV NODE_ENV=production
 
 RUN apk add --update \
     python
@@ -15,6 +15,8 @@ WORKDIR /opt/app
 
 COPY . /opt/app
 
+RUN chown -R 1001:1001 /opt/app
+
 RUN npm run build
 
 RUN rm -rf ./app/client \
@@ -23,5 +25,7 @@ RUN rm -rf ./app/client \
 
 # Clear deps and caches
 RUN apk --purge del python && rm -rf /var/cache/apk/*
+
+USER 1001
 
 CMD ["node", "--inspect", "static/server.js"]
