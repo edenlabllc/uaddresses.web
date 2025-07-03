@@ -11,6 +11,8 @@ RUN apk add --update python3
 COPY package.json /tmp/package.json
 RUN cd /tmp && npm install --omit=dev --quiet --legacy-peer-deps && mkdir -p /opt/app && cp -a /tmp/node_modules /opt/app/
 
+RUN cd /tmp && npm install karma-jasmine karma-chrome-launcher jasmine-core --save-dev --legacy-peer-deps
+
 WORKDIR /opt/app
 
 COPY . /opt/app
