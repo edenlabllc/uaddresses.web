@@ -1,8 +1,10 @@
+
 const karmaWebpack = require('karma-webpack');
 const karmaMocha = require('karma-mocha');
 const karmaChai = require('karma-chai');
 const karmaSinon = require('karma-sinon');
 const karmaCoverage = require('karma-coverage');
+const karmaPhantomjsLauncher = require('karma-phantomjs-launcher');
 const karmaSourcemapLoader = require('karma-sourcemap-loader');
 const karmaSpecReporter = require('karma-spec-reporter');
 const karmaCoveralls = require('karma-coveralls');
@@ -35,6 +37,7 @@ const plugins = [
   karmaChai,
   karmaSinon,
   karmaCoverage,
+  karmaPhantomjsLauncher,
   karmaSourcemapLoader,
   karmaSpecReporter,
 ];
@@ -76,7 +79,7 @@ module.exports = (config) => {
       stats: 'errors-only',
     },
 
-    browsers: ['ChromeHeadless'],
+    browsers: ['PhantomJS'],
     client: {
       mocha: {
         timeout: 6000, // 6 seconds - upped from 2 seconds
