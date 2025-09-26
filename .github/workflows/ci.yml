@@ -6,6 +6,10 @@ on:
     branches:
       - master
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   build:
 
@@ -36,12 +40,20 @@ jobs:
     - name: Setup Docker Buildx
       uses: docker/setup-buildx-action@v3
 
-    - name: Login to GCR
-      uses: docker/login-action@v1
+    - name: Authenticate to Google Cloud (OIDC)
+      uses: google-github-actions/auth@v2
+      id: auth
       with:
-        registry: eu.gcr.io
-        username: _json_key
-        password: ${{ secrets.GCR_JSON_KEY }}
+        token_format: access_token
+        workload_identity_provider: "projects/783375390186/locations/global/workloadIdentityPools/github-pool/providers/github-provider"
+        service_account: "gha-cosign-artifact@ehealth-162117.iam.gserviceaccount.com"
+
+    - name: Login to GAR
+      uses: docker/login-action@v3
+      with:
+        registry: europe-docker.pkg.dev
+        username: oauth2accesstoken
+        password: ${{ steps.auth.outputs.access_token }}
 
     - name: Set image tag
       id: vars
@@ -51,12 +63,13 @@ jobs:
         echo "timestamp=$(date +'%s')" >> $GITHUB_OUTPUT
 
     - name: Build and push images
-      uses: docker/build-push-action@v2
+      id: docker_build
+      uses: docker/build-push-action@v6
       with:
         push: true
         context: .
         file: Dockerfile
-        tags: eu.gcr.io/ehealth-162117/${{ steps.vars.outputs.project_name }}:${{ steps.vars.outputs.image_tag }}
+        tags: europe-docker.pkg.dev/ehealth-162117/eu.gcr.io/${{ steps.vars.outputs.project_name }}:${{ steps.vars.outputs.image_tag }}
 
     - run: |
         git config --global user.email "deployment@edenlab.com.ua"
@@ -65,3 +78,16 @@ jobs:
         git remote set-url origin https://${{ secrets.GITHUB_TOKEN }}@github.com/edenlabllc/uaddresses.web.git
         git push --follow-tags origin master
       continue-on-error: false
+
+    - name: Install Cosign
+      uses: sigstore/cosign-installer@v3
+
+    - name: Sign image with cosign using digest
+      env:
+        GOOGLE_APPLICATION_CREDENTIALS: ${{ steps.auth.outputs.credentials_file_path }}
+      run: |
+        echo "Signing digest: ${{ steps.docker_build.outputs.digest }}"
+        cosign sign --tlog-upload=false \
+          --yes \
+          --key gcpkms://projects/ehealth-162117/locations/europe-west1/keyRings/ehealth/cryptoKeys/cosign-signer-key \
+          europe-docker.pkg.dev/ehealth-162117/eu.gcr.io/${{ steps.vars.outputs.project_name }}@${{ steps.docker_build.outputs.digest }}
