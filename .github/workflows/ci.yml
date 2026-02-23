@@ -79,6 +79,41 @@ jobs:
         git push --follow-tags origin master
       continue-on-error: false
 
+    - name: Scan image for vulnerabilities (Trivy)
+      id: trivy
+      uses: aquasecurity/trivy-action@0.33.1
+      with:
+        image-ref: "europe-docker.pkg.dev/ehealth-162117/eu.gcr.io/${{ steps.vars.outputs.project_name }}@${{ steps.docker_build.outputs.digest }}"
+        format: "table"
+        output: "trivy-results.txt"
+        severity: "HIGH,CRITICAL"
+        ignore-unfixed: true
+        exit-code: "0"
+      env:
+        TRIVY_USERNAME: oauth2accesstoken
+        TRIVY_PASSWORD: ${{ steps.auth.outputs.access_token }}
+        TRIVY_DISABLE_VEX_NOTICE: "true"
+        TRIVY_TABLE_MODE: "detailed"
+
+    - name: Add Trivy results to Job Summary
+      if: always()
+      run: |
+        echo "## 🔍 Trivy Vulnerability Scan: ${{ steps.vars.outputs.project_name }}" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Image:** \`europe-docker.pkg.dev/ehealth-162117/eu.gcr.io/${{ steps.vars.outputs.project_name }}@${{ steps.docker_build.outputs.digest }}\`" >> $GITHUB_STEP_SUMMARY
+        echo "**Tag:** \`${{ steps.vars.outputs.image_tag }}\`" >> $GITHUB_STEP_SUMMARY
+        echo "**Severity:** HIGH, CRITICAL | **Unfixed:** ignored" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        if [ -s trivy-results.txt ]; then
+          echo "### ⚠️ Vulnerabilities Found (HIGH/CRITICAL)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          cat trivy-results.txt >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+        else
+          echo "### ✅ No HIGH/CRITICAL vulnerabilities found" >> $GITHUB_STEP_SUMMARY
+        fi
+
     - name: Install Cosign
       uses: sigstore/cosign-installer@v3
 
