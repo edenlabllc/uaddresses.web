@@ -7,6 +7,7 @@ const karmaPhantomjsLauncher = require('karma-phantomjs-launcher');
 const karmaSourcemapLoader = require('karma-sourcemap-loader');
 const karmaSpecReporter = require('karma-spec-reporter');
 const karmaCoveralls = require('karma-coveralls');
+const karmaChromeLauncher = require('karma-chrome-launcher');
 const webpackMerge = require('webpack-merge');
 
 const parts = require('./webpack/parts');
@@ -39,6 +40,7 @@ const plugins = [
   karmaPhantomjsLauncher,
   karmaSourcemapLoader,
   karmaSpecReporter,
+  karmaChromeLauncher,
 ];
 
 const reporters = [

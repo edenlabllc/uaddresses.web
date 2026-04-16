@@ -71,7 +71,9 @@ jobs:
         file: Dockerfile
         tags: europe-docker.pkg.dev/ehealth-162117/eu.gcr.io/${{ steps.vars.outputs.project_name }}:${{ steps.vars.outputs.image_tag }}
 
-    - run: |
+    - name: Release (only master)
+      if: github.ref_name == 'master'
+      run: |
         git config --global user.email "deployment@edenlab.com.ua"
         git config --global user.name "Deployment Bot"
         standard-version -m "chore(release): publish %s [ci skip]"
